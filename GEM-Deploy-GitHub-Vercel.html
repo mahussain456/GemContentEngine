@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEM · GitHub + Vercel Deployment Guide</title>
+<link rel="icon" type="image/x-icon" href="/assets/web-assets/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/web-assets/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  /* Official GEM palette */
+  --forest-deep:#0E2A1F;--forest:#1B4D3E;--forest-mid:#2A6650;--sage:#4F8A73;
+  --sage-light:#A7BFAE;--mint:#D6E3DB;--pale-mint:#E9F1EC;
+  --cream:#F4EFE6;--cream-soft:#EFE9DD;--divider:#D8D2C7;
+  --ink:#1A1A1A;--ink-soft:#3A3A3A;--ink-mid:#6E6E6E;--gold:#C8A96A;
+  --serif:'Playfair Display','EB Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',Consolas,'Courier New',monospace;
+}
+@page{margin:0;size:letter}
+body{font-family:var(--serif);color:var(--ink);background:var(--cream);font-size:13px;line-height:1.65}
+.page{padding:54px 56px;background:var(--cream);min-height:100vh}
+.page-break{page-break-before:always}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}.no-print{display:none!important}.page{min-height:auto}}
+@media screen{body{padding:30px;background:#E8E2D4}.page{box-shadow:0 8px 30px rgba(0,0,0,.15);max-width:880px;margin:0 auto 30px;border-radius:4px}}
+
+.cover{background:radial-gradient(ellipse at top,var(--forest-mid) 0%,var(--forest) 45%,var(--forest-deep) 100%);color:var(--cream);padding:80px 60px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;position:relative}
+.cover::before,.cover::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.cover::before{top:40px}.cover::after{bottom:40px}
+.cover-rule{width:48px;height:1px;background:var(--gold);opacity:.55;margin:32px 0}
+.cover-title{font-family:var(--serif);font-size:46px;font-weight:500;line-height:1.18;max-width:680px;color:#FFFCF6;margin-bottom:16px;letter-spacing:-.005em}
+.cover-sub{font-size:16px;font-style:italic;color:var(--sage-light);opacity:.85;max-width:540px;line-height:1.55;margin-bottom:24px}
+.cover-meta{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,239,226,.5)}
+
+.ph{margin-bottom:30px}
+.ph-rule{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.ph-rule-line{width:24px;height:2px;background:var(--accent,var(--forest-mid))}
+.ph-eyebrow{font-size:10px;font-family:var(--serif);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent,var(--forest-mid))}
+.ph-title{font-family:var(--serif);font-size:32px;font-weight:600;color:var(--ink);line-height:1.18;margin-bottom:6px;letter-spacing:-.01em}
+.ph-sub{font-size:14px;color:var(--ink-mid);font-style:italic;line-height:1.55}
+.ph-divider{height:1px;margin-top:14px;background:linear-gradient(90deg,var(--accent,var(--forest-mid)) 0%,var(--divider) 60%,transparent 100%)}
+
+h2{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);margin:34px 0 12px;letter-spacing:-.005em}
+h2:first-child{margin-top:0}
+h3{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);margin:22px 0 10px}
+p{margin:0 0 12px;color:var(--ink-soft);font-size:13px;line-height:1.7}
+strong{color:var(--ink)}
+em{font-style:italic}
+ul,ol{margin:6px 0 14px 22px}
+li{margin-bottom:5px;color:var(--ink-soft);font-size:13px;line-height:1.65}
+li::marker{color:var(--sage)}
+
+code{font-family:var(--mono);font-size:11.5px;background:var(--cream-soft);padding:1px 7px;border-radius:3px;color:var(--forest)}
+.code-block{font-family:var(--mono);font-size:11.5px;background:var(--forest-deep);color:var(--sage-light);padding:14px 18px;border-radius:6px;overflow-x:auto;margin:12px 0;line-height:1.7;white-space:pre}
+.code-block .c{color:var(--ink-mid);font-style:italic}
+.code-block .v{color:#FFFCF6}
+
+.callout{background:var(--pale-mint);border:1px solid var(--mint);border-left:4px solid var(--forest-mid);border-radius:6px;padding:14px 18px;margin:14px 0}
+.callout-eyebrow{font-family:var(--serif);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--forest);margin-bottom:6px}
+.callout p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.7}
+.callout p+p{margin-top:8px}
+.warn{background:#FEF3C7;border:1px solid #F59E0B;border-left:4px solid #B45309;border-radius:6px;padding:14px 18px;margin:14px 0}
+.warn .callout-eyebrow{color:#7C2D12}
+.warn p{color:#78350F}
+.win{background:#F0FDF4;border:1px solid #BBF7D0;border-left:4px solid #15803D;border-radius:6px;padding:14px 18px;margin:14px 0}
+.win .callout-eyebrow{color:#14532D}
+.win p{color:#14532D}
+
+.step{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;background:#FFF;border:1px solid var(--divider);border-radius:6px;padding:14px 16px;break-inside:avoid}
+.step-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--forest);color:var(--sage-light);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;font-weight:600}
+.step-body{flex:1}
+.step-title{font-family:var(--serif);font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.step-body p{margin:4px 0 0;font-size:11.5px;color:var(--ink-soft);line-height:1.65}
+
+table{width:100%;border-collapse:collapse;margin:12px 0 18px;background:#FFF;border:1px solid var(--divider);border-radius:6px;overflow:hidden}
+th{background:var(--forest);color:#FFF;font-family:var(--serif);font-weight:600;font-size:11.5px;text-align:left;padding:10px 12px;letter-spacing:.03em}
+td{padding:9px 12px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--divider);line-height:1.55;vertical-align:top}
+tr:nth-child(even) td{background:var(--cream)}
+
+.print-helper{position:fixed;top:14px;right:14px;background:var(--forest);color:var(--cream);padding:10px 16px;border-radius:6px;font-family:var(--serif);font-size:12px;cursor:pointer;border:none;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:999}
+.print-helper:hover{background:var(--forest-deep)}
+@media print{.print-helper{display:none}}
+
+.tree{font-family:var(--mono);font-size:11.5px;background:var(--cream-soft);border:1px solid var(--divider);border-radius:6px;padding:14px 18px;line-height:1.8;color:var(--ink-soft);white-space:pre}
+</style>
+</head>
+<body>
+
+<button class="print-helper no-print" onclick="window.print()">📄 Save as PDF</button>
+
+<!-- COVER -->
+<div class="cover">
+  <img src="/assets/logos/svg/GEM_primary_horizontal_dark.svg" alt="GEM Content Engine" style="width:380px;max-width:80%;height:auto;margin-bottom:36px;display:block">
+  <div class="cover-rule"></div>
+  <h1 class="cover-title">Deploy via GitHub + Vercel</h1>
+  <div class="cover-sub">Push your folder to GitHub. Connect Vercel. Add thegeminfo.com. Live in under 20 minutes.</div>
+  <div class="cover-meta">v1.0 · 2026</div>
+</div>
+
+<!-- INTRO -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Overview</div></div>
+    <div class="ph-title">What you're about to do</div>
+    <div class="ph-sub">Six steps. ~20 minutes. After this, every <code>git push</code> auto-deploys to thegeminfo.com.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-eyebrow">The big picture</div>
+    <p><strong>1.</strong> Restructure your folder so the URLs are clean (<code>/</code> = landing, <code>/app/</code> = the app)</p>
+    <p><strong>2.</strong> Push to a new GitHub repo</p>
+    <p><strong>3.</strong> Sign in to Vercel with that GitHub account → import the repo → deploy</p>
+    <p><strong>4.</strong> Add thegeminfo.com as a custom domain in Vercel</p>
+    <p><strong>5.</strong> Update your domain's DNS (Vercel gives you the exact records)</p>
+    <p><strong>6.</strong> Convert <code>og-image.svg</code> → <code>og-image.png</code> and push the change</p>
+  </div>
+
+  <h2>What you need before starting</h2>
+  <ul>
+    <li>A <strong>GitHub account</strong> (free — github.com)</li>
+    <li>A <strong>Vercel account</strong> (free — vercel.com — sign up with GitHub for one-click integration)</li>
+    <li><strong>Git installed</strong> on your machine (git-scm.com — or use GitHub Desktop if you prefer GUI)</li>
+    <li>Access to your domain's <strong>DNS settings</strong> (wherever you bought thegeminfo.com)</li>
+    <li>Your local <code>D:\AI_Stuff\Gem_Content_Machine</code> folder</li>
+  </ul>
+
+  <h2>The folder structure you're going for</h2>
+  <p>Vercel will serve this directly. No build step, no config — it just works because everything is static HTML.</p>
+  <div class="tree">gem-content-engine/
+├── index.html              <span style="color:var(--gold)">← was landing.html</span>
+├── app/
+│   └── index.html          <span style="color:var(--gold)">← was gem.html</span>
+├── assets/
+│   ├── favicon.svg
+│   ├── logo-mark-dark.svg
+│   ├── logo-mark-light.svg
+│   ├── logo-full-horizontal-dark.svg
+│   ├── logo-full-horizontal-light.svg
+│   ├── logo-full-stacked.svg
+│   ├── og-image.svg
+│   ├── og-image.png        <span style="color:var(--gold)">← create this before launch</span>
+│   ├── social-banner.svg
+│   └── social-avatar.svg
+├── GEM-Launch-Playbook.html
+├── GEM-Brand-Guide.html
+├── GEM-Deploy-GitHub-Vercel.html
+├── README.md
+└── .gitignore</div>
+
+  <p>Notice: <code>landing.html</code> becomes <code>index.html</code> at the root, and <code>gem.html</code> becomes <code>app/index.html</code>. That gives you the clean URLs <code>thegeminfo.com</code> and <code>thegeminfo.com/app</code>.</p>
+</div>
+
+<!-- STEP 1: PREP FILES -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Step 1 · 5 minutes</div></div>
+    <div class="ph-title">Prep the folder</div>
+    <div class="ph-sub">Restructure for clean URLs and Git-friendly defaults.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Make a copy of the project (don't edit your working folder)</div>
+    <p>Duplicate <code>D:\AI_Stuff\Gem_Content_Machine</code> as <code>D:\AI_Stuff\gem-deploy</code>. You'll only push the <em>deploy</em> copy to GitHub.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">Rename inside the deploy folder</div>
+    <p>Rename <code>landing.html</code> → <code>index.html</code> (at the root). Create a new subfolder called <code>app</code>. Move <code>gem.html</code> into it and rename to <code>index.html</code>. The <code>assets/</code> folder stays at the root unchanged.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">3</div><div class="step-body">
+    <div class="step-title">Delete files you don't want public</div>
+    <p>Remove these from <code>gem-deploy</code>:</p>
+    <ul>
+      <li><code>files.zip</code> and <code>files1.6.zip</code> (old archives)</li>
+      <li><code>files/</code> and <code>files1.6/</code> folders</li>
+      <li><code>gem.original.html</code> (legacy)</li>
+      <li>The 280MB <code>.mp4</code> screen recording (Git rejects files over 100MB; if you want it online, host it on YouTube and link it)</li>
+    </ul>
+  </div></div>
+
+  <div class="step"><div class="step-num">4</div><div class="step-body">
+    <div class="step-title">Create a <code>.gitignore</code> at the root</div>
+    <p>Stops accidental files (license keys, OS junk) from being committed. Use this exact content:</p>
+  </div></div>
+
+  <div class="code-block">.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+.env
+.env.local
+node_modules/
+*.zip
+*.mp4
+.claude/</div>
+
+  <div class="step"><div class="step-num">5</div><div class="step-body">
+    <div class="step-title">Create a <code>README.md</code> at the root</div>
+    <p>GitHub displays this on your repo's home page. Keep it short.</p>
+  </div></div>
+
+  <div class="code-block"><span class="v"># GEM Content Engine</span>
+
+Six AI agents in one HTML file. One purchase, forever yours.
+
+<span class="v">## Live</span>
+- Landing: https://thegeminfo.com
+- App: https://thegeminfo.com/app
+- Buy: https://gumroad.com/l/gem-founder
+
+<span class="v">## Local dev</span>
+Static HTML — open `index.html` in any browser, or run:
+```
+npx serve .
+```
+
+<span class="v">## License</span>
+Proprietary. © 2026 GEM Content Engine. All rights reserved.</div>
+</div>
+
+<!-- STEP 2: GITHUB -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Step 2 · 5 minutes</div></div>
+    <div class="ph-title">Push to GitHub</div>
+    <div class="ph-sub">Two paths: GitHub Desktop (easier) or git CLI (faster if you've used it before).</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>Path A — GitHub Desktop (recommended for first-timers)</h2>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Install GitHub Desktop</div>
+    <p>Download from <a href="https://desktop.github.com">desktop.github.com</a>. Sign in with your GitHub account.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">File → Add Local Repository</div>
+    <p>Choose <code>D:\AI_Stuff\gem-deploy</code>. GitHub Desktop will say "this isn't a Git repository — create one?" Click <strong>create</strong>.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">3</div><div class="step-body">
+    <div class="step-title">Make your first commit</div>
+    <p>In the bottom-left, type a summary like <em>"Initial deploy"</em> and click <strong>Commit to main</strong>.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">4</div><div class="step-body">
+    <div class="step-title">Publish to GitHub</div>
+    <p>Click <strong>Publish repository</strong>. Repo name: <code>gem-content-engine</code>. Description: "GEM · Six-Agent Content Engine." <strong>Keep "Keep this code private"</strong> checked — you don't need this public yet (Vercel can read private repos with your permission).</p>
+  </div></div>
+
+  <h2>Path B — Git CLI (faster if you have it set up)</h2>
+
+  <div class="code-block"><span class="c"># From inside D:\AI_Stuff\gem-deploy</span>
+git init
+git branch -M main
+git add .
+git commit -m <span class="v">"Initial deploy"</span>
+
+<span class="c"># Create the empty repo on GitHub first (github.com/new), then:</span>
+git remote add origin https://github.com/<span class="v">YOUR-USERNAME</span>/gem-content-engine.git
+git push -u origin main</div>
+
+  <div class="warn">
+    <div class="callout-eyebrow">Authentication note</div>
+    <p>GitHub no longer accepts password auth on the CLI. If <code>git push</code> asks for credentials, use a <strong>Personal Access Token</strong> (github.com → Settings → Developer settings → Personal access tokens → Generate new token, classic, scope: <code>repo</code>) as your password. Or use GitHub Desktop instead.</p>
+  </div>
+
+  <div class="win">
+    <div class="callout-eyebrow">Confirmation</div>
+    <p>Open <code>github.com/YOUR-USERNAME/gem-content-engine</code> — you should see your files. If you can see <code>index.html</code> at the top, you're done with this step.</p>
+  </div>
+</div>
+
+<!-- STEP 3: VERCEL -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Step 3 · 3 minutes</div></div>
+    <div class="ph-title">Connect Vercel</div>
+    <div class="ph-sub">Sign up, import the repo, deploy. Vercel does the rest.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Sign up at vercel.com</div>
+    <p>Click <strong>"Continue with GitHub"</strong>. Authorize Vercel to read your GitHub repos. (Choose "Only select repositories" → pick <code>gem-content-engine</code> for the tightest scope.)</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">"Add New…" → "Project"</div>
+    <p>Vercel shows a list of your GitHub repos. Click <strong>Import</strong> next to <code>gem-content-engine</code>.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">3</div><div class="step-body">
+    <div class="step-title">Configure project (almost everything is auto-detected)</div>
+    <p>Vercel detects "Other" framework — perfect, no build step. Leave everything default:</p>
+    <ul>
+      <li><strong>Framework Preset:</strong> Other</li>
+      <li><strong>Build Command:</strong> empty (skip)</li>
+      <li><strong>Output Directory:</strong> empty (default — root)</li>
+      <li><strong>Install Command:</strong> empty (skip)</li>
+    </ul>
+    <p>Click <strong>Deploy</strong>.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">4</div><div class="step-body">
+    <div class="step-title">Wait ~30 seconds</div>
+    <p>Vercel uploads, hashes, distributes globally. You'll see a confetti animation when it's live. The default URL looks like <code>gem-content-engine-xyz.vercel.app</code> — click it to verify.</p>
+  </div></div>
+
+  <div class="callout">
+    <div class="callout-eyebrow">Smoke test the live URL right now</div>
+    <p>Open the Vercel URL → confirm: (a) landing page renders, (b) "Try Demo" navigates to <code>/app/</code>, (c) the app launches and Demo Mode runs. If anything's broken, <strong>fix it before adding the domain</strong> — DNS changes are reversible but slow.</p>
+  </div>
+
+  <h2>Auto-deploy is now wired</h2>
+  <p>From now on, every time you <code>git push</code> to main (or commit + push from GitHub Desktop), Vercel auto-deploys within ~30 seconds. Each deploy gets its own preview URL too — useful for testing changes before they hit thegeminfo.com.</p>
+</div>
+
+<!-- STEP 4: DOMAIN -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Step 4 · 5–60 minutes</div></div>
+    <div class="ph-title">Add thegeminfo.com</div>
+    <div class="ph-sub">Vercel side first (1 min), then DNS at your registrar (5 min), then wait for propagation (5–60 min).</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>In Vercel</h2>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Project → Settings → Domains</div>
+    <p>Type <code>thegeminfo.com</code> → click <strong>Add</strong>. Then add <code>www.thegeminfo.com</code> as a second entry — Vercel auto-redirects www → root (or vice versa) based on which you mark as primary. Keep <code>thegeminfo.com</code> as primary.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">Vercel shows you the DNS records to add</div>
+    <p>Two options will appear:</p>
+    <ul>
+      <li><strong>Option A — Use Vercel nameservers</strong> (cleanest, takes over the whole domain)</li>
+      <li><strong>Option B — Add A and CNAME records</strong> (keep your current registrar's DNS, just point this domain)</li>
+    </ul>
+    <p><strong>Use Option B</strong> — it's lower-stakes and keeps your registrar in charge of email if you ever set up custom email at the domain.</p>
+  </div></div>
+
+  <h2>At your domain registrar (where you bought thegeminfo.com)</h2>
+
+  <p>Vercel will give you the <em>exact</em> records, but they're consistently:</p>
+
+  <table>
+    <thead><tr><th>Type</th><th>Name / Host</th><th>Value</th><th>TTL</th></tr></thead>
+    <tbody>
+      <tr><td><code>A</code></td><td><code>@</code> (or blank — root)</td><td><code>76.76.21.21</code></td><td>3600</td></tr>
+      <tr><td><code>CNAME</code></td><td><code>www</code></td><td><code>cname.vercel-dns.com</code></td><td>3600</td></tr>
+    </tbody>
+  </table>
+
+  <p>Find your registrar's DNS panel (usually "Manage DNS" or "Advanced DNS"), delete any conflicting A/CNAME records on those names, add these two, save.</p>
+
+  <div class="warn">
+    <div class="callout-eyebrow">If your registrar uses a different naming convention</div>
+    <p>Some registrars use <code>@</code> for the root, others use blank, others want the full domain typed. Some use "Host" instead of "Name". The <em>values</em> (76.76.21.21 and cname.vercel-dns.com) don't change — only the input field labels do. Vercel's domain-add UI shows screenshots for the popular registrars (GoDaddy, Namecheap, Cloudflare, Google Domains, Squarespace).</p>
+  </div>
+
+  <h2>Wait for DNS to propagate</h2>
+  <p>Anywhere from 2 minutes to 60 minutes. Vercel auto-detects when the records are live and provisions an SSL certificate within seconds of detecting them. You'll see a green checkmark next to your domain in the Vercel dashboard.</p>
+
+  <p>To check propagation manually: <a href="https://dnschecker.org">dnschecker.org</a> → enter <code>thegeminfo.com</code> → choose A record. If most pins are green, you're done.</p>
+
+  <div class="win">
+    <div class="callout-eyebrow">Confirmation</div>
+    <p>Open <code>https://thegeminfo.com</code> in a fresh tab. You should see the landing page, with HTTPS auto-enabled (green padlock). If you see Vercel's "this domain is being configured" page, give DNS another 10–20 minutes.</p>
+  </div>
+</div>
+
+<!-- STEP 5: OG IMAGE + POST-DEPLOY -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Step 5 · 10 minutes</div></div>
+    <div class="ph-title">Convert OG image &amp; finalize</div>
+    <div class="ph-sub">SVG is great for the web, but social platforms need PNG. Do this before you share any link.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>Convert the OG image to PNG</h2>
+
+  <p>Open <code>D:\AI_Stuff\gem-deploy\assets\og-image.svg</code>. Pick one of the three paths from the Brand Guide:</p>
+
+  <ul>
+    <li><strong>Figma:</strong> drag the SVG in → select → Export → 1× PNG → save as <code>og-image.png</code> in the same <code>/assets</code> folder.</li>
+    <li><strong>npx (if you have Node.js):</strong> from inside <code>gem-deploy</code> run:
+      <div class="code-block">npx svgexport assets/og-image.svg assets/og-image.png 1200:630</div>
+    </li>
+    <li><strong>Online (no install):</strong> upload SVG to <a href="https://cloudconvert.com/svg-to-png">cloudconvert.com/svg-to-png</a>, set output 1200×630, download into <code>/assets</code>.</li>
+  </ul>
+
+  <p>Repeat for <code>social-banner.svg</code> (1500×500) and <code>social-avatar.svg</code> (400×400) when you're ready to update your X / LinkedIn profiles.</p>
+
+  <h2>Commit and push</h2>
+
+  <p>From inside <code>gem-deploy</code>:</p>
+
+  <div class="code-block">git add assets/og-image.png
+git commit -m <span class="v">"Add OG share image"</span>
+git push</div>
+
+  <p>Or in GitHub Desktop: type a summary, click "Commit to main", click "Push origin." Vercel auto-deploys in ~30 seconds.</p>
+
+  <h2>Validate the share preview</h2>
+  <p>Once the new commit is live:</p>
+  <ul>
+    <li><strong>OpenGraph preview:</strong> <a href="https://www.opengraph.xyz">opengraph.xyz</a> → enter <code>https://thegeminfo.com</code> → confirm the OG image renders correctly.</li>
+    <li><strong>Twitter card validator:</strong> <a href="https://cards-dev.twitter.com/validator">cards-dev.twitter.com/validator</a> → forces Twitter to re-fetch your OG metadata. Run this <em>before</em> sharing on Twitter, otherwise X may cache a broken preview for days.</li>
+    <li><strong>LinkedIn post inspector:</strong> <a href="https://www.linkedin.com/post-inspector/">linkedin.com/post-inspector</a> → same idea for LinkedIn.</li>
+  </ul>
+</div>
+
+<!-- STEP 6: GUMROAD + LAUNCH READINESS -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Step 6 · Last mile</div></div>
+    <div class="ph-title">Wire up Gumroad &amp; launch checklist</div>
+    <div class="ph-sub">The site is live. Now make it actually take money.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>Gumroad setup</h2>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Create product on gumroad.com</div>
+    <p>Title: "GEM · Content Engine — Founder's Edition." Price: <strong>$9</strong>. Suggested short URL slug: <code>gem-founder</code> (becomes <code>gumroad.com/l/gem-founder</code>).</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">Upload deliverable</div>
+    <p>Zip <code>gem.html</code> (the original, not the renamed app/index.html) plus <code>GEM-User-Manual.pdf</code> together. Upload as the product file.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">3</div><div class="step-body">
+    <div class="step-title">Workflow → enable License Keys</div>
+    <p>For now: choose "I'll provide my own keys." When a sale comes in, generate one with <code>gemGenerateLicense()</code> in the GEM browser console and paste it into the buyer's delivery via Gumroad's customer dashboard.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">4</div><div class="step-body">
+    <div class="step-title">Update the buy buttons in your repo</div>
+    <p>If your Gumroad URL is <code>gumroad.com/l/gem-founder</code>, that's already wired in your <code>index.html</code>. If you used a different slug, find &amp; replace <code>gumroad.com/l/gem-founder</code> with your actual URL, commit, push.</p>
+  </div></div>
+
+  <h2>Pre-launch checklist</h2>
+  <table>
+    <thead><tr><th>Item</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>thegeminfo.com loads with HTTPS</td><td>☐</td></tr>
+      <tr><td>thegeminfo.com/app/ loads, demo runs end-to-end</td><td>☐</td></tr>
+      <tr><td>OG image renders on opengraph.xyz</td><td>☐</td></tr>
+      <tr><td>Buy button goes to live Gumroad checkout</td><td>☐</td></tr>
+      <tr><td>Gumroad delivery email tested with own purchase</td><td>☐</td></tr>
+      <tr><td>License key activation flow tested with the test purchase</td><td>☐</td></tr>
+      <tr><td>Founder counter on landing page reads "100 / 100 remaining"</td><td>☐</td></tr>
+      <tr><td>Social profile pic + banner uploaded (X / LinkedIn)</td><td>☐</td></tr>
+      <tr><td>30 names ready in your "personal network DM" list</td><td>☐</td></tr>
+      <tr><td>Day 1 post drafted and ready to ship Tuesday morning</td><td>☐</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Updating the founder counter as sales come in</h2>
+  <p>The counter is a single number in <code>index.html</code> — search for <code>SEATS_REMAINING</code> at the bottom of the file. After each sale, decrement, commit, push. Auto-deploys in 30 seconds.</p>
+  <div class="code-block"><span class="c">// Before sale 1</span>
+const SEATS_REMAINING = <span class="v">100</span>;
+
+<span class="c">// After sale 1</span>
+const SEATS_REMAINING = <span class="v">99</span>;</div>
+
+  <p>When the counter hits 0 (or 5 — slight scarcity hedge), update the buy button to "Founder's Edition sold out — $29 standard" and edit the price in Gumroad to $29. The graduation script in the Launch Playbook tells you what to email past buyers.</p>
+
+  <h2>If something breaks</h2>
+  <ul>
+    <li><strong>Vercel rollback:</strong> Vercel project → Deployments → find a previous good deploy → ⋯ menu → "Promote to Production." Reverts in seconds.</li>
+    <li><strong>DNS issue:</strong> Run <code>nslookup thegeminfo.com</code> (or use dnschecker.org). If A record isn't 76.76.21.21, your registrar didn't save. Re-check.</li>
+    <li><strong>Mixed content warning (broken HTTPS):</strong> means your HTML is loading something via <code>http://</code>. Search the codebase for <code>http://</code> and convert to <code>https://</code>.</li>
+    <li><strong>OG image not updating:</strong> the platform cached. For X, run the validator. For LinkedIn, the inspector. For Slack, the cache lives ~24h — change the filename (<code>og-image-v2.png</code>) and update the meta tag to force a re-fetch.</li>
+  </ul>
+</div>
+
+<!-- CLOSING -->
+<div class="page-break"></div>
+<div style="background:var(--forest-deep);color:var(--cream);padding:60px 56px;text-align:center;position:relative">
+  <div style="position:absolute;left:50%;top:24px;transform:translateX(-50%);width:48px;height:1px;background:var(--gold);opacity:.55"></div>
+  <div style="position:absolute;left:50%;bottom:24px;transform:translateX(-50%);width:48px;height:1px;background:var(--gold);opacity:.55"></div>
+  <h1 style="font-family:var(--serif);font-size:30px;font-weight:500;color:#FFFCF6;margin-bottom:12px;line-height:1.25">You're live.</h1>
+  <p style="color:rgba(212,239,226,.7);max-width:420px;margin:0 auto;font-size:13px;line-height:1.7">Now follow Part II of the Launch Playbook. The first dollar is closer than you think.</p>
+  <div style="font-family:var(--serif);font-size:11px;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--sage-light);margin-top:32px">GEM · Deploy Guide v1.0 · thegeminfo.com</div>
+</div>
+
+</body>
+</html>

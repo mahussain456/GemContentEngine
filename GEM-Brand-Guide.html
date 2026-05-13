@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEM · Brand Identity Guide</title>
+<link rel="icon" type="image/x-icon" href="/assets/web-assets/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/web-assets/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  /* Official GEM palette */
+  --forest-deep:#0E2A1F; --forest:#1B4D3E; --forest-mid:#2A6650; --sage:#4F8A73;
+  --sage-light:#A7BFAE; --mint:#D6E3DB; --pale-mint:#E9F1EC;
+  --cream:#F4EFE6; --cream-soft:#EFE9DD; --cream-warm:#E9E2D2;
+  --divider:#D8D2C7; --divider-strong:#C8C1B2;
+  --ink:#1A1A1A; --ink-soft:#3A3A3A; --ink-mid:#6E6E6E; --ink-light:#A8A296;
+  --gold:#C8A96A;
+  --serif:'Playfair Display','EB Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',Consolas,monospace;
+}
+@page{margin:0;size:letter}
+body{font-family:var(--serif);color:var(--ink);background:var(--cream);font-size:13px;line-height:1.65}
+.page{padding:54px 56px;background:var(--cream);min-height:100vh}
+.page-break{page-break-before:always}
+@media print{
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+  .no-print{display:none!important}
+  .page{min-height:auto}
+}
+@media screen{
+  body{padding:30px;background:#E8E2D4}
+  .page{box-shadow:0 8px 30px rgba(0,0,0,.15);max-width:880px;margin:0 auto 30px;border-radius:4px}
+}
+
+/* ─── Cover ─── */
+.cover{
+  background:radial-gradient(ellipse at top,var(--forest-mid) 0%,var(--forest) 45%,var(--forest-deep) 100%);
+  color:var(--cream);padding:80px 60px;text-align:center;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  min-height:100vh;position:relative;overflow:hidden;
+}
+.cover::before,.cover::after{
+  content:'';position:absolute;left:50%;transform:translateX(-50%);
+  width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.cover::before{top:40px} .cover::after{bottom:40px}
+.cover-rule{width:48px;height:1px;background:var(--gold);opacity:.55;margin:32px 0}
+.cover-title{
+  font-family:var(--serif);font-size:48px;font-weight:500;line-height:1.15;
+  max-width:680px;color:#FFFCF6;margin-bottom:16px;letter-spacing:-.005em;
+}
+.cover-sub{
+  font-size:17px;font-style:italic;color:var(--sage-light);opacity:.85;
+  max-width:520px;line-height:1.55;margin-bottom:24px;
+}
+.cover-meta{
+  font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(212,239,226,.5);
+}
+
+/* Page header */
+.ph{margin-bottom:30px}
+.ph-rule{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.ph-rule-line{width:24px;height:2px;background:var(--forest-mid)}
+.ph-eyebrow{font-size:10px;font-family:var(--serif);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--forest-mid)}
+.ph-title{font-family:var(--serif);font-size:34px;font-weight:600;color:var(--ink);line-height:1.18;margin-bottom:6px;letter-spacing:-.01em}
+.ph-sub{font-size:14px;color:var(--ink-mid);font-style:italic;line-height:1.55}
+.ph-divider{height:1px;margin-top:14px;background:linear-gradient(90deg,var(--forest-mid) 0%,var(--divider) 60%,transparent 100%)}
+
+h2{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);margin:36px 0 14px;letter-spacing:-.005em}
+h2:first-child{margin-top:0}
+h3{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink);margin:24px 0 10px;letter-spacing:-.003em}
+p{margin:0 0 12px;color:var(--ink-soft);font-size:13px;line-height:1.7}
+strong{color:var(--ink)}
+em{font-style:italic}
+ul,ol{margin:6px 0 16px 22px}
+ul li,ol li{margin-bottom:6px;color:var(--ink-soft);font-size:13px;line-height:1.65}
+ul li::marker{color:var(--sage)}
+code{font-family:var(--mono);font-size:11.5px;background:var(--cream-soft);padding:1px 7px;border-radius:3px;color:var(--forest)}
+
+.callout{background:var(--pale-mint);border:1px solid var(--mint);border-left:4px solid var(--forest-mid);border-radius:6px;padding:14px 18px;margin:14px 0}
+.callout-eyebrow{font-family:var(--serif);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--forest);margin-bottom:6px}
+.callout p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.7}
+
+.warn{background:#FEF3C7;border:1px solid #F59E0B;border-left:4px solid #B45309;border-radius:6px;padding:14px 18px;margin:14px 0}
+.warn .callout-eyebrow{color:#7C2D12}
+.warn p{color:#78350F}
+
+/* ─── Color swatches ─── */
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0 28px}
+.sw{border-radius:8px;overflow:hidden;border:1px solid var(--divider);background:#fff}
+.sw-color{height:84px}
+.sw-info{padding:10px 12px}
+.sw-name{font-family:var(--serif);font-weight:600;font-size:13px;color:var(--ink);margin-bottom:2px}
+.sw-hex{font-family:var(--mono);font-size:11px;color:var(--ink-mid);text-transform:uppercase;letter-spacing:.05em}
+.sw-use{font-size:10.5px;color:var(--ink-mid);margin-top:5px;line-height:1.45}
+
+/* ─── Logo display ─── */
+.logo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:14px 0 24px}
+.logo-cell{border:1px solid var(--divider);border-radius:8px;overflow:hidden;background:#fff}
+.logo-cell-display{padding:36px 24px;display:flex;align-items:center;justify-content:center;min-height:160px}
+.logo-cell-info{padding:12px 16px;background:var(--cream);border-top:1px solid var(--divider);font-family:var(--mono);font-size:10.5px;color:var(--ink-mid);text-transform:uppercase;letter-spacing:.1em}
+.logo-cell.dark-bg .logo-cell-display{background:var(--forest-deep)}
+.logo-cell.cream-bg .logo-cell-display{background:var(--cream-soft)}
+.logo-cell.cream-bg-soft .logo-cell-display{background:#fff}
+.logo-cell img{max-width:100%;height:auto;max-height:120px}
+
+/* ─── Type specimen ─── */
+.type-spec{background:#fff;border:1px solid var(--divider);border-radius:8px;padding:24px 28px;margin:12px 0 18px}
+.type-meta{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-mid);margin-bottom:10px;display:flex;gap:16px;flex-wrap:wrap}
+.type-meta strong{color:var(--forest)}
+.type-sample{color:var(--ink);line-height:1.2;letter-spacing:-.01em}
+.serif-sample{font-family:var(--serif);font-size:42px;font-weight:500}
+.serif-italic{font-family:var(--serif);font-size:32px;font-style:italic;font-weight:500;color:var(--forest-mid)}
+.sans-sample{font-family:var(--sans);font-size:18px;font-weight:500;line-height:1.6;color:var(--ink-soft)}
+.mono-sample{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--forest-mid)}
+
+/* ─── Tagline cards ─── */
+.tagline-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0 22px}
+.tagline{background:#fff;border:1px solid var(--divider);border-left:3px solid var(--gold);border-radius:6px;padding:14px 18px}
+.tagline-text{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--forest);line-height:1.4}
+.tagline-when{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-mid);margin-top:6px}
+.tagline.primary{border-left-color:var(--forest-mid);background:var(--pale-mint)}
+.tagline.primary .tagline-text{color:var(--forest-deep);font-weight:500}
+
+/* ─── Voice grid ─── */
+.voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 22px}
+.voice-card{padding:18px 22px;border-radius:8px;border:1px solid var(--divider);background:#fff}
+.voice-card.do{border-left:3px solid var(--forest-mid);background:var(--pale-mint)}
+.voice-card.dont{border-left:3px solid #B45309;background:#FEF3C7}
+.voice-eyebrow{font-family:var(--serif);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;margin-bottom:8px}
+.voice-card.do .voice-eyebrow{color:var(--forest)}
+.voice-card.dont .voice-eyebrow{color:#7C2D12}
+.voice-card p{font-size:12.5px;line-height:1.7;margin:0 0 6px}
+.voice-card.do p{color:var(--ink-soft)}
+.voice-card.dont p{color:#78350F}
+
+/* ─── Misuse grid ─── */
+.misuse-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 22px}
+.misuse{background:#fff;border:1px solid var(--divider);border-radius:8px;padding:14px;text-align:center}
+.misuse-display{height:120px;display:flex;align-items:center;justify-content:center;background:var(--cream);border-radius:6px;margin-bottom:10px;position:relative;overflow:hidden}
+.misuse-x{position:absolute;top:6px;right:8px;font-size:18px;color:#DC2626;font-weight:700}
+.misuse-label{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-mid)}
+
+/* ─── Asset grid ─── */
+.asset-row{background:#fff;border:1px solid var(--divider);border-radius:8px;padding:18px 22px;margin:12px 0;display:flex;gap:18px;align-items:center}
+.asset-thumb{flex-shrink:0;width:120px;height:120px;background:var(--cream);border:1px solid var(--divider);border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.asset-thumb img{max-width:90%;max-height:90%}
+.asset-info{flex:1}
+.asset-info h4{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.asset-info .asset-spec{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-mid);margin-bottom:6px}
+.asset-info p{font-size:12.5px;color:var(--ink-soft);line-height:1.6;margin:0}
+
+/* ─── TOC ─── */
+.toc-entry{display:flex;gap:18px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--divider)}
+.toc-entry:last-child{border-bottom:none}
+.toc-num{flex-shrink:0;width:38px;font-family:var(--serif);font-size:14px;font-weight:600;color:var(--forest-mid);font-style:italic}
+.toc-title{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.toc-sub{font-size:12px;color:var(--ink-mid);line-height:1.55}
+
+.print-helper{position:fixed;top:14px;right:14px;background:var(--forest);color:var(--cream);padding:10px 16px;border-radius:6px;font-family:var(--serif);font-size:12px;cursor:pointer;border:none;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:999}
+.print-helper:hover{background:var(--forest-deep)}
+@media print{.print-helper{display:none}}
+
+@media (max-width:760px){
+  .swatches{grid-template-columns:repeat(2,1fr)}
+  .logo-grid,.voice-grid{grid-template-columns:1fr}
+  .misuse-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<button class="print-helper no-print" onclick="window.print()">📄 Save as PDF</button>
+
+<!-- ════════════════ COVER ════════════════ -->
+<div class="cover">
+  <img src="/assets/logos/svg/GEM_primary_horizontal_dark.svg" alt="GEM Content Engine" style="width:380px;max-width:80%;height:auto;margin-bottom:36px;display:block">
+  <div class="cover-rule"></div>
+  <h1 class="cover-title">Brand Identity Guide</h1>
+  <div class="cover-sub">Logo, color, typography, voice, and the full asset library — every signal that says "this is GEM."</div>
+  <div class="cover-meta">v1.0 · 2026 · thegeminfo.com</div>
+</div>
+
+<!-- ════════════════ TOC ════════════════ -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Contents</div></div>
+    <div class="ph-title">Inside this guide</div>
+    <div class="ph-sub">Six sections. Read once, reference forever.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <div class="toc-entry"><div class="toc-num">I.</div><div><div class="toc-title">The Brand in One Sentence</div><div class="toc-sub">What GEM stands for and why the brand looks the way it looks.</div></div></div>
+  <div class="toc-entry"><div class="toc-num">II.</div><div><div class="toc-title">Logo System</div><div class="toc-sub">Mark, wordmark, lockups, clear space, sizing, and what not to do.</div></div></div>
+  <div class="toc-entry"><div class="toc-num">III.</div><div><div class="toc-title">Color Palette</div><div class="toc-sub">Forest greens, warm cream, gold accent — with hex codes and usage rules.</div></div></div>
+  <div class="toc-entry"><div class="toc-num">IV.</div><div><div class="toc-title">Typography</div><div class="toc-sub">Serif headlines (Fraunces / Georgia), sans body (DM Sans), mono accents (JetBrains Mono).</div></div></div>
+  <div class="toc-entry"><div class="toc-num">V.</div><div><div class="toc-title">Voice &amp; Tone</div><div class="toc-sub">How GEM sounds. Five do's, five don'ts. Tagline options.</div></div></div>
+  <div class="toc-entry"><div class="toc-num">VI.</div><div><div class="toc-title">Asset Library</div><div class="toc-sub">Every SVG file in your /assets folder, what it's for, and how to convert to PNG when needed.</div></div></div>
+</div>
+
+<!-- ════════════════ I. BRAND ESSENCE ════════════════ -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part I · Essence</div></div>
+    <div class="ph-title">The brand in one sentence</div>
+    <div class="ph-sub">If GEM only had time to say one thing, this is the thing.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <div style="background:var(--pale-mint);border:1px solid var(--mint);border-left:4px solid var(--forest-mid);border-radius:8px;padding:32px 36px;margin:18px 0 26px;text-align:center">
+    <div style="font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--forest);margin-bottom:14px">Brand essence</div>
+    <p style="font-family:var(--serif);font-size:24px;font-style:italic;color:var(--forest-deep);line-height:1.45;margin:0">"Six AI agents in one HTML file. One purchase, forever yours.<br>The opposite of the per-word, per-month, per-seat content stack."</p>
+  </div>
+
+  <h2>The three things GEM is</h2>
+  <p><strong>Crafted, not assembled.</strong> A multi-agent pipeline with locked schemas — not a chat box dressed up as a tool. Each agent has one job, done well.</p>
+  <p><strong>Owned, not rented.</strong> One HTML file. One purchase. Runs on your machine forever, even after the company that sold it disappears. (Including ours, hypothetically.)</p>
+  <p><strong>Solo-first.</strong> Built by one person for one-person teams. The brand sounds like a thoughtful operator, not a marketing department.</p>
+
+  <h2>Why the visual identity looks the way it looks</h2>
+  <p><strong>Forest green.</strong> Trust, calm, growth. Not the saturated tech-startup green — a deep, warm forest tone. We are not in a hurry; we are deliberate.</p>
+  <p><strong>Warm cream, not white.</strong> Cream signals editorial craft over Silicon Valley sterility. Books, not dashboards.</p>
+  <p><strong>Gold accent.</strong> Sparingly. Just enough to feel like a real product, not enough to feel like a casino.</p>
+  <p><strong>Serif typography.</strong> Most software brands use sans-serif because everyone else does. Serif (Fraunces / Georgia) makes GEM legible <em>as a brand</em> the moment you see a screenshot.</p>
+  <p><strong>The diamond mark.</strong> A simple hexagonal gem cut viewed from above, with a center spark. Faceted but uncomplicated — exactly like the product itself.</p>
+</div>
+
+<!-- ════════════════ II. LOGO ════════════════ -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part II · Logo</div></div>
+    <div class="ph-title">The logo system</div>
+    <div class="ph-sub">One mark. Two lockups. Three contexts. The rules are short.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>Primary marks (icon only)</h2>
+
+  <div class="logo-grid">
+    <div class="logo-cell dark-bg">
+      <div class="logo-cell-display"><img src="/assets/icons/svg/GEM_icon_mark.svg" alt="Logo mark"></div>
+      <div class="logo-cell-info">Icon mark · Use on dark surfaces</div>
+    </div>
+    <div class="logo-cell cream-bg-soft">
+      <div class="logo-cell-display" style="background:var(--cream-soft)"><img src="/assets/icons/svg/GEM_app_icon_light.svg" alt="App icon, light"></div>
+      <div class="logo-cell-info">App icon · Light surface</div>
+    </div>
+  </div>
+
+  <h2>Primary horizontal lockup</h2>
+
+  <div class="logo-grid">
+    <div class="logo-cell dark-bg">
+      <div class="logo-cell-display"><img src="/assets/logos/svg/GEM_primary_horizontal_dark.svg" alt="Horizontal logo on dark"></div>
+      <div class="logo-cell-info">Horizontal · Dark surface</div>
+    </div>
+    <div class="logo-cell cream-bg-soft">
+      <div class="logo-cell-display"><img src="/assets/logos/svg/GEM_primary_horizontal.svg" alt="Horizontal logo on cream"></div>
+      <div class="logo-cell-info">Horizontal · Cream surface (default)</div>
+    </div>
+  </div>
+
+  <h2>Stacked &amp; wordmark</h2>
+
+  <div class="logo-grid">
+    <div class="logo-cell cream-bg-soft">
+      <div class="logo-cell-display"><img src="/assets/logos/svg/GEM_stacked.svg" alt="Stacked logo" style="max-height:200px"></div>
+      <div class="logo-cell-info">Stacked · Square placements (avatars, splash, cards)</div>
+    </div>
+    <div class="logo-cell cream-bg-soft">
+      <div class="logo-cell-display"><img src="/assets/logos/svg/GEM_wordmark_only.svg" alt="Wordmark only"></div>
+      <div class="logo-cell-info">Wordmark only · Type-only contexts</div>
+    </div>
+  </div>
+
+  <h2>Sizing &amp; clear space</h2>
+  <ul>
+    <li><strong>Minimum size:</strong> Mark renders cleanly down to 16×16 px (favicon). Wordmark needs 64 px wide minimum.</li>
+    <li><strong>Clear space:</strong> Always preserve at least the width of the inner spark (the center circle) of empty space around any version of the logo.</li>
+    <li><strong>Preferred lockup by context:</strong> Horizontal for headers and email signatures · Stacked for avatars, app icons, splash screens · Mark only for favicons and tiny placements.</li>
+  </ul>
+
+  <h2>What <em>not</em> to do</h2>
+
+  <div class="misuse-grid">
+    <div class="misuse">
+      <div class="misuse-display" style="background:#FCE7F3"><span class="misuse-x">✗</span>
+        <svg viewBox="0 0 64 64" width="60" fill="none"><rect width="64" height="64" rx="12" fill="#FCE7F3"/><path d="M32 12L48 21V41L32 50L16 41V21L32 12Z" stroke="#BE185D" stroke-width="2" stroke-linejoin="round"/><circle cx="32" cy="31" r="6" fill="#BE185D"/></svg>
+      </div>
+      <div class="misuse-label">Don't recolor — the mark is forest green or sage-light only</div>
+    </div>
+    <div class="misuse">
+      <div class="misuse-display"><span class="misuse-x">✗</span>
+        <svg viewBox="0 0 80 64" width="80" fill="none"><path d="M40 12L60 21V41L40 50L20 41V21L40 12Z" stroke="#1A3828" stroke-width="2" stroke-linejoin="round" transform="scale(1.4 0.7) translate(-12 12)"/></svg>
+      </div>
+      <div class="misuse-label">Don't stretch — the hexagon must stay regular</div>
+    </div>
+    <div class="misuse">
+      <div class="misuse-display"><span class="misuse-x">✗</span>
+        <svg viewBox="0 0 64 64" width="60" fill="none" style="filter:drop-shadow(0 4px 8px rgba(0,0,0,0.5))"><path d="M32 12L48 21V41L32 50L16 41V21L32 12Z" stroke="#1A3828" stroke-width="2" stroke-linejoin="round"/><circle cx="32" cy="31" r="6" fill="#1A3828"/></svg>
+      </div>
+      <div class="misuse-label">Don't add drop shadows, glows, or 3D effects</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ III. COLOR ════════════════ -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part III · Color</div></div>
+    <div class="ph-title">The palette</div>
+    <div class="ph-sub">Twelve colors. Three families. Use the named tokens — don't mix in random shades.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>Forest greens (primary brand)</h2>
+  <div class="swatches">
+    <div class="sw"><div class="sw-color" style="background:#0E2A1F"></div><div class="sw-info"><div class="sw-name">Deep Forest</div><div class="sw-hex">#0E2A1F</div><div class="sw-use">Cover backgrounds, primary CTAs, footers. The "premium" surface.</div></div></div>
+    <div class="sw"><div class="sw-color" style="background:#1B4D3E"></div><div class="sw-info"><div class="sw-name">Pine Green</div><div class="sw-hex">#1B4D3E</div><div class="sw-use">Brand accents, secondary CTAs, body text on cream when serif.</div></div></div>
+    <div class="sw"><div class="sw-color" style="background:#A7BFAE"></div><div class="sw-info"><div class="sw-name">Sage</div><div class="sw-hex">#A7BFAE</div><div class="sw-use">Soft accents, badges, dividers, decorative type on dark.</div></div></div>
+    <div class="sw"><div class="sw-color" style="background:#E9F1EC"></div><div class="sw-info"><div class="sw-name">Mist</div><div class="sw-hex">#E9F1EC</div><div class="sw-use">Callout backgrounds, badge fills, soft tints on cream.</div></div></div>
+  </div>
+
+  <h2>Cream, neutrals &amp; ink</h2>
+  <div class="swatches">
+    <div class="sw"><div class="sw-color" style="background:#F4EFE6;border:1px solid var(--divider)"></div><div class="sw-info"><div class="sw-name">Warm Beige</div><div class="sw-hex">#F4EFE6</div><div class="sw-use">Default page background. Warmer than white. The brand "paper".</div></div></div>
+    <div class="sw"><div class="sw-color" style="background:#D8D2C7"></div><div class="sw-info"><div class="sw-name">Stone</div><div class="sw-hex">#D8D2C7</div><div class="sw-use">Borders, dividers, hairlines on cream.</div></div></div>
+    <div class="sw"><div class="sw-color" style="background:#DAD4C6"></div><div class="sw-info"><div class="sw-name">Clay</div><div class="sw-hex">#DAD4C6</div><div class="sw-use">Card alternating rows, soft surface variation.</div></div></div>
+    <div class="sw"><div class="sw-color" style="background:#1A1A1A"></div><div class="sw-info"><div class="sw-name">Charcoal</div><div class="sw-hex">#1A1A1A</div><div class="sw-use">Primary body text on cream. Never pure black.</div></div></div>
+  </div>
+
+  <h2>Gold accent</h2>
+  <div class="swatches">
+    <div class="sw"><div class="sw-color" style="background:#C8A96A"></div><div class="sw-info"><div class="sw-name">Gold</div><div class="sw-hex">#C8A96A</div><div class="sw-use">Sparingly — premium badges, accent rules, decorative dividers on dark.</div></div></div>
+  </div>
+
+  <h2>Usage rules</h2>
+  <ul>
+    <li><strong>The 60-30-10 rule.</strong> Warm Beige 60% (page) + Pine Green/Deep Forest 30% (text + structure) + Sage / Gold 10% (accents). When in doubt, use less green.</li>
+    <li><strong>Never pure black on cream.</strong> Always Charcoal (#1A1A1A). Pure black is jarring on warm backgrounds.</li>
+    <li><strong>Gold is a punctuation mark.</strong> One gold rule per spread. One gold badge per page. If you need two, you don't need any.</li>
+    <li><strong>Sage on cream needs care.</strong> Sage (#A7BFAE) fails contrast on cream for text — use Pine Green (#1B4D3E) or darker for any reading copy. Sage is for soft surfaces and decorative type only.</li>
+    <li><strong>Accessibility floor.</strong> Pine Green (#1B4D3E) on Warm Beige hits ~9.7:1 contrast — well above WCAG AAA. Stay there for body copy.</li>
+    <li><strong>CSS tokens already exist.</strong> Use <code>/assets/web-assets/gem-brand-tokens.css</code> — drop-in variables: <code>--gem-deep-forest</code>, <code>--gem-pine-green</code>, <code>--gem-sage</code>, <code>--gem-mist</code>, <code>--gem-warm-beige</code>, <code>--gem-stone</code>, <code>--gem-clay</code>, <code>--gem-charcoal</code>, <code>--gem-gold</code>.</li>
+  </ul>
+</div>
+
+<!-- ════════════════ IV. TYPOGRAPHY ════════════════ -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part IV · Typography</div></div>
+    <div class="ph-title">Type system</div>
+    <div class="ph-sub">Three families, three roles. Don't introduce a fourth.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <div class="type-spec">
+    <div class="type-meta"><strong>SERIF · HEADLINES &amp; BRAND</strong><span>Playfair Display (primary) · EB Garamond (alt)</span><span>Weights: 500, 600, 700</span></div>
+    <div class="type-sample serif-sample">One idea. Every channel.</div>
+    <div class="type-sample serif-italic" style="margin-top:14px">Six AI agents.</div>
+    <p style="font-size:11.5px;color:var(--ink-mid);margin-top:14px">For hero headlines, section titles, and editorial moments. Playfair Display has the sharp, high-contrast strokes that read "premium publication" — pair with Inter for a classic editorial / modern hybrid. The wordmark in the official logo uses EB Garamond — they harmonize cleanly.</p>
+  </div>
+
+  <div class="type-spec">
+    <div class="type-meta"><strong>SANS · BODY &amp; UI</strong><span>Inter (web) · system-ui fallback</span><span>Weights: 400, 500, 600, 700</span></div>
+    <div class="type-sample sans-sample">Body copy, navigation, buttons, form fields, dashboard text. Inter is the calm, neutral workhorse that lets the serif headlines do the talking. Reads cleanly at 13–15 px on screen.</div>
+    <p style="font-size:11.5px;color:var(--ink-mid);margin-top:14px">For paragraphs, UI, buttons, captions. Default 13.5 px on web, line-height 1.65. Avoid going below 12 px for any reading copy.</p>
+  </div>
+
+  <div class="type-spec">
+    <div class="type-meta"><strong>MONO · LABELS &amp; TECHNICAL</strong><span>JetBrains Mono (web) · Consolas fallback</span><span>Weights: 500, 600</span></div>
+    <div class="type-sample mono-sample">CONTENT  ENGINE  ·  THEGEMINFO.COM</div>
+    <p style="font-size:11.5px;color:var(--ink-mid);margin-top:14px">Eyebrow labels (uppercase, letter-spaced .18em–.22em), code snippets, technical specs, footers. Mono is GEM's "indie technical builder" signal.</p>
+  </div>
+
+  <h2>Pairing recipes that just work</h2>
+  <ul>
+    <li><strong>Hero.</strong> Mono eyebrow (10px, .22em letter-spacing, Pine Green) → Playfair Display headline 48–72px (weight 500) → Inter lede 16–18px.</li>
+    <li><strong>Section.</strong> Mono eyebrow (10px) → Playfair H2 (32–42px, weight 600) → Inter body (13.5–15px).</li>
+    <li><strong>Card.</strong> Inter label (10px uppercase) → Playfair title (15–18px, weight 600) → Inter body (12.5–13px).</li>
+    <li><strong>Pull quote.</strong> Playfair italic 18–22px on Mist background, with a Gold left border.</li>
+  </ul>
+
+  <h2>Web font loading</h2>
+  <div class="callout">
+    <div class="callout-eyebrow">CSS import (already in landing.html and brand-guide)</div>
+    <p><code>&lt;link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"&gt;</code></p>
+  </div>
+</div>
+
+<!-- ════════════════ V. VOICE ════════════════ -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part V · Voice</div></div>
+    <div class="ph-title">How GEM sounds</div>
+    <div class="ph-sub">A thoughtful operator, not a marketing department. Sharp, no fluff, slightly contrarian.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>The five rules</h2>
+
+  <div class="voice-grid">
+    <div class="voice-card do">
+      <div class="voice-eyebrow">★ Do</div>
+      <p><strong>Be specific.</strong> "$11K/month." "90 seconds." "Six agents." Numbers and names earn trust.</p>
+    </div>
+    <div class="voice-card dont">
+      <div class="voice-eyebrow">✗ Don't</div>
+      <p><strong>Use generic SaaS-speak.</strong> "Solutions." "Empowering." "Seamless." If it could be on every other product page, cut it.</p>
+    </div>
+    <div class="voice-card do">
+      <div class="voice-eyebrow">★ Do</div>
+      <p><strong>Talk like a person.</strong> Contractions are fine. So are sentences that start with <em>And</em> or <em>But</em>.</p>
+    </div>
+    <div class="voice-card dont">
+      <div class="voice-eyebrow">✗ Don't</div>
+      <p><strong>Be the marketing department.</strong> "Revolutionize your content workflow with cutting-edge AI" → instant trust loss.</p>
+    </div>
+    <div class="voice-card do">
+      <div class="voice-eyebrow">★ Do</div>
+      <p><strong>Show your work.</strong> "I built this in 6 weeks because…" Process beats polish.</p>
+    </div>
+    <div class="voice-card dont">
+      <div class="voice-eyebrow">✗ Don't</div>
+      <p><strong>Pretend GEM is bigger than it is.</strong> No "our team is committed to…" It's one person. Lean into it.</p>
+    </div>
+    <div class="voice-card do">
+      <div class="voice-eyebrow">★ Do</div>
+      <p><strong>Be slightly contrarian.</strong> "Most AI tools rent you a chat box. GEM gives you a finished workflow."</p>
+    </div>
+    <div class="voice-card dont">
+      <div class="voice-eyebrow">✗ Don't</div>
+      <p><strong>Be mean.</strong> Contrarian, not contemptuous. Don't trash competitors by name.</p>
+    </div>
+    <div class="voice-card do">
+      <div class="voice-eyebrow">★ Do</div>
+      <p><strong>End with a clear ask.</strong> Tell the reader what to do next. "Try the demo." "Buy at $9." "Reply with feedback."</p>
+    </div>
+    <div class="voice-card dont">
+      <div class="voice-eyebrow">✗ Don't</div>
+      <p><strong>Bury the verb.</strong> "We're excited to share that GEM is now available…" → "GEM is live. Here's the link."</p>
+    </div>
+  </div>
+
+  <h2>Tagline options</h2>
+
+  <div class="tagline-grid">
+    <div class="tagline primary">
+      <div class="tagline-text">"One idea. Every channel."</div>
+      <div class="tagline-when">Primary — use everywhere by default</div>
+    </div>
+    <div class="tagline">
+      <div class="tagline-text">"Six AI agents. One full content drop in 90 seconds."</div>
+      <div class="tagline-when">Long form — landing page lede, podcast intro</div>
+    </div>
+    <div class="tagline">
+      <div class="tagline-text">"The opposite of a $49/month chatbot."</div>
+      <div class="tagline-when">Comparative — cold DMs, comparison posts</div>
+    </div>
+    <div class="tagline">
+      <div class="tagline-text">"Stop paying per-word. Start paying once."</div>
+      <div class="tagline-when">CTA-heavy — closing copy, ad creative</div>
+    </div>
+    <div class="tagline">
+      <div class="tagline-text">"Built by one person. Built for one-person teams."</div>
+      <div class="tagline-when">Solo / IndieHackers / build-in-public moments</div>
+    </div>
+  </div>
+
+  <h2>Phrase bank</h2>
+  <ul>
+    <li><strong>Use:</strong> "ship", "drop", "stack", "workflow", "operator", "indie", "solo", "no-fluff", "build in public", "one purchase, forever yours"</li>
+    <li><strong>Avoid:</strong> "leverage", "synergy", "solution", "empower", "unlock", "transform", "revolutionize", "next-gen", "best-in-class"</li>
+  </ul>
+</div>
+
+<!-- ════════════════ VI. ASSETS ════════════════ -->
+<div class="page-break"></div>
+<div class="page">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part VI · Assets</div></div>
+    <div class="ph-title">Asset library</div>
+    <div class="ph-sub">The official package lives in <code>/assets/</code> — 40+ files across logos, icons, social, and web. Below: what to grab when.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>Logos (all in <code>/assets/logos/</code>)</h2>
+
+  <div class="asset-row">
+    <div class="asset-thumb"><img src="/assets/logos/svg/GEM_primary_horizontal.svg" alt="" style="width:auto;max-width:100%"></div>
+    <div class="asset-info">
+      <h4>GEM_primary_horizontal.svg</h4>
+      <div class="asset-spec">2500×900 · Mark + EB Garamond wordmark + tagline</div>
+      <p>The default logo — use everywhere by default. PNG copies at 2000w + 4000w in <code>/logos/png/</code>. There's also a dark-surface variant: <code>GEM_primary_horizontal_dark.svg</code>.</p>
+    </div>
+  </div>
+
+  <div class="asset-row">
+    <div class="asset-thumb"><img src="/assets/logos/svg/GEM_stacked.svg" alt="" style="max-height:120px;width:auto"></div>
+    <div class="asset-info">
+      <h4>GEM_stacked.svg</h4>
+      <div class="asset-spec">Square format · Mark above wordmark</div>
+      <p>For square placements — splash screens, app icons, business cards, decks. PNG version: <code>GEM_stacked_3000w.png</code>.</p>
+    </div>
+  </div>
+
+  <div class="asset-row">
+    <div class="asset-thumb"><img src="/assets/logos/svg/GEM_wordmark_only.svg" alt="" style="max-height:60px;width:auto"></div>
+    <div class="asset-info">
+      <h4>GEM_wordmark_only.svg</h4>
+      <div class="asset-spec">Type-only · No mark</div>
+      <p>For contexts where the mark is already adjacent (banner illustrations, dual-brand lockups). PNG copy: <code>GEM_wordmark_only_3000w.png</code>.</p>
+    </div>
+  </div>
+
+  <h2>Icons (all in <code>/assets/icons/</code>)</h2>
+
+  <div class="asset-row">
+    <div class="asset-thumb"><img src="/assets/icons/svg/GEM_icon_mark.svg" alt="" style="width:96px;height:96px"></div>
+    <div class="asset-info">
+      <h4>GEM_icon_mark.svg</h4>
+      <div class="asset-spec">SVG + PNG sizes 16, 32, 48, 64, 180, 192, 256, 512, 1024</div>
+      <p>The mark alone — for tiny icons (favicons), app shortcuts, and any place you need GEM in a single glyph. PNG sizes are pre-rendered in <code>/icons/png/</code> for non-vector contexts.</p>
+    </div>
+  </div>
+
+  <div class="asset-row">
+    <div class="asset-thumb"><img src="/assets/icons/svg/GEM_app_icon_rounded.svg" alt="" style="width:96px;height:96px"></div>
+    <div class="asset-info">
+      <h4>GEM_app_icon_rounded.svg</h4>
+      <div class="asset-spec">Squircle / iOS-style rounded</div>
+      <p>iOS / macOS app icon shape. PNG copies: 256, 512, 1024. There's also a <code>GEM_app_icon_light.svg</code> for cream-surface contexts.</p>
+    </div>
+  </div>
+
+  <div class="asset-row">
+    <div class="asset-thumb"><img src="/assets/icons/svg/GEM_social_avatar.svg" alt="" style="width:96px;height:96px;border-radius:50%"></div>
+    <div class="asset-info">
+      <h4>GEM_social_avatar.svg</h4>
+      <div class="asset-spec">Designed to crop circular · PNG sizes 256, 512, 1024</div>
+      <p>Profile picture for X / LinkedIn / GitHub / IG / TikTok. Use the 1024 PNG (<code>/icons/png/GEM_social_avatar_1024.png</code>) for upload — most platforms downsample.</p>
+    </div>
+  </div>
+
+  <h2>Social images (all in <code>/assets/social/</code>)</h2>
+
+  <div class="asset-row">
+    <div class="asset-thumb"><img src="/assets/social/GEM_open_graph_1200x630.jpg" alt="" style="width:auto;max-width:100%;height:auto"></div>
+    <div class="asset-info">
+      <h4>GEM_open_graph_1200x630.jpg</h4>
+      <div class="asset-spec">1200×630 · JPG · Open Graph / Twitter card</div>
+      <p>Already wired into <code>landing.html</code> via <code>&lt;meta property="og:image"&gt;</code>. Shows up on Twitter, LinkedIn, Slack, Discord, etc. when someone pastes <code>thegeminfo.com</code>.</p>
+    </div>
+  </div>
+
+  <div class="asset-row">
+    <div class="asset-thumb"><img src="/assets/social/GEM_linkedin_banner_1500x500.jpg" alt="" style="width:auto;max-width:100%;height:auto"></div>
+    <div class="asset-info">
+      <h4>GEM_linkedin_banner_1500x500.jpg</h4>
+      <div class="asset-spec">1500×500 · LinkedIn cover image</div>
+      <p>Upload as your LinkedIn profile background. Also works at native size for X (1500×500) and similar.</p>
+    </div>
+  </div>
+
+  <div class="asset-row">
+    <div class="asset-thumb"><img src="/assets/social/GEM_facebook_cover_1640x924.jpg" alt="" style="width:auto;max-width:100%;height:auto"></div>
+    <div class="asset-info">
+      <h4>GEM_facebook_cover_1640x924.jpg</h4>
+      <div class="asset-spec">1640×924 · Facebook page cover</div>
+      <p>Drop into Facebook page settings → Cover photo.</p>
+    </div>
+  </div>
+
+  <div class="asset-row">
+    <div class="asset-thumb"><img src="/assets/social/GEM_social_avatar_1080.png" alt="" style="width:96px;height:96px;border-radius:50%"></div>
+    <div class="asset-info">
+      <h4>GEM_social_avatar_1080.png</h4>
+      <div class="asset-spec">1080×1080 · PNG · Square — crops to circle</div>
+      <p>Universal profile picture across X, LinkedIn, IG, TikTok, GitHub. Highest-quality version of the avatar.</p>
+    </div>
+  </div>
+
+  <h2>Web favicons (all in <code>/assets/web-assets/</code>)</h2>
+  <p>Already wired into the <code>&lt;head&gt;</code> of <code>landing.html</code> and <code>gem.html</code>. Includes:</p>
+  <ul>
+    <li><code>favicon.ico</code> — multi-resolution Windows-style icon (legacy support)</li>
+    <li><code>favicon-16x16.png</code>, <code>favicon-32x32.png</code> — modern browser tabs</li>
+    <li><code>apple-touch-icon.png</code> — 180×180, iOS home-screen bookmark</li>
+    <li><code>android-chrome-192x192.png</code>, <code>android-chrome-512x512.png</code> — Android PWA</li>
+    <li><code>gem-brand-tokens.css</code> — drop-in CSS variables for the official palette + button styles</li>
+  </ul>
+
+  <div class="callout" style="margin-top:18px">
+    <div class="callout-eyebrow">Drop-in usage example</div>
+    <p>Add to any new page: <code>&lt;link rel="stylesheet" href="/assets/web-assets/gem-brand-tokens.css"&gt;</code></p>
+    <p>Then use <code>var(--gem-pine-green)</code>, <code>var(--gem-warm-beige)</code>, etc. directly. The official <code>.gem-primary-button</code> and <code>.gem-badge</code> classes are also pre-defined.</p>
+  </div>
+
+  <h2>The full reference</h2>
+  <p>The official PDF brand guide is in <code>/assets/brand-guide/GEM_brand_guide.pdf</code> — open it for the original designer's reference, including a color-palette image and the brand board the package was built from.</p>
+</div>
+
+<!-- ════════════════ Closing ════════════════ -->
+<div class="page-break"></div>
+<div style="background:var(--forest-deep);color:var(--cream);padding:60px 56px;text-align:center;position:relative">
+  <div style="position:absolute;left:50%;top:24px;transform:translateX(-50%);width:48px;height:1px;background:var(--gold);opacity:.55"></div>
+  <div style="position:absolute;left:50%;bottom:24px;transform:translateX(-50%);width:48px;height:1px;background:var(--gold);opacity:.55"></div>
+  <h1 style="font-family:var(--serif);font-size:30px;font-weight:500;color:#FFFCF6;margin-bottom:12px;line-height:1.25">If a screenshot looks like GEM,<br>everything is working.</h1>
+  <p style="color:rgba(212,239,226,.7);max-width:420px;margin:0 auto;font-size:13px;line-height:1.7">Forest green. Warm cream. Serif headlines. A diamond. One purchase, forever yours.</p>
+  <div style="font-family:var(--serif);font-size:11px;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--sage-light);margin-top:32px">GEM · Brand Guide v1.0 · thegeminfo.com</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://thegeminfo.com/</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thegeminfo.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thegeminfo.com/"/>
+    <image:image>
+      <image:loc>https://thegeminfo.com/assets/social/GEM_open_graph_1200x630.jpg</image:loc>
+      <image:title>GEM Content Engine — One idea. Every channel.</image:title>
+      <image:caption>Six AI agents. One full content drop in 90 seconds.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thegeminfo.com/assets/logos/png/GEM_primary_horizontal_2000w.png</image:loc>
+      <image:title>GEM Content Engine logo</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://thegeminfo.com/app/</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thegeminfo.com/app/"/>
+  </url>
+
+  <url>
+    <loc>https://thegeminfo.com/#pricing</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://thegeminfo.com/#how</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thegeminfo.com/#features</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thegeminfo.com/#compare</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://thegeminfo.com/#faq</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

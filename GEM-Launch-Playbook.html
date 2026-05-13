@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GEM · Launch Playbook — Pricing, Marketing, Deployment</title>
+<link rel="icon" type="image/x-icon" href="/assets/web-assets/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/web-assets/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  /* Official GEM palette */
+  --forest-deep:#0E2A1F; --forest:#1B4D3E; --forest-mid:#2A6650; --sage:#4F8A73;
+  --sage-light:#A7BFAE; --mint:#D6E3DB; --pale-mint:#E9F1EC;
+  --cream:#F4EFE6; --cream-soft:#EFE9DD; --cream-warm:#E9E2D2;
+  --divider:#D8D2C7; --divider-strong:#C8C1B2;
+  --ink:#1A1A1A; --ink-soft:#3A3A3A; --ink-mid:#6E6E6E; --ink-light:#A8A296;
+  --gold:#C8A96A;
+  /* Section accents — kept distinct so each Part is visually identifiable */
+  --accent-money:#1B4D3E; --accent-marketing:#9F1239; --accent-deploy:#0369A1;
+  --accent-strategy:#6D28D9; --accent-scripts:#9A3412;
+  --serif:'Playfair Display','EB Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',Consolas,monospace;
+}
+@page{margin:0;size:letter}
+body{
+  font-family:var(--serif);
+  color:var(--ink);background:var(--cream);
+  font-size:12px;line-height:1.65;
+}
+.page{padding:54px 56px;background:var(--cream);min-height:100vh}
+.page-break{page-break-before:always}
+@media print{
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+  .no-print{display:none!important}
+  .page{min-height:auto}
+  a{color:var(--forest);text-decoration:underline}
+}
+@media screen{
+  body{padding:30px;background:#E8E2D4}
+  .page{box-shadow:0 8px 30px rgba(0,0,0,.15);max-width:780px;margin:0 auto 30px;border-radius:4px}
+}
+
+/* ─── Cover ─── */
+.cover{
+  background:radial-gradient(ellipse at top,var(--forest-mid) 0%,var(--forest) 45%,var(--forest-deep) 100%);
+  color:var(--cream);padding:80px 60px;text-align:center;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  min-height:100vh;position:relative;overflow:hidden;
+}
+.cover::before,.cover::after{
+  content:'';position:absolute;left:50%;transform:translateX(-50%);
+  width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.cover::before{top:40px} .cover::after{bottom:40px}
+.cover-logo{
+  width:60px;height:60px;border:2px solid var(--sage-light);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:24px;
+}
+.cover-wordmark{
+  font-family:var(--serif);font-size:14px;font-weight:600;letter-spacing:.5em;
+  color:var(--sage-light);text-transform:uppercase;padding-left:.5em;margin-bottom:6px;
+}
+.cover-tag{
+  font-size:9.5px;letter-spacing:.32em;text-transform:uppercase;
+  color:rgba(212,239,226,.5);
+}
+.cover-rule{width:48px;height:1px;background:var(--gold);opacity:.55;margin:32px 0}
+.cover-title{
+  font-family:var(--serif);font-size:42px;font-weight:500;line-height:1.18;
+  max-width:680px;color:#FFFCF6;margin-bottom:16px;letter-spacing:-.005em;
+}
+.cover-sub{
+  font-size:15px;font-style:italic;color:var(--sage-light);opacity:.85;
+  max-width:520px;line-height:1.6;margin-bottom:24px;
+}
+.cover-meta{
+  font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(212,239,226,.5);font-family:var(--serif);
+}
+.cover-chips{
+  margin-top:48px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:580px;
+}
+.cover-chip{
+  background:rgba(212,239,226,0.08);border:1px solid rgba(212,239,226,0.18);
+  border-radius:8px;padding:12px 18px;font-family:var(--serif);font-size:11.5px;
+  font-weight:600;color:var(--sage-light);min-width:140px;
+}
+.cover-chip-num{font-size:24px;color:#FFFCF6;display:block;margin-bottom:3px;font-weight:500}
+
+/* ─── Page header ─── */
+.ph{margin-bottom:26px}
+.ph-rule{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.ph-rule-line{width:24px;height:2px;background:var(--accent)}
+.ph-eyebrow{
+  font-size:9.5px;font-family:var(--serif);font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+}
+.ph-title{
+  font-family:var(--serif);font-size:30px;font-weight:600;color:var(--ink);
+  line-height:1.18;margin-bottom:6px;letter-spacing:-.01em;
+}
+.ph-sub{font-size:13px;color:var(--ink-mid);font-style:italic;line-height:1.55}
+.ph-divider{
+  height:1px;margin-top:14px;
+  background:linear-gradient(90deg,var(--accent) 0%,var(--divider) 60%,transparent 100%);
+}
+
+/* Accent variants per part */
+.acc-strategy{--accent:var(--accent-strategy)}
+.acc-money{--accent:var(--accent-money)}
+.acc-marketing{--accent:var(--accent-marketing)}
+.acc-deploy{--accent:var(--accent-deploy)}
+.acc-scripts{--accent:var(--accent-scripts)}
+
+/* ─── Body type ─── */
+h2{
+  font-family:var(--serif);font-size:21px;font-weight:600;color:var(--ink);
+  margin:30px 0 12px;letter-spacing:-.005em;line-height:1.25;
+}
+h2:first-child{margin-top:0}
+h3{
+  font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);
+  margin:22px 0 10px;letter-spacing:-.003em;
+}
+h3 .num{
+  display:inline-block;font-style:italic;color:var(--accent,var(--forest-mid));
+  margin-right:8px;font-weight:500;
+}
+p{margin:0 0 11px;color:var(--ink-soft);font-size:12.5px;line-height:1.7}
+strong{color:var(--ink)}
+em{font-style:italic}
+ul,ol{margin:6px 0 14px 22px}
+ul li,ol li{margin-bottom:5px;color:var(--ink-soft);font-size:12.5px;line-height:1.65}
+ul li::marker{color:var(--accent,var(--sage));}
+code{
+  font-family:var(--mono);font-size:11px;
+  background:var(--cream-soft);padding:1px 6px;border-radius:3px;color:var(--accent-money);
+}
+
+/* ─── Callouts ─── */
+.callout{
+  background:var(--pale-mint);border:1px solid var(--mint);
+  border-left:4px solid var(--forest-mid);border-radius:6px;
+  padding:14px 18px;margin:14px 0;break-inside:avoid;
+}
+.callout-eyebrow{
+  font-family:var(--serif);font-size:10px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--forest);margin-bottom:6px;
+}
+.callout p{margin:0;font-size:12px;color:var(--ink-soft);line-height:1.7}
+.callout p+p{margin-top:8px}
+
+.warn{
+  background:#FEF3C7;border:1px solid #F59E0B;border-left:4px solid #B45309;
+  border-radius:6px;padding:14px 18px;margin:14px 0;break-inside:avoid;
+}
+.warn .callout-eyebrow{color:#7C2D12}
+.warn p{color:#78350F}
+
+.win{
+  background:#F0FDF4;border:1px solid #BBF7D0;border-left:4px solid #15803D;
+  border-radius:6px;padding:14px 18px;margin:14px 0;break-inside:avoid;
+}
+.win .callout-eyebrow{color:#14532D}
+.win p{color:#14532D}
+
+/* ─── Tables ─── */
+table{
+  width:100%;border-collapse:collapse;margin:12px 0 18px;
+  background:#FFF;border:1px solid var(--divider);border-radius:6px;overflow:hidden;
+  break-inside:avoid;
+}
+th{
+  background:var(--forest);color:#FFF;font-family:var(--serif);font-weight:600;
+  font-size:11.5px;text-align:left;padding:10px 12px;letter-spacing:.03em;
+}
+td{
+  padding:9px 12px;font-size:11.5px;color:var(--ink-soft);
+  border-top:1px solid var(--divider);line-height:1.55;vertical-align:top;
+}
+tr:nth-child(even) td{background:var(--cream)}
+.tbl-num{font-family:var(--mono);color:var(--accent-money);font-weight:600}
+.tbl-pos{color:var(--accent-money);font-weight:600}
+.tbl-neg{color:var(--accent-marketing);font-weight:600}
+
+/* ─── Step blocks ─── */
+.step{
+  display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;
+  background:#FFF;border:1px solid var(--divider);border-radius:6px;
+  padding:14px 16px;break-inside:avoid;
+}
+.step-num{
+  flex-shrink:0;width:32px;height:32px;border-radius:50%;
+  background:var(--forest);color:var(--sage-light);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:14px;font-weight:600;
+}
+.step-body{flex:1}
+.step-title{
+  font-family:var(--serif);font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:4px;
+}
+.step-body p{margin:4px 0 0;font-size:11.5px;color:var(--ink-soft);line-height:1.65}
+
+/* ─── TOC ─── */
+.toc-entry{
+  display:flex;gap:18px;align-items:flex-start;padding:14px 0;
+  border-bottom:1px solid var(--divider);
+}
+.toc-entry:last-child{border-bottom:none}
+.toc-num{
+  flex-shrink:0;width:38px;font-family:var(--serif);font-size:14px;
+  font-weight:600;color:var(--accent);font-style:italic;
+}
+.toc-title{
+  font-family:var(--serif);font-size:15px;font-weight:600;color:var(--ink);
+  margin-bottom:2px;
+}
+.toc-sub{font-size:11.5px;color:var(--ink-mid);line-height:1.55}
+
+/* ─── Pull quote ─── */
+.pq{
+  margin:22px 0;padding:18px 24px;border-left:3px solid var(--gold);
+  background:linear-gradient(90deg,var(--cream-soft) 0%,transparent 100%);
+  font-family:var(--serif);font-size:15px;font-style:italic;
+  color:var(--forest);line-height:1.55;break-inside:avoid;
+}
+.pq-attr{
+  display:block;margin-top:8px;font-size:10px;font-style:normal;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mid);
+}
+
+/* ─── Script template ─── */
+.script{
+  background:#FFFCF6;border:1px solid var(--divider);
+  border-left:3px solid var(--accent-scripts);border-radius:6px;
+  padding:16px 20px;margin:14px 0;break-inside:avoid;
+}
+.script-eyebrow{
+  font-family:var(--serif);font-size:10px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--accent-scripts);
+  margin-bottom:8px;
+}
+.script-title{
+  font-family:var(--serif);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:10px;
+}
+.script-body{
+  font-size:11.5px;color:var(--ink-soft);line-height:1.75;white-space:pre-wrap;
+  font-family:var(--serif);font-style:italic;
+}
+.script-body strong{color:var(--ink);font-style:normal}
+
+/* ─── Closing ─── */
+.closing{
+  background:var(--forest-deep);color:var(--cream);
+  padding:60px 56px;text-align:center;position:relative;
+}
+.closing::before,.closing::after{
+  content:'';position:absolute;left:50%;transform:translateX(-50%);
+  width:48px;height:1px;background:var(--gold);opacity:.55;
+}
+.closing::before{top:24px} .closing::after{bottom:24px}
+.closing h1{
+  font-family:var(--serif);font-size:28px;font-weight:500;color:#FFFCF6;
+  margin-bottom:12px;line-height:1.25;
+}
+.closing p{
+  color:rgba(212,239,226,.7);max-width:420px;margin:0 auto;
+  font-size:12.5px;line-height:1.7;
+}
+.closing .signoff{
+  font-family:var(--serif);font-size:11px;font-weight:600;letter-spacing:.4em;
+  text-transform:uppercase;color:var(--sage-light);margin-top:32px;
+}
+
+/* ─── Print helper ─── */
+.print-helper{
+  position:fixed;top:14px;right:14px;background:var(--forest);color:var(--cream);
+  padding:10px 16px;border-radius:6px;font-family:var(--serif);font-size:12px;
+  cursor:pointer;border:none;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:999;
+}
+.print-helper:hover{background:var(--forest-deep)}
+@media print{.print-helper{display:none}}
+</style>
+</head>
+<body>
+
+<button class="print-helper no-print" onclick="window.print()">📄 Save as PDF</button>
+
+<!-- ════════════════ COVER ════════════════ -->
+<div class="cover">
+  <img src="/assets/logos/svg/GEM_primary_horizontal_dark.svg" alt="GEM Content Engine" style="width:380px;max-width:80%;height:auto;margin-bottom:36px;display:block">
+  <div class="cover-rule"></div>
+  <h1 class="cover-title">The Launch Playbook</h1>
+  <div class="cover-sub">Pricing strategy, the 90-day marketing plan to your first dollar, deployment in 15 minutes, and the scripts you need on day one.</div>
+  <div class="cover-meta">v1.0 · Solo Founder Edition · 2026</div>
+  <div class="cover-chips">
+    <div class="cover-chip"><span class="cover-chip-num">$9</span>First-dollar price</div>
+    <div class="cover-chip"><span class="cover-chip-num">90</span>Days to revenue</div>
+    <div class="cover-chip"><span class="cover-chip-num">15</span>Min to deploy</div>
+  </div>
+</div>
+
+<!-- ════════════════ TOC ════════════════ -->
+<div class="page-break"></div>
+<div class="page acc-strategy">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Contents</div></div>
+    <div class="ph-title">Inside this playbook</div>
+    <div class="ph-sub">Five parts. Read in order. Act on each one before moving to the next.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <div class="toc-entry"><div class="toc-num">I.</div>
+    <div><div class="toc-title">Pricing — Stop Guessing, Start Anchoring</div>
+    <div class="toc-sub">Why $197 is killing you out of the gate. The first-dollar price ladder. Pricing psychology for one-time digital products. The exact tiers I'd ship today.</div></div></div>
+
+  <div class="toc-entry" style="--accent:var(--accent-marketing)"><div class="toc-num">II.</div>
+    <div><div class="toc-title">Days 1–7 — The First Dollar</div>
+    <div class="toc-sub">A day-by-day playbook. Network outreach scripts, the build-in-public template, the founder's edition launch. The goal: $1 by day 7. Real customers, not friends.</div></div></div>
+
+  <div class="toc-entry" style="--accent:var(--accent-marketing)"><div class="toc-num">III.</div>
+    <div><div class="toc-title">Days 8–30 — Momentum &amp; Social Proof</div>
+    <div class="toc-sub">Reddit, Indie Hackers, Twitter / X, Product Hunt. The ten-platform launch sequence. How to collect, package, and weaponize testimonials.</div></div></div>
+
+  <div class="toc-entry" style="--accent:var(--accent-marketing)"><div class="toc-num">IV.</div>
+    <div><div class="toc-title">Days 31–90 — Scaling to $10K MRR Equivalent</div>
+    <div class="toc-sub">Affiliate program, content engine, partnerships, paid ads (only after these), AppSumo decision tree. When to raise prices.</div></div></div>
+
+  <div class="toc-entry" style="--accent:var(--accent-deploy)"><div class="toc-num">V.</div>
+    <div><div class="toc-title">Deployment — From Folder to Live URL in 15 Minutes</div>
+    <div class="toc-sub">Cloudflare Pages step-by-step. File prep. Custom domain. Gumroad wiring. Post-deploy checklist. CORS gotchas.</div></div></div>
+
+  <div class="toc-entry" style="--accent:var(--accent-scripts)"><div class="toc-num">VI.</div>
+    <div><div class="toc-title">Scripts &amp; Templates</div>
+    <div class="toc-sub">Cold outreach DMs. Build-in-public posts. Reddit text. Twitter threads. Affiliate pitch. Newsletter outreach. Use these verbatim.</div></div></div>
+
+  <div class="callout" style="margin-top:36px">
+    <div class="callout-eyebrow">How to read this</div>
+    <p>If you only have an hour today: <strong>Part I (Pricing)</strong> and <strong>Part II Day 1</strong> — those two will get you to your first sale fastest. Part V is "do this on a Saturday morning." Parts III and IV are weekly references for the next three months. Part VI is your copy-paste vault.</p>
+  </div>
+</div>
+
+<!-- ════════════════ PART I — PRICING ════════════════ -->
+<div class="page-break"></div>
+<div class="page acc-money">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part I · Pricing</div></div>
+    <div class="ph-title">Stop guessing. Start anchoring.</div>
+    <div class="ph-sub">The four mistakes that kill solo-founder pricing — and the exact ladder that gets you to $1 fastest.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>Why $197 is killing you on day one</h2>
+  <p>$197 is the right price for GEM <em>after</em> you have testimonials, Twitter mentions, and a screenshot of your Stripe dashboard. It is the wrong price for an unknown product from an unknown founder, sold off a fresh landing page with zero social proof.</p>
+  <p>This is not about discounting. It is about <strong>price-to-trust calibration</strong>. Buyers calibrate price against signals: brand recognition, testimonial volume, founder reputation, social-proof velocity. When you have none of those, your price has to absorb the missing trust. That is what a "founder's edition" price does.</p>
+
+  <div class="pq">"In the first month I would price almost anything at one-tenth of what it is worth. The goal of month one is not revenue. It is reviews."<span class="pq-attr">— Patio11 / Patrick McKenzie</span></div>
+
+  <h2>The four mistakes</h2>
+
+  <h3><span class="num">1.</span> Pricing for the buyer you wish you had</h3>
+  <p>You priced $197 for a "serious creator with budget." That buyer exists. They are not your day-one customer. Your day-one customer is the curious early adopter who buys things that look interesting for under $20 because the downside is a coffee.</p>
+
+  <h3><span class="num">2.</span> Hiding behind tiers you cannot defend</h3>
+  <p>Three tiers — $97 / $197 / $497 — implies you have figured out three personas and three feature splits. You haven't. Nobody has at launch. Pick one price, ship, learn, then add tiers when you have evidence that buyers are asking for them.</p>
+
+  <h3><span class="num">3.</span> Refusing to do a "founder's edition"</h3>
+  <p>Founder's editions are not discounts. They are a deliberate signal: <em>"I am building this in public, I want early customers I can talk to, and I am willing to give them a 5x deal in exchange for honest feedback and a testimonial."</em> Sahil Lavingia did this with the Gumroad book. Pieter Levels did this with Nomad List. Daniel Vassallo did this with everything.</p>
+
+  <h3><span class="num">4.</span> Annual instead of one-time</h3>
+  <p>Subscriptions feel safer to founders ("recurring revenue!") and worse to buyers ("another bill"). For a one-person product where you cannot promise daily updates, <strong>one-time is the right model</strong>. You are already there. Don't change it.</p>
+
+  <h2>The price ladder I would ship today</h2>
+
+  <table>
+    <thead><tr>
+      <th>Phase</th><th>Price</th><th>Trigger to graduate</th><th>Why this works</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Founder's Edition</strong><br><em>Days 1–30</em></td>
+        <td><span class="tbl-num">$9</span></td>
+        <td>20 paying customers OR 5 testimonials</td>
+        <td>Removes price as an objection entirely. Generates social proof at maximum speed. Each buyer is a potential testimonial.</td>
+      </tr>
+      <tr>
+        <td><strong>Early Bird</strong><br><em>Month 2</em></td>
+        <td><span class="tbl-num">$29</span></td>
+        <td>50 customers OR first 3 organic mentions</td>
+        <td>Still impulse-buy territory. Your testimonials now do the heavy lifting.</td>
+      </tr>
+      <tr>
+        <td><strong>Standard</strong><br><em>Month 3</em></td>
+        <td><span class="tbl-num">$79</span></td>
+        <td>100+ customers OR Product Hunt #1–3 finish</td>
+        <td>Now you have proof. $79 is "no-think" for a creator who already saw a friend tweet about it.</td>
+      </tr>
+      <tr>
+        <td><strong>Pro</strong><br><em>Month 4+</em></td>
+        <td><span class="tbl-num">$149</span></td>
+        <td>250+ customers, mentions in 2+ newsletters</td>
+        <td>This is the new "real" price. You can defend it because you have receipts.</td>
+      </tr>
+      <tr>
+        <td><strong>Future ceiling</strong><br><em>Month 6+</em></td>
+        <td><span class="tbl-num">$249</span></td>
+        <td>Steady weekly sales at $149</td>
+        <td>The price your $497 Agency tier was always meant to be. Bundle a setup call to justify it.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="win">
+    <div class="callout-eyebrow">Founder's-edition framing for the landing page</div>
+    <p>Replace your current pricing block with: <em>"Founder's Edition — $9 · One-time, lifetime. Limited to the first 100 buyers in exchange for honest feedback and a testimonial."</em></p>
+    <p>Add a counter: <em>"43 / 100 founder seats remaining"</em> (update by hand for now). Scarcity is real here, not theatrical — you genuinely will graduate to $29 when you hit 100.</p>
+  </div>
+
+  <h2>The one-tier playbook</h2>
+  <p>For the first 30 days, <strong>delete the Personal and Agency tiers from your landing page.</strong> Show one price. $9. One button. <em>"Get GEM."</em></p>
+  <p>Choice paralysis kills first-time conversions. You can re-introduce tiers in month two, when buyers are asking <em>"is there a version with X?"</em> — that is the signal you need a second SKU, not before.</p>
+
+  <h2>Why $9 specifically (not $5, not $19)</h2>
+  <ul>
+    <li><strong>$5</strong> reads as "free trial of cheap thing." Buyers don't take it seriously.</li>
+    <li><strong>$9</strong> is the canonical "impulse-buy digital product" price. Crosses the friction threshold where the buyer doesn't open a spreadsheet to think about it.</li>
+    <li><strong>$19</strong> requires the buyer to weigh it against a meal out. Twice the price doubles the cognitive cost, not the perceived value, at this stage.</li>
+    <li><strong>$9 with a clear "going up to $29" signal</strong> creates legitimate urgency and lets the buyer feel smart for catching it early.</li>
+  </ul>
+
+  <h2>What about Gumroad fees at $9?</h2>
+  <p>Gumroad takes 9% + $0.50 per sale. On a $9 sale you net <strong>$7.69</strong>. Your cost of goods is $0 (it is a static HTML file). At 100 sales: $769 net. At 100 testimonials: priceless.</p>
+  <p>If $7.69 net per sale feels small — remember, you have <em>zero marginal cost</em>. The next 100 sales also net $769. The next 1,000 net $7,690. And by sale #1,000 your price is no longer $9.</p>
+
+  <div class="callout">
+    <div class="callout-eyebrow">The price-graduation script (use this in your launch posts)</div>
+    <p><em>"GEM Founder's Edition — $9, one-time, lifetime, no subscription. I'm taking the first 100 buyers at this price in exchange for one piece of honest feedback. After 100, it goes up to $29. After 250, it goes to $79. I'd rather have 100 humans I can email than 10 anonymous Stripe charges."</em></p>
+  </div>
+</div>
+
+<!-- ════════════════ PART II — DAYS 1-7 ════════════════ -->
+<div class="page-break"></div>
+<div class="page acc-marketing">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part II · Days 1–7</div></div>
+    <div class="ph-title">The first dollar</div>
+    <div class="ph-sub">A day-by-day plan. By Sunday night you should have at least one stranger's $9 in your account.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>Day 1 (Monday) — Ship the storefront</h2>
+  <p>You cannot sell anything you cannot link to. Today is purely a setup day.</p>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Deploy landing.html and gem.html (Part V — 15 minutes)</div>
+    <p>Cloudflare Pages, drag the folder, done. You'll have a live URL like <code>gem-content.pages.dev</code>.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">Buy the domain (10 minutes)</div>
+    <p>Cloudflare Registrar has the cheapest .com renewals (~$10/yr, no markup). Pick something memorable: <code>getgem.app</code>, <code>gemkit.io</code>, <code>contentgem.co</code>. Don't agonize — pick one in 10 minutes.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">3</div><div class="step-body">
+    <div class="step-title">Set up Gumroad (30 minutes)</div>
+    <p>Create the product. Title: "GEM · Six-Agent Content Engine (Founder's Edition)". Price: $9. Upload a zip of <code>gem.html</code> + <code>GEM-User-Manual.pdf</code>. Enable license keys (Workflow tab). Copy the checkout URL. Drop it into your landing page's three "Get GEM" buttons. Re-deploy.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">4</div><div class="step-body">
+    <div class="step-title">Replace landing-page pricing with the single $9 founder's offer</div>
+    <p>Edit the pricing section to one tier, $9, "Founder's Edition — first 100 only." Add a counter starting at "100 / 100 remaining."</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">5</div><div class="step-body">
+    <div class="step-title">Smoke-test the buy flow</div>
+    <p>Use a different browser / Gumroad's preview to walk a fake buyer through the funnel. Confirm: landing → buy → email arrives → file downloads → license key included. Fix anything broken.</p>
+  </div></div>
+
+  <h2>Day 2 (Tuesday) — Personal network outreach</h2>
+  <p>Your warmest leads are people who already trust you. They are not "real" customers — they are <em>practice runs</em> for the messaging that will work on strangers.</p>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Write down 30 names</div>
+    <p>Anyone you've worked with, gone to school with, met at a conference, or had a real conversation with on Twitter. Yes, even people you haven't talked to in years. <em>Especially</em> them — re-engagement is normal.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">Send 30 personalized DMs / emails</div>
+    <p>Not a blast. Each one references something specific to that person. Use the script in <strong>Part VI · Cold DM #1</strong>. Goal: 3 buyers + 5 "share with my friend who needs this" responses. Expect 10–20% response rate.</p>
+  </div></div>
+
+  <div class="callout">
+    <div class="callout-eyebrow">Be careful here</div>
+    <p>Do not feel weird. You are not asking for a favor — you are giving people early access to a tool you built that helps with a real problem. If they don't want it, they will say so. If they do, you just made $9 and got someone who will retweet your launch post next week.</p>
+  </div>
+
+  <h2>Day 3 (Wednesday) — Build-in-public on Twitter / X</h2>
+  <p>The first build-in-public post is the hardest. The 50th is easy. Start.</p>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Post the "I built X because Y" thread</div>
+    <p>Use the template in <strong>Part VI · Build-in-Public Thread</strong>. Six tweets. Screenshot at tweet 3. Demo GIF at tweet 5. Buy link at tweet 6.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">Pin it. Then go talk to people</div>
+    <p>Don't just post and disappear. Spend 60 minutes replying to other people's tweets in the indie-hacker / solo-creator / AI-tools space. Add value. Don't pitch. Pinned post does the pitching.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">3</div><div class="step-body">
+    <div class="step-title">DM the 5 people who reply to your thread</div>
+    <p>Even if they just say "cool!" — that's a conversation starter. Offer them the founder price + a free chat about their content workflow. Most won't take it. The ones who do become testimonials.</p>
+  </div></div>
+
+  <h2>Day 4 (Thursday) — The Indie Hackers post</h2>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Post on indiehackers.com/group/indie-makers</div>
+    <p>Title: <em>"I replaced my $400/mo content stack with one HTML file — built it in 6 weeks, launching today."</em> Body: short version of your build-in-public thread + link. IH crowd loves indie + technical + cheap.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">Reply to every comment within 2 hours for the first 24 hours</div>
+    <p>Post velocity matters on IH. Engagement in the first 24 hours determines whether you hit the front page.</p>
+  </div></div>
+
+  <h2>Day 5 (Friday) — Reddit (carefully)</h2>
+  <p>Reddit will eat you alive if you self-promote without context. It will also send 10x the traffic of Indie Hackers if you do it right.</p>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Pick three subreddits, read each one's rules twice</div>
+    <p>Candidates: <strong>r/SaaS</strong> (lenient), <strong>r/SideProject</strong> (built for this), <strong>r/EntrepreneurRideAlong</strong> (loves journey posts). Avoid r/Entrepreneur — too crowded, anti-promo. Avoid r/marketing — wrong audience.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">Post one journey-style story per subreddit</div>
+    <p>Use the template in <strong>Part VI · Reddit Journey Post</strong>. The angle is always: "what I built, why I built it, what I learned, here's the link if you want it." Never lead with the link.</p>
+  </div></div>
+
+  <h2>Days 6–7 (Weekend) — Gather and respond</h2>
+  <ul>
+    <li>Reply to every comment, every reply, every DM</li>
+    <li>Screenshot every nice thing anyone says — this is your testimonial bank</li>
+    <li>Email every buyer personally: <em>"thanks for being a founder. What would make GEM 10x more useful for you?"</em></li>
+    <li>Update the founder counter on your landing page</li>
+    <li>Add the first 3 testimonials to the landing page (just text + first name + role; logo later)</li>
+  </ul>
+
+  <div class="win">
+    <div class="callout-eyebrow">Day 7 success metric</div>
+    <p><strong>Minimum bar:</strong> 1 sale to a stranger (not a friend, not a known contact). <strong>Realistic target:</strong> 5–15 sales total across friends + strangers. <strong>Stretch:</strong> 25+ sales and at least one tweet from someone you don't know.</p>
+    <p>If you hit zero sales by Sunday — the problem is almost always one of three things: (1) buy button doesn't actually work, (2) landing page doesn't make the value clear in the first 5 seconds, (3) you didn't actually do the outreach. Fix that one thing. Don't change the price.</p>
+  </div>
+</div>
+
+<!-- ════════════════ PART III — DAYS 8-30 ════════════════ -->
+<div class="page-break"></div>
+<div class="page acc-marketing">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part III · Days 8–30</div></div>
+    <div class="ph-title">Momentum &amp; social proof</div>
+    <div class="ph-sub">Three weeks to compound your first dollar into your first hundred. Then your first thousand.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>The 10-platform sequence</h2>
+  <p>Don't do all of these. Do them <em>in this order</em>, one platform per day. Each post takes ~90 minutes including replies. Stop when you find one that converts and double down.</p>
+
+  <table>
+    <thead><tr><th>Day</th><th>Platform</th><th>Format</th><th>Realistic outcome</th></tr></thead>
+    <tbody>
+      <tr><td>8</td><td>Twitter / X</td><td>Demo video (90s screen recording)</td><td>2K–20K views, 3–10 buyers</td></tr>
+      <tr><td>10</td><td>r/SideProject</td><td>"What I built" post</td><td>50–500 upvotes, 2–8 buyers</td></tr>
+      <tr><td>12</td><td>r/SaaS</td><td>"Lessons from launching" post</td><td>20–200 upvotes, 1–5 buyers</td></tr>
+      <tr><td>14</td><td>Hacker News</td><td>Show HN post</td><td>10–500 points, 5–50 buyers (high variance)</td></tr>
+      <tr><td>16</td><td>Indie Hackers</td><td>Milestone post (e.g. "First $X")</td><td>Steady trickle, community trust</td></tr>
+      <tr><td>18</td><td>LinkedIn</td><td>Long-form story post</td><td>500–5K views, 1–10 buyers (B2B leans here)</td></tr>
+      <tr><td>20</td><td>YouTube</td><td>3-min product walkthrough video</td><td>Slow burn, builds SEO</td></tr>
+      <tr><td>22</td><td>r/Entrepreneur</td><td>Story post (no link, "DM for it")</td><td>High risk / high reward — read rules carefully</td></tr>
+      <tr><td>25</td><td>Product Hunt</td><td>Full launch (Tuesday or Wednesday best)</td><td>200–2000 upvotes, 20–200 buyers</td></tr>
+      <tr><td>28</td><td>Newsletter outreach</td><td>10 personalized emails to indie newsletters</td><td>1–3 mentions, long-tail traffic</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Product Hunt — the one launch you must not screw up</h2>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Schedule for Tuesday or Wednesday at 12:01 AM PT</div>
+    <p>Most upvotes happen in the first 4 hours. PT timezone catches the US workday. Avoid Mondays (busy) and Fridays (dead).</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">Find a hunter (optional but powerful)</div>
+    <p>Someone with 500+ followers on PH posts your product. Reach out 2 weeks ahead. <a href="https://www.producthunt.com/leaderboard/hunters">producthunt.com/leaderboard/hunters</a> for candidates. Don't pay anyone for this — it's against PH terms.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">3</div><div class="step-body">
+    <div class="step-title">Prepare the asset pack the night before</div>
+    <p>You need: 240×240 logo, 1270×760 main gallery image, 4–6 additional screenshots, a 30-second demo video (loop in GIF format works too), 60-character tagline, 260-character description, the maker's first comment ready to paste.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">4</div><div class="step-body">
+    <div class="step-title">Be online from 12:01 AM PT to ~6 PM PT</div>
+    <p>Reply to every comment within 30 minutes. Post in your own networks ("I just launched on PH, would mean the world if you'd take a look") — but never directly ask for upvotes (PH bans this).</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">5</div><div class="step-body">
+    <div class="step-title">Have a Founder's Edition discount code ready for PH visitors</div>
+    <p><code>PHLAUNCH</code> for $4 off (so PH buyers get GEM for $5 — meta-cheap impulse buy on launch day).</p>
+  </div></div>
+
+  <h2>The testimonial flywheel</h2>
+  <p>Every sale is a potential testimonial. Don't wait for them to come to you.</p>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Day 3 after purchase — automated email</div>
+    <p>"How's GEM going? Anything I can help with?" 30% reply rate. Use replies as testimonials with permission.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">Day 14 — personal email</div>
+    <p>"Mind if I quote your reply on the landing page? Happy to link to your Twitter / site / company in return." 80% say yes. Free social proof.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">3</div><div class="step-body">
+    <div class="step-title">Day 30 — case study request</div>
+    <p>For your most enthusiastic users: <em>"Would you do a 20-minute call so I can write up your workflow as a case study? You'll get a permanent backlink."</em> Case studies are the #1 conversion lever for the next price tier.</p>
+  </div></div>
+
+  <h2>Pricing graduation triggers</h2>
+
+  <div class="callout">
+    <div class="callout-eyebrow">When to raise from $9 to $29</div>
+    <p>The day you hit <strong>20 buyers</strong> OR <strong>5 testimonials</strong>, change the price. Email past buyers: <em>"Founders' edition is closing — last 24 hours at $9, then it's $29 forever."</em> This last-call email typically drives a final spike of sales (2–5x the previous week's rate).</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-eyebrow">When to raise from $29 to $79</div>
+    <p>The day you have <strong>50 customers</strong> OR <strong>3 organic mentions you didn't pay for</strong>. Same play: email past buyers, give them a heads-up, drive the spike.</p>
+  </div>
+
+  <h2>End-of-month-1 dashboard</h2>
+  <table>
+    <thead><tr><th>Metric</th><th>Floor</th><th>Target</th><th>Stretch</th></tr></thead>
+    <tbody>
+      <tr><td>Total sales</td><td><span class="tbl-num">10</span></td><td><span class="tbl-num">50</span></td><td><span class="tbl-num">200+</span></td></tr>
+      <tr><td>Net revenue</td><td><span class="tbl-num">$77</span></td><td><span class="tbl-num">$385</span></td><td><span class="tbl-num">$1,540+</span></td></tr>
+      <tr><td>Email list (buyers)</td><td>10</td><td>50</td><td>200+</td></tr>
+      <tr><td>Testimonials</td><td>2</td><td>8</td><td>20+</td></tr>
+      <tr><td>Mentions you didn't ask for</td><td>0</td><td>3</td><td>10+</td></tr>
+      <tr><td>Twitter followers gained</td><td>50</td><td>300</td><td>1000+</td></tr>
+    </tbody>
+  </table>
+
+  <p>If you hit floor on every line — keep grinding, don't change strategy. If you missed the floor on revenue but exceeded on testimonials — you have a copy / pricing problem, not a product problem (good news, easier to fix). If you missed on testimonials but hit revenue — you have a product gap somewhere, talk to buyers immediately.</p>
+</div>
+
+<!-- ════════════════ PART IV — DAYS 31-90 ════════════════ -->
+<div class="page-break"></div>
+<div class="page acc-marketing">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part IV · Days 31–90</div></div>
+    <div class="ph-title">Scaling to repeatable revenue</div>
+    <div class="ph-sub">Six channels that compound. Pick two. Ignore the rest until you're saturated.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>The compounding channels</h2>
+  <p>By day 30 you should have 50–200 customers and 5–20 testimonials. The next 60 days are about turning those into a flywheel that brings buyers without you posting daily.</p>
+
+  <h3><span class="num">1.</span> Affiliate program (highest ROI per hour)</h3>
+  <p>Gumroad has built-in affiliates — 30% commission, one toggle. Email your most enthusiastic 20 buyers: <em>"You said GEM helped — would you share a custom link with your audience? You earn 30% on every sale."</em> Some will say yes immediately. Each affiliate is a sales channel that compounds.</p>
+
+  <div class="win">
+    <div class="callout-eyebrow">Affiliate math at scale</div>
+    <p>10 affiliates × 5 sales/month each at $79 = 50 sales × $79 × 70% to you = <strong>$2,765/month from affiliates alone</strong>, with you doing nothing but answering occasional questions.</p>
+  </div>
+
+  <h3><span class="num">2.</span> Content engine (slowest start, biggest tail)</h3>
+  <p>Pick one content medium and ship weekly. Choose by what you actually enjoy — sustainability matters more than reach.</p>
+  <ul>
+    <li><strong>YouTube</strong> — workflow walkthroughs, "I built X with GEM" videos. Best for SEO + trust.</li>
+    <li><strong>Twitter threads</strong> — "I generated 30 days of content in 2 hours." Best for distribution.</li>
+    <li><strong>Newsletter</strong> — "GEM Stack Weekly." Best for building an asset you own.</li>
+    <li><strong>Long-form blog</strong> — "How to build a content system as a solo founder." Best for SEO + LLM citations (huge in 2026).</li>
+  </ul>
+
+  <h3><span class="num">3.</span> Partnerships with creators in adjacent spaces</h3>
+  <p>Find 5 creators who teach AI / content / solopreneurship to audiences of 5K–50K. Offer them a co-branded GEM template (e.g. "Justin Welsh's LinkedIn template, built into GEM"). They post, you sell, they get a cut. Win-win — and a much warmer endorsement than ads.</p>
+
+  <h3><span class="num">4.</span> AppSumo (consider carefully)</h3>
+  <p>AppSumo deals can do $50K–$500K in 30 days. They also: take a huge cut (typically 70%), require a price floor of $39–$59 lifetime, and saturate the audience that would have otherwise bought at full price. Decision tree:</p>
+  <ul>
+    <li><strong>Do AppSumo if:</strong> you have hit a plateau at $79–$149 and need a cash injection or a big spike of customers fast (because each AppSumo buyer becomes an upsell candidate).</li>
+    <li><strong>Skip AppSumo if:</strong> you're growing nicely organically or your unit economics already work — AppSumo's 70% cut crushes margins on a low-price product.</li>
+  </ul>
+
+  <h3><span class="num">5.</span> Paid ads (only after PMF signal)</h3>
+  <p>Don't run ads until you can answer yes to all three: <strong>(a)</strong> Are organic visitors converting at 2%+? <strong>(b)</strong> Is your average customer worth at least $40 to you (after 1 upsell or referral)? <strong>(c)</strong> Do you have 3+ proven creative angles from organic content?</p>
+  <p>If yes to all three: start with $20/day on Twitter/X promoted posts using your highest-engagement organic post. Scale only if cost-per-acquisition stays below 30% of your price.</p>
+
+  <h3><span class="num">6.</span> Direct outreach to enterprise / agency buyers</h3>
+  <p>By month 3, some buyers will be agencies asking <em>"can we get this for our team?"</em> That's the signal to introduce a $497–$997 Agency tier (white-label or seat-based). One enterprise sale = 30 founder-edition sales. Don't build the tier in advance — build it when the first buyer asks.</p>
+
+  <h2>The 90-day revenue model</h2>
+  <table>
+    <thead><tr><th>Month</th><th>Avg price</th><th>Sales / mo</th><th>Gross</th><th>Net (after Gumroad)</th></tr></thead>
+    <tbody>
+      <tr><td>Month 1 (Founder)</td><td>$9</td><td>50</td><td>$450</td><td><span class="tbl-pos">$385</span></td></tr>
+      <tr><td>Month 2 (Early bird)</td><td>$29</td><td>80</td><td>$2,320</td><td><span class="tbl-pos">$2,071</span></td></tr>
+      <tr><td>Month 3 (Standard)</td><td>$79</td><td>120</td><td>$9,480</td><td><span class="tbl-pos">$8,587</span></td></tr>
+      <tr><td><strong>90-day total</strong></td><td>—</td><td><strong>250</strong></td><td><strong>$12,250</strong></td><td><span class="tbl-pos"><strong>$11,043</strong></span></td></tr>
+    </tbody>
+  </table>
+
+  <p>Conservative scenario above. Floor scenario (10/30/50 sales) = ~$3,500 net. Stretch scenario (200/300/500) = ~$60K+ net. Single-product solo product, no inventory, no team.</p>
+
+  <h2>What success in month 3 actually looks like</h2>
+  <ul>
+    <li>200+ customers, 30+ testimonials, 10+ active affiliates</li>
+    <li>Steady 30+ sales per week without you doing daily outreach</li>
+    <li>One newsletter mention or podcast feature per month, organically</li>
+    <li>Agency buyers asking about white-label tier</li>
+    <li>You can stop the launch grind and start working on v1.8 (or v2.0)</li>
+  </ul>
+
+  <div class="callout">
+    <div class="callout-eyebrow">When to consider raising from $79 to $149</div>
+    <p>When at least 50% of your buyers come from referrals or organic mentions (i.e. not your own posting). At that point your social proof is doing the selling, and price elasticity flips — you can raise prices without dropping volume.</p>
+  </div>
+</div>
+
+<!-- ════════════════ PART V — DEPLOYMENT ════════════════ -->
+<div class="page-break"></div>
+<div class="page acc-deploy">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part V · Deployment</div></div>
+    <div class="ph-title">From folder to live URL in 15 minutes</div>
+    <div class="ph-sub">The exact sequence. No git. No CLI. Cloudflare Pages drag-and-drop with custom domain.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>What you need before you start</h2>
+  <ul>
+    <li>A free <strong>Cloudflare account</strong> (no credit card required for Pages)</li>
+    <li><strong>landing.html</strong> and <strong>gem.html</strong> from your project folder</li>
+    <li>A <strong>domain name</strong> (optional today — you can use the free <code>*.pages.dev</code> subdomain to start)</li>
+  </ul>
+
+  <h2>Step 1 — Prep the files (3 minutes)</h2>
+  <p>Create a new folder anywhere on your machine. Call it <code>gem-deploy</code>. Inside, create this exact structure:</p>
+  <ul>
+    <li><code>gem-deploy/index.html</code> — rename your <code>landing.html</code> to <code>index.html</code></li>
+    <li><code>gem-deploy/app/index.html</code> — create an <code>app</code> subfolder, rename <code>gem.html</code> to <code>index.html</code> inside it</li>
+  </ul>
+  <p>This gives you clean URLs: <code>yourdomain.com/</code> for the landing, <code>yourdomain.com/app/</code> for the actual app.</p>
+
+  <h2>Step 2 — Update three links in the new index.html (2 minutes)</h2>
+  <p>Open the renamed <code>index.html</code> (the landing page) in any text editor. Find each instance of <code>gem.html</code> and replace with <code>app/</code>. There are three:</p>
+  <ul>
+    <li>The "Try Demo" button in the header</li>
+    <li>The "Try the demo first" button in the final CTA section</li>
+    <li>The "Try Demo" link in the footer</li>
+  </ul>
+
+  <h2>Step 3 — Update the License modal's buy link (1 minute)</h2>
+  <p>Open <code>app/index.html</code> (the renamed gem.html). Find this line:</p>
+  <div class="callout">
+    <p><code>&lt;a class="m-btn-ghost" href="landing.html#pricing" target="_blank" ...&gt;Buy a license →&lt;/a&gt;</code></p>
+  </div>
+  <p>Change <code>landing.html#pricing</code> to <code>/#pricing</code>. This makes the buy link inside the app point back to your landing page's pricing section.</p>
+
+  <h2>Step 4 — Deploy to Cloudflare Pages (5 minutes)</h2>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Sign up at pages.cloudflare.com (free)</div>
+    <p>No credit card required. Use the same email you'll use for everything else.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">Create a project → "Upload assets" (the no-git path)</div>
+    <p>Project name: <code>gem-content</code> (becomes <code>gem-content.pages.dev</code>). Production branch: leave default.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">3</div><div class="step-body">
+    <div class="step-title">Drag your entire <code>gem-deploy</code> folder onto the upload zone</div>
+    <p>Cloudflare uploads the whole folder structure. Takes ~30 seconds. Click "Deploy site."</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">4</div><div class="step-body">
+    <div class="step-title">Wait ~30 seconds → live</div>
+    <p>You now have <code>https://gem-content.pages.dev</code> (landing) and <code>https://gem-content.pages.dev/app/</code> (the app).</p>
+  </div></div>
+
+  <h2>Step 5 — Add your custom domain (5 minutes, optional but recommended)</h2>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body">
+    <div class="step-title">Buy a domain (Cloudflare Registrar, ~$10/yr)</div>
+    <p>Cheapest at-cost pricing in the industry. Skip if you already own one.</p>
+  </div></div>
+
+  <div class="step"><div class="step-num">2</div><div class="step-body">
+    <div class="step-title">In your Pages project → "Custom domains" → "Set up a custom domain"</div>
+    <p>Enter the domain. If it's already at Cloudflare, done in seconds. If elsewhere, Cloudflare gives you 2 CNAME records to add at your registrar (5–60 min to propagate).</p>
+  </div></div>
+
+  <h2>Re-deploying after edits</h2>
+  <p>Every time you change a file: drag the whole <code>gem-deploy</code> folder onto the project's deployments page. Cloudflare keeps a history of every deploy and lets you roll back with one click if something breaks.</p>
+
+  <h2>Provider gotchas in hosted mode</h2>
+  <table>
+    <thead><tr><th>Provider</th><th>Works on hosted demo?</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>OpenAI</td><td><span class="tbl-pos">Yes</span></td><td>Direct browser calls work fine</td></tr>
+      <tr><td>OpenRouter</td><td><span class="tbl-pos">Yes</span></td><td>Direct browser calls work fine</td></tr>
+      <tr><td>Anthropic</td><td><span class="tbl-pos">Yes (mostly)</span></td><td>Requires keys created after early 2024 — older keys lack direct-browser-access permission</td></tr>
+      <tr><td>Ollama</td><td><span class="tbl-neg">No</span></td><td>Ollama is localhost-only — won't work from a public URL. Buyers need to download <code>gem.html</code> and run it locally for free Ollama mode</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <div class="callout-eyebrow">Recommendation</div>
+    <p>Before you go live: edit the Provider modal in your hosted <code>app/index.html</code> to add a small note next to "Ollama (Local)" — something like <em>"requires the downloaded version"</em> — so buyers don't get confused.</p>
+  </div>
+
+  <h2>Wiring up Gumroad</h2>
+  <ol>
+    <li>Create the product on Gumroad: title "GEM · Content Engine — Founder's Edition", price $9</li>
+    <li>Upload a <code>.zip</code> containing <code>gem.html</code> + <code>GEM-User-Manual.pdf</code> as the deliverable</li>
+    <li>Workflow tab → enable "License keys" — buyers automatically get one in their delivery email</li>
+    <li>Customize the email template — include the URL <code>yourdomain.com/app/</code> and instructions to paste the license key in the "⚠ Activate" chip</li>
+    <li>Copy the Gumroad checkout URL → update the three "Get GEM" buttons on your landing page → re-deploy</li>
+  </ol>
+
+  <h2>Manual key minting (until you wire Gumroad's license API)</h2>
+  <p>Open <code>gem.html</code> in your own browser. Hit F12 → Console tab → run:</p>
+  <div class="callout">
+    <p><code>gemGenerateLicense()</code></p>
+    <p>Returns something like <code>GEM-L0NW-HY6Y-KYW1</code>. Each call generates a fresh valid key.</p>
+  </div>
+  <p>Configure Gumroad to <strong>not</strong> auto-generate keys (Workflow → License keys → "I'll provide my own"). When a sale comes in, you'll get an email — generate a key, manually paste it into the buyer's delivery message via Gumroad's customer dashboard. Tedious but free, and only needed for the first ~50 sales.</p>
+
+  <h2>OG image (10 minutes — high ROI)</h2>
+  <p>When someone shares your URL, the preview card shows a screenshot. Right now there isn't one set. Create a 1200×630 PNG (Canva is fastest) with: forest-green gradient background, GEM wordmark, "One idea. Every channel." tagline. Save as <code>og.png</code> in your <code>gem-deploy</code> folder. Add to <code>&lt;head&gt;</code> of <code>index.html</code>:</p>
+  <div class="callout">
+    <p><code>&lt;meta property="og:image" content="https://yourdomain.com/og.png"&gt;<br>&lt;meta name="twitter:card" content="summary_large_image"&gt;<br>&lt;meta name="twitter:image" content="https://yourdomain.com/og.png"&gt;</code></p>
+  </div>
+  <p>Test the preview at <a href="https://www.opengraph.xyz/">opengraph.xyz</a>.</p>
+
+  <h2>Cost summary</h2>
+  <table>
+    <thead><tr><th>Item</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr><td>Cloudflare Pages</td><td>Free (forever, generous limits)</td></tr>
+      <tr><td>Custom domain</td><td>~$10 / year</td></tr>
+      <tr><td>Gumroad</td><td>9% + $0.50 per sale (no monthly fee)</td></tr>
+      <tr><td><strong>Fixed cost to operate</strong></td><td><span class="tbl-pos"><strong>~$10 / year</strong></span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════════════════ PART VI — SCRIPTS ════════════════ -->
+<div class="page-break"></div>
+<div class="page acc-scripts">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part VI · Scripts &amp; templates</div></div>
+    <div class="ph-title">Copy-paste your way to month one</div>
+    <div class="ph-sub">Use these verbatim. Replace bracketed text. Keep the structure.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>Script 1 — Cold DM to your personal network</h2>
+  <div class="script">
+    <div class="script-eyebrow">Channel: Twitter DM, LinkedIn DM, or email · Day 2</div>
+    <div class="script-title">"Personal network outreach"</div>
+    <div class="script-body">Hey [name] — long time no talk. Hope [specific thing about their life/work] is going well.
+
+I just shipped a thing I think you'd actually use. Spent the last 6 weeks building it because I was tired of [the specific pain].
+
+It's called GEM. It's six AI agents that take one content idea and produce a full drop — script, video prompts, captions, hashtags — for every channel. Single HTML file, no install, runs locally with Ollama for free or with any cloud LLM.
+
+Launching today at $9 founder price (going up to $29 after the first 100). No subscription, no per-word pricing, lifetime updates.
+
+Here's the page if you want a look: [yourdomain.com]
+
+If it's not for you, no worries — and if you know anyone who'd find this useful, I'd owe you one.</div>
+  </div>
+
+  <h2>Script 2 — Build-in-public Twitter / X thread</h2>
+  <div class="script">
+    <div class="script-eyebrow">Channel: Twitter / X · Day 3</div>
+    <div class="script-title">"I built X because Y" — six tweets</div>
+    <div class="script-body"><strong>Tweet 1:</strong>
+I just spent 6 weeks rebuilding my entire content workflow into one HTML file.
+
+Six AI agents. One pipeline. From idea to ready-to-publish content in 90 seconds.
+
+It's called GEM. Launching today at the founder price 👇
+
+<strong>Tweet 2:</strong>
+The problem: I was paying $400/mo across Jasper, Copy.ai, Midjourney, and 3 other tools. Each one needed its own prompt setup. Outputs didn't talk to each other.
+
+I'd spend more time gluing tools together than actually creating.
+
+<strong>Tweet 3:</strong>
+[Demo screenshot or 30-second video — make sure it shows the pipeline animating end-to-end]
+
+Each agent has one job:
+◈ Brand — voice + audience
+◯ Scout — viral angles
+⬡ Architect — title + structure
+✎ Writer — full script
+✦ Visual — Midjourney/DALL-E/FLUX prompts
+▣ Adapter — per-channel rewrites
+
+<strong>Tweet 4:</strong>
+The trick was making them hand off to each other with locked JSON schemas. Each agent's output is the next agent's input — no prompt drift, no inconsistent voice across outputs.
+
+Ollama for free, or any cloud LLM (~$0.05/run on gpt-4o-mini). Zero subscription.
+
+<strong>Tweet 5:</strong>
+[Second screenshot — the PDF export or a content drop output]
+
+Output is one PDF you can hand to a VA, or copy directly into your scheduler. 17+ asset types per run.
+
+<strong>Tweet 6:</strong>
+GEM Founder's Edition — $9, one-time, lifetime, first 100 buyers only.
+
+Link: [yourdomain.com]
+
+I'd love early feedback from anyone who tries it. Reply or DM. 🌿</div>
+  </div>
+
+  <h2>Script 3 — Reddit "journey" post</h2>
+  <div class="script">
+    <div class="script-eyebrow">Channel: r/SideProject or r/SaaS · Day 5</div>
+    <div class="script-title">"What I built and why" — story format</div>
+    <div class="script-body"><strong>Title:</strong> I rebuilt my $400/mo content stack into one HTML file. Here's what I learned.
+
+<strong>Body:</strong>
+TL;DR: Built a 6-agent content engine that runs in a single HTML file. Replaces Jasper + Copy.ai + Midjourney prompt setups. Launched today at $9. Looking for honest feedback.
+
+The problem I had: I was paying for four AI tools, each with its own prompt setup. Outputs didn't connect. I'd spend an hour gluing them together for every piece of content.
+
+The thing I built: A single HTML file (no install, no server) that runs six specialized AI agents in sequence — Brand, Scout, Architect, Writer, Visual Director, Channel Adapter. Each one hands work to the next via locked JSON. Output is a complete content drop: script, image prompts, video prompts, per-channel captions.
+
+What surprised me building it:
+- Multi-agent isn't fancy. It's just having tight schemas between agents instead of one giant prompt.
+- Local LLMs (Ollama) are good enough for 80% of this. I genuinely run mine on Ollama for free.
+- The hard part wasn't the AI. It was the JSON validation and the per-platform output formatting.
+
+What it actually does: [link to a 30-second loom or your tweet thread]
+
+If you want to try it: [yourdomain.com] — $9 founder price for the first 100 buyers. After that it goes to $29.
+
+Feedback wanted on:
+1. Does the pipeline make sense to someone who hasn't built one?
+2. Is $9 too low or too high? (I went back and forth on this)
+3. What's the killer use case I should lead with?
+
+Happy to answer anything in the comments.</div>
+  </div>
+
+  <h2>Script 4 — Indie Hackers post</h2>
+  <div class="script">
+    <div class="script-eyebrow">Channel: indiehackers.com · Day 4</div>
+    <div class="script-title">"What I'm shipping" milestone post</div>
+    <div class="script-body"><strong>Title:</strong> Launching today: a 6-agent content engine in one HTML file. $9 founder price.
+
+<strong>Body:</strong>
+Hi IH 👋
+
+After 6 weeks of nights-and-weekends, I'm launching GEM today.
+
+The 30-second pitch: One HTML file, six AI agents, full content drop in 90 seconds. Replaces 4–5 SaaS tools I was paying for monthly. Ollama for free or any cloud LLM. One-time $9, no subscription.
+
+[Screenshot]
+
+Why I'm posting here first: IH was where I learned that one-time pricing is fine if your product is finished, and that you should sell to your network on day one. Both are why I'm shipping today instead of polishing for another month.
+
+Asking for: brutally honest feedback on the landing page ([yourdomain.com]) and the pricing ($9 → $29 → $79 ladder). Also any IH-specific channels you've found that work for indie tools at this price point.
+
+Will reply to every comment today.</div>
+  </div>
+
+  <h2>Script 5 — Affiliate program pitch</h2>
+  <div class="script">
+    <div class="script-eyebrow">Channel: Email to engaged buyers · Day 21+</div>
+    <div class="script-title">"Become a GEM affiliate" outreach</div>
+    <div class="script-body">Hey [name],
+
+You bought GEM 3 weeks ago and [reference something they said in feedback or on Twitter]. That made my week.
+
+Quick offer: I'm opening up a small affiliate program — 30% commission on every sale through your unique link. No quotas, no exclusivity, paid through Gumroad automatically.
+
+If you'd be willing to share GEM with your audience occasionally, I'd love to set you up. You'd be one of the first 10 affiliates and I'm capping it there for now so each one gets attention.
+
+Would that be interesting? If yes, I'll send you the dashboard link and a few pre-written tweets/posts you can use (or ignore).
+
+— [your name]</div>
+  </div>
+
+  <h2>Script 6 — The "going up next week" email</h2>
+  <div class="script">
+    <div class="script-eyebrow">Channel: Email to past buyers · Day before price change</div>
+    <div class="script-title">"Last call at this price" — drives final spike</div>
+    <div class="script-body"><strong>Subject:</strong> GEM founder price closes tomorrow
+
+Quick heads-up: GEM goes from $9 to $29 tomorrow at midnight ET. The first 100 founder seats sold out a week early.
+
+You bought yours, so this isn't a pitch at you — it's a heads-up so you can pass the link along to anyone who's been on the fence. After tomorrow it's $29 forever.
+
+Link: [yourdomain.com]
+
+Also: thank you. The first 100 of anything is the hardest, and you were one of them.
+
+— [your name]</div>
+  </div>
+
+  <h2>Script 7 — Newsletter outreach</h2>
+  <div class="script">
+    <div class="script-eyebrow">Channel: Email to indie newsletter operators · Day 28</div>
+    <div class="script-title">"Would you cover this?" — short and respectful</div>
+    <div class="script-body"><strong>Subject:</strong> indie tool for [their newsletter's audience]?
+
+Hi [name],
+
+Big fan of [specific thing in their last issue]. Quick pitch — if you ever cover indie/AI/no-subscription tools, GEM might fit:
+
+- 6 AI agents in one HTML file
+- Replaces Jasper/Copy.ai/Midjourney prompt setups
+- $79 one-time, runs locally (Ollama) or on any cloud LLM
+- 200+ paying customers, all-time, organic
+- Built solo over 6 weeks, launched 4 weeks ago
+
+Demo (no signup needed): [yourdomain.com/app]
+
+No follow-up if it's not a fit — wanted to put it on your radar in case it is.
+
+— [your name]</div>
+  </div>
+</div>
+
+<!-- ════════════════ CLOSING ════════════════ -->
+<div class="page-break"></div>
+<div class="closing">
+  <h1>The only metric that matters this week</h1>
+  <p>Not "did I post enough." Not "did the page look right." Just: <em>did one stranger pay you nine dollars.</em></p>
+  <p style="margin-top:18px">Get that. Then get the next one. Everything else compounds from there.</p>
+  <div class="signoff">GEM · Launch Playbook · v1.0</div>
+</div>
+
+</body>
+</html>

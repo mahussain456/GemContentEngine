@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEM · The 30-Day Marketing Push — Day-by-Day to First Revenue</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Cpolygon points='512,150.8 824.81,331.4 824.81,692.6 512,873.2 199.19,692.6 199.19,331.4' fill='%230E2A1F'/%3E%3Cpolygon points='512,306.2 690.23,409.1 690.23,614.9 512,717.8 333.77,614.9 333.77,409.1' fill='%23F8F4EA'/%3E%3Cpolygon points='512,417.92 593.48,464.96 593.48,559.04 512,606.08 430.52,559.04 430.52,464.96' fill='%230E2A1F'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --forest-deep:#0E2A1F;--forest:#1B4D3E;--forest-mid:#2A6650;--sage:#4F8A73;
+  --sage-light:#A7BFAE;--mint:#D6E3DB;--pale-mint:#E9F1EC;
+  --cream:#F4EFE6;--cream-soft:#EFE9DD;--cream-warm:#E9E2D2;
+  --divider:#D8D2C7;--divider-strong:#C8C1B2;
+  --ink:#1A1A1A;--ink-soft:#3A3A3A;--ink-mid:#6E6E6E;--ink-light:#A8A296;
+  --gold:#C8A96A;
+  --serif:'Playfair Display','EB Garamond',Georgia,serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',Consolas,monospace;
+}
+@page{margin:0;size:letter}
+body{font-family:var(--serif);color:var(--ink);background:var(--cream);font-size:12px;line-height:1.65}
+.page{padding:54px 56px;background:var(--cream);min-height:100vh}
+.page-break{page-break-before:always}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}.no-print{display:none!important}.page{min-height:auto}}
+@media screen{body{padding:30px;background:#E8E2D4}.page{box-shadow:0 8px 30px rgba(0,0,0,.15);max-width:880px;margin:0 auto 30px;border-radius:4px}}
+
+/* Cover */
+.cover{background:radial-gradient(ellipse at top,var(--forest-mid) 0%,var(--forest) 45%,var(--forest-deep) 100%);color:var(--cream);padding:80px 60px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;position:relative;overflow:hidden}
+.cover::before,.cover::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.cover::before{top:40px}.cover::after{bottom:40px}
+.cover-rule{width:48px;height:1px;background:var(--gold);opacity:.55;margin:32px 0}
+.cover-title{font-family:var(--serif);font-size:46px;font-weight:600;line-height:1.15;max-width:680px;color:#FFFCF6;margin-bottom:16px;letter-spacing:-.005em}
+.cover-sub{font-size:16px;font-style:italic;color:var(--sage-light);opacity:.88;max-width:560px;line-height:1.6;margin-bottom:24px}
+.cover-meta{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,239,226,.5);font-family:var(--serif)}
+.cover-chips{margin-top:48px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;max-width:640px}
+.cover-chip{background:rgba(212,239,226,0.08);border:1px solid rgba(212,239,226,0.18);border-radius:8px;padding:14px 18px;font-family:var(--serif);font-size:11.5px;font-weight:600;color:var(--sage-light);min-width:140px}
+.cover-chip-num{font-size:30px;color:#FFFCF6;display:block;margin-bottom:3px;font-weight:600}
+
+/* Page header */
+.ph{margin-bottom:30px}
+.ph-rule{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.ph-rule-line{width:24px;height:2px;background:var(--accent,var(--forest-mid))}
+.ph-eyebrow{font-size:10px;font-family:var(--serif);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent,var(--forest-mid))}
+.ph-title{font-family:var(--serif);font-size:32px;font-weight:600;color:var(--ink);line-height:1.18;margin-bottom:6px;letter-spacing:-.01em}
+.ph-sub{font-size:14px;color:var(--ink-mid);font-style:italic;line-height:1.55}
+.ph-divider{height:1px;margin-top:14px;background:linear-gradient(90deg,var(--accent,var(--forest-mid)) 0%,var(--divider) 60%,transparent 100%)}
+
+h2{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);margin:34px 0 12px;letter-spacing:-.005em}
+h2:first-child{margin-top:0}
+h3{font-family:var(--serif);font-size:15.5px;font-weight:600;color:var(--ink);margin:22px 0 10px}
+p{margin:0 0 12px;color:var(--ink-soft);font-size:13px;line-height:1.7}
+strong{color:var(--ink)}
+em{font-style:italic}
+ul,ol{margin:6px 0 14px 22px}
+li{margin-bottom:5px;color:var(--ink-soft);font-size:13px;line-height:1.65}
+li::marker{color:var(--sage)}
+
+code{font-family:var(--mono);font-size:11.5px;background:var(--cream-soft);padding:1px 7px;border-radius:3px;color:var(--forest)}
+
+/* Day card */
+.day{background:#FFF;border:1px solid var(--divider);border-radius:8px;margin:14px 0;overflow:hidden;break-inside:avoid;box-shadow:0 1px 3px rgba(14,42,31,.04)}
+.day-header{background:var(--pale-mint);border-bottom:1px solid var(--mint);padding:14px 18px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.day-num{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--forest);line-height:1;font-style:italic}
+.day-name{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--ink);letter-spacing:.03em;text-transform:uppercase;font-style:italic}
+.day-mission{font-size:12px;color:var(--ink-mid);margin-left:auto;font-style:italic}
+.day-body{padding:18px 22px}
+.day-body p{margin:0 0 10px;font-size:12.5px;color:var(--ink-soft)}
+.day-tasks{list-style:none;margin:8px 0 0}
+.day-tasks li{position:relative;padding-left:26px;margin-bottom:8px;font-size:12.5px;color:var(--ink-soft);line-height:1.7;list-style:none}
+.day-tasks li::before{content:'';position:absolute;left:0;top:5px;width:14px;height:14px;border:1.5px solid var(--sage);border-radius:3px;background:#FFF}
+.day-tasks li.win::before{background:var(--forest);border-color:var(--forest)}
+.day-tasks li.win::after{content:'✓';position:absolute;left:3px;top:3px;color:#FFF;font-size:10px;font-weight:700}
+.day-meta{margin-top:14px;padding-top:12px;border-top:1px dashed var(--divider);display:flex;gap:18px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.13em;color:var(--ink-mid);flex-wrap:wrap}
+.day-meta strong{color:var(--forest)}
+
+/* Callouts */
+.callout{background:var(--pale-mint);border:1px solid var(--mint);border-left:4px solid var(--forest-mid);border-radius:6px;padding:14px 18px;margin:14px 0;break-inside:avoid}
+.callout-eyebrow{font-family:var(--serif);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--forest);margin-bottom:6px}
+.callout p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.7}
+.callout p+p{margin-top:8px}
+
+.warn{background:#FEF3C7;border:1px solid #F59E0B;border-left:4px solid #B45309;border-radius:6px;padding:14px 18px;margin:14px 0;break-inside:avoid}
+.warn .callout-eyebrow{color:#7C2D12}
+.warn p{color:#78350F}
+
+.win{background:#F0FDF4;border:1px solid #BBF7D0;border-left:4px solid #15803D;border-radius:6px;padding:14px 18px;margin:14px 0;break-inside:avoid}
+.win .callout-eyebrow{color:#14532D}
+.win p{color:#14532D}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;margin:12px 0 18px;background:#FFF;border:1px solid var(--divider);border-radius:6px;overflow:hidden;break-inside:avoid}
+th{background:var(--forest);color:#FFF;font-family:var(--serif);font-weight:600;font-size:11.5px;text-align:left;padding:10px 12px;letter-spacing:.03em}
+td{padding:9px 12px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--divider);line-height:1.55;vertical-align:top}
+tr:nth-child(even) td{background:var(--cream)}
+.tbl-pos{color:#15803D;font-weight:600}
+.tbl-neg{color:#B91C1C;font-weight:600}
+
+/* Pull quote */
+.pq{margin:22px 0;padding:18px 24px;border-left:3px solid var(--gold);background:linear-gradient(90deg,var(--cream-soft) 0%,transparent 100%);font-family:var(--serif);font-size:15px;font-style:italic;color:var(--forest);line-height:1.55;break-inside:avoid}
+.pq-attr{display:block;margin-top:8px;font-size:10px;font-style:normal;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mid)}
+
+/* Channel grid */
+.ch-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:14px 0}
+.ch-card{background:#FFF;border:1px solid var(--divider);border-radius:6px;padding:14px 16px;break-inside:avoid}
+.ch-card h4{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.ch-card p{font-size:11.5px;color:var(--ink-soft);margin:0 0 6px;line-height:1.6}
+.ch-meta{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--forest);margin-top:8px;padding-top:8px;border-top:1px dashed var(--divider)}
+
+.print-helper{position:fixed;top:14px;right:14px;background:var(--forest);color:var(--cream);padding:10px 16px;border-radius:6px;font-family:var(--serif);font-size:12px;cursor:pointer;border:none;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:999}
+.print-helper:hover{background:var(--forest-deep)}
+@media print{.print-helper{display:none}}
+
+.toc-entry{display:flex;gap:18px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--divider)}
+.toc-entry:last-child{border-bottom:none}
+.toc-num{flex-shrink:0;width:38px;font-family:var(--serif);font-size:14px;font-weight:600;color:var(--forest-mid);font-style:italic}
+.toc-title{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.toc-sub{font-size:12px;color:var(--ink-mid);line-height:1.55}
+
+.acc-platform{--accent:#9F1239}
+.acc-money{--accent:#1B4D3E}
+.acc-content{--accent:#6D28D9}
+.acc-week{--accent:#0369A1}
+</style>
+</head>
+<body>
+
+<button class="print-helper no-print" onclick="window.print()">📄 Save as PDF</button>
+
+<!-- COVER -->
+<div class="cover">
+  <!-- Official horizontal logo (dark variant) — inlined for portability -->
+  <svg width="380" viewBox="0 0 2500 900" xmlns="http://www.w3.org/2000/svg" style="max-width:80%;height:auto;margin-bottom:36px;display:block">
+    <g>
+      <polygon points="400,209.2 608.54,329.6 608.54,570.4 400,690.8 191.46,570.4 191.46,329.6" fill="#0E2A1F"/>
+      <polygon points="400,209.2 608.54,329.6 518.82,381.4 400,312.8" fill="#143D2C"/>
+      <polygon points="608.54,329.6 608.54,570.4 518.82,518.6 518.82,381.4" fill="#0B241B"/>
+      <polygon points="608.54,570.4 400,690.8 400,587.2 518.82,518.6" fill="#174835"/>
+      <polygon points="400,690.8 191.46,570.4 281.18,518.6 400,587.2" fill="#0D2C20"/>
+      <polygon points="191.46,570.4 191.46,329.6 281.18,381.4 281.18,518.6" fill="#1B533C"/>
+      <polygon points="191.46,329.6 400,209.2 400,312.8 281.18,381.4" fill="#09251B"/>
+      <polygon points="400,312.8 518.82,381.4 518.82,518.6 400,587.2 281.18,518.6 281.18,381.4" fill="#F8F4EA"/>
+      <polygon points="400,312.8 518.82,381.4 400,450" fill="#FFFFFF"/>
+      <polygon points="518.82,381.4 518.82,518.6 400,450" fill="#D7D2C7"/>
+      <polygon points="518.82,518.6 400,587.2 400,450" fill="#F1ECE1"/>
+      <polygon points="400,587.2 281.18,518.6 400,450" fill="#FFFFFF"/>
+      <polygon points="281.18,518.6 281.18,381.4 400,450" fill="#DCD6C9"/>
+      <polygon points="281.18,381.4 400,312.8 400,450" fill="#F7F2E8"/>
+      <polygon points="400,387.28 454.32,418.64 454.32,481.36 400,512.72 345.68,481.36 345.68,418.64" fill="#0E2A1F"/>
+      <polygon points="400,398.48 444.62,424.24 444.62,475.76 400,501.52 355.38,475.76 355.38,424.24" fill="#123B2A"/>
+      <polyline points="400,209.2 608.54,329.6 608.54,570.4" fill="none" stroke="#C8A96A" stroke-width="6.72" opacity=".75"/>
+      <polyline points="191.46,570.4 400,690.8 608.54,570.4" fill="none" stroke="#F8F4EA" stroke-width="4.48" opacity=".55"/>
+    </g>
+    <line x1="780" y1="220" x2="780" y2="720" stroke="#C8A96A" stroke-width="4" opacity=".55"/>
+    <text x="890" y="460" font-family="'Playfair Display',Georgia,serif" font-weight="600" letter-spacing="38" font-size="240" fill="#F4EFE6">GEM</text>
+    <text x="905" y="620" font-family="'Inter',Arial,sans-serif" font-weight="500" letter-spacing="32" font-size="58" fill="#A7BFAE">CONTENT ENGINE</text>
+  </svg>
+  <div class="cover-rule"></div>
+  <h1 class="cover-title">The 30-Day<br>Marketing Push</h1>
+  <div class="cover-sub">A day-by-day playbook to take GEM Content Engine from quietly live to first revenue and ongoing momentum. Zero filler. Every day has a clear deliverable.</div>
+  <div class="cover-meta">v1.0 · Solo Founder Edition · 2026 · thegeminfo.com</div>
+  <div class="cover-chips">
+    <div class="cover-chip"><span class="cover-chip-num">30</span>Days of action</div>
+    <div class="cover-chip"><span class="cover-chip-num">10</span>Channels covered</div>
+    <div class="cover-chip"><span class="cover-chip-num">$9</span>Founder price</div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="page-break"></div>
+<div class="page acc-week">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Contents</div></div>
+    <div class="ph-title">Inside this 30-day push</div>
+    <div class="ph-sub">Read the platform decision first. Then follow the days.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <div class="toc-entry"><div class="toc-num">I.</div><div><div class="toc-title">Platform decision — Gumroad vs HighLevel</div><div class="toc-sub">Why Gumroad wins for a $9 indie product. The 60-minute setup. The fees you'll pay. When HighLevel makes sense (rarely).</div></div></div>
+
+  <div class="toc-entry"><div class="toc-num">II.</div><div><div class="toc-title">Pre-flight checklist — Day 0</div><div class="toc-sub">12 things that must be true before Day 1. If any are missing, fix them first. Don't skip this.</div></div></div>
+
+  <div class="toc-entry"><div class="toc-num">III.</div><div><div class="toc-title">Week 1 — Personal network &amp; warm channels</div><div class="toc-sub">Days 1–7. Goal: First $1 from a stranger. Warmest leads first. Build messaging in private before you broadcast.</div></div></div>
+
+  <div class="toc-entry"><div class="toc-num">IV.</div><div><div class="toc-title">Week 2 — Public broadcast &amp; community</div><div class="toc-sub">Days 8–14. Goal: 25+ paying customers. Twitter/X, Indie Hackers, Reddit, Hacker News. Where to post, what to say, when.</div></div></div>
+
+  <div class="toc-entry"><div class="toc-num">V.</div><div><div class="toc-title">Week 3 — Compound effects</div><div class="toc-sub">Days 15–21. Goal: 60+ customers. Product Hunt launch. Affiliate program. First testimonials weaponized. Newsletter outreach.</div></div></div>
+
+  <div class="toc-entry"><div class="toc-num">VI.</div><div><div class="toc-title">Week 4 — Scale &amp; price-up</div><div class="toc-sub">Days 22–30. Goal: 100+ customers, then close founder pricing. The "going up" email. First case study. Plan v1.8.</div></div></div>
+
+  <div class="toc-entry"><div class="toc-num">VII.</div><div><div class="toc-title">The full marketing channel matrix</div><div class="toc-sub">Every channel ranked by ROI for a $9 indie product. What to ignore. What to double-down on after Day 30.</div></div></div>
+
+  <div class="toc-entry"><div class="toc-num">VIII.</div><div><div class="toc-title">Daily metrics &amp; the dashboard you'll keep</div><div class="toc-sub">The 7 numbers to track. Where to find them. Floor / target / stretch by week.</div></div></div>
+</div>
+
+<!-- I — PLATFORM DECISION -->
+<div class="page-break"></div>
+<div class="page acc-money">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part I · Platform decision</div></div>
+    <div class="ph-title">Gumroad. Use Gumroad.</div>
+    <div class="ph-sub">For a $9 one-time digital product, Gumroad isn't just easier — it's actually the better business decision. Here's why HighLevel is a trap at this stage.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>The 30-second answer</h2>
+  <p><strong>Use Gumroad.</strong> Not HighLevel. Not Lemon Squeezy. Not your own Stripe + custom checkout. Gumroad. Set it up in 60 minutes, ship today, scale to $50K with zero infrastructure changes.</p>
+
+  <div class="callout">
+    <div class="callout-eyebrow">Why this isn't even close</div>
+    <p><strong>Gumroad</strong> exists for exactly your use case: digital creators selling indie digital products one-time. Built-in license keys, automatic delivery, affiliate program, refund handling, and tax compliance. <strong>$0 monthly</strong>. Pay only when you sell.</p>
+    <p><strong>HighLevel</strong> is an agency/SaaS marketing platform that costs <strong>$97–$497/month</strong> minimum. It's powerful (CRM, funnels, SMS, email automation, calendars) but built for B2B service sellers running paid ads at $1K+ AOV. For a $9 indie product, you'd lose money for months before HighLevel paid for itself, and you'd get distracted by 100 features you don't need.</p>
+  </div>
+
+  <h2>The numbers that matter</h2>
+  <table>
+    <thead><tr><th>&nbsp;</th><th>Gumroad</th><th>HighLevel ($97 plan)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Monthly cost</strong></td><td><span class="tbl-pos">$0</span></td><td><span class="tbl-neg">$97</span></td></tr>
+      <tr><td><strong>Per-sale fee</strong></td><td>~10% (9% + $0.50)</td><td>0% on payments + Stripe 2.9% + 30¢</td></tr>
+      <tr><td><strong>Net on a $9 sale</strong></td><td>$7.69</td><td>$8.43 (but $97 sunk monthly)</td></tr>
+      <tr><td><strong>Sales to break even on monthly fee</strong></td><td>0</td><td>~13 sales/mo</td></tr>
+      <tr><td><strong>Setup time</strong></td><td>60 min</td><td>2–3 days</td></tr>
+      <tr><td><strong>Built-in license keys</strong></td><td><span class="tbl-pos">Yes</span></td><td>No (need integration)</td></tr>
+      <tr><td><strong>Built-in affiliate program</strong></td><td><span class="tbl-pos">Yes (one toggle)</span></td><td>Add-on / custom</td></tr>
+      <tr><td><strong>Buyer trust signal</strong></td><td>High (recognized brand)</td><td>Low (custom-branded checkout)</td></tr>
+      <tr><td><strong>Tax/VAT handling</strong></td><td><span class="tbl-pos">Automatic</span></td><td>Manual setup</td></tr>
+      <tr><td><strong>Discoverability</strong></td><td>Some (Gumroad Discover)</td><td>None</td></tr>
+    </tbody>
+  </table>
+
+  <h2>When HighLevel actually makes sense</h2>
+  <p>HighLevel earns its monthly fee when:</p>
+  <ul>
+    <li>You're selling a service or coaching at <strong>$497–$10,000+</strong> per customer (not a $9 download)</li>
+    <li>You need a CRM with sales pipelines, lead scoring, and SMS workflows</li>
+    <li>You're running paid ads and need landing pages + email automation + booking calendars in one place</li>
+    <li>You're building an agency that needs sub-accounts (one HighLevel account, multiple client brands)</li>
+  </ul>
+  <p>None of that is true for a $9 indie product on day one. Save HighLevel for if/when you build a $497 Agency tier in month 4.</p>
+
+  <h2>Other platforms — quick verdict</h2>
+  <table>
+    <thead><tr><th>Platform</th><th>For GEM at $9</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Lemon Squeezy</strong></td><td>Solid alternative</td><td>Slightly lower fees (~5% + 50¢) and excellent EU VAT handling. UI a bit less polished than Gumroad. Pick it if you're EU-based or want lower fees.</td></tr>
+      <tr><td><strong>Paddle</strong></td><td>Skip for now</td><td>Built for SaaS subscriptions, not one-time digital products. Higher fees and more compliance overhead.</td></tr>
+      <tr><td><strong>Stripe Direct</strong></td><td>Skip until 1000+ sales</td><td>Cheapest fees but you build everything (checkout, license delivery, refunds, tax). Two weeks of work for $0.50/sale savings.</td></tr>
+      <tr><td><strong>Buy Me a Coffee</strong></td><td>Skip</td><td>Donation-flavored. Wrong vibe for a product purchase.</td></tr>
+      <tr><td><strong>Etsy / Creative Market</strong></td><td>Skip</td><td>Wrong audience. Their buyers want templates, not software.</td></tr>
+      <tr><td><strong>HighLevel</strong></td><td>Skip until $50K+ ARR</td><td>Right tool, wrong stage. Revisit when you have an Agency tier and paid traffic.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Gumroad in 60 minutes — the exact setup</h2>
+
+  <div class="day"><div class="day-header"><div class="day-num">1.</div><div class="day-name">Create the product</div><div class="day-mission">~10 min</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Sign up at gumroad.com (free)</li>
+        <li>Click "New product" → "Digital product"</li>
+        <li>Name: <code>GEM Content Engine — Founder's Edition</code></li>
+        <li>Price: <code>$9</code></li>
+        <li>Custom URL slug: <code>gem-founder</code> (becomes <code>gumroad.com/l/gem-founder</code>)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">2.</div><div class="day-name">Upload the deliverable</div><div class="day-mission">~10 min</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Zip together: <code>gem.html</code>, <code>GEM-User-Manual.pdf</code>, <code>GEM-Brand-Guide.html</code></li>
+        <li>Filename: <code>gem-content-engine-v1.7.zip</code></li>
+        <li>Upload as the product file</li>
+        <li>Test the download as a fake buyer (Gumroad has a preview mode)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">3.</div><div class="day-name">Write the product description</div><div class="day-mission">~15 min</div></div>
+    <div class="day-body">
+      <p>Use this verbatim — pulls the same hooks the landing page uses:</p>
+      <div class="callout" style="margin-top:8px">
+        <p><strong>Headline:</strong> Six AI agents in one HTML file. One purchase, forever yours.</p>
+        <p><strong>Body:</strong> GEM turns one content idea into a complete drop — script, image prompts, video prompts, captions, hashtags, carousels — for YouTube, Instagram, Facebook, and your blog. About 90 seconds per run.<br><br>
+        Six specialist agents pass work down the line: Brand → Scout → Architect → Writer → Visual → Channel Adapter. Each has a tight schema and one job. The result is a complete, ready-to-publish content package — not a Slack thread of follow-up prompts.<br><br>
+        Runs locally on Ollama (free) or any cloud LLM (OpenAI, Anthropic, OpenRouter). Single HTML file, no install, no server, no account.<br><br>
+        <strong>Founder's Edition: $9 lifetime, first 100 buyers only.</strong> Direct line to me for feedback.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">4.</div><div class="day-name">Enable license keys</div><div class="day-mission">~5 min</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Workflow tab → enable "License keys"</li>
+        <li>Choose: <strong>"I'll provide my own keys"</strong></li>
+        <li>For now: when a sale comes in, generate a key by opening <code>gem.html</code> in your browser, F12 console, run <code>gemGenerateLicense()</code>, paste into Gumroad's customer message</li>
+        <li>(Once you hit ~50 sales, integrate Gumroad's license API — but don't bother now)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">5.</div><div class="day-name">Enable the affiliate program</div><div class="day-mission">~5 min</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Settings → Affiliates → Enable</li>
+        <li>Set commission: <strong>30%</strong></li>
+        <li>Approval: <strong>Manual</strong> (you want to vet the first 10 affiliates)</li>
+        <li>Affiliates earn $2.30 per $9 sale via their unique link — meaningful at volume</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">6.</div><div class="day-name">Customize the delivery email</div><div class="day-mission">~10 min</div></div>
+    <div class="day-body">
+      <p>The email a buyer gets within 30 seconds of paying. This is your <em>first</em> brand experience — don't leave it default.</p>
+      <p>Include: short personal welcome ("Thanks for being a founder. Here's your download + license key + a 60-second start guide."), download link, license key, link to <code>thegeminfo.com/app/</code>, and a one-line invitation to reply with feedback.</p>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">7.</div><div class="day-name">Wire the buy buttons on your live site</div><div class="day-mission">~5 min</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Copy your Gumroad checkout URL (<code>https://gumroad.com/l/gem-founder</code>)</li>
+        <li>Find &amp; replace this URL on landing.html (already wired — verify all 3 buy buttons go to the right place)</li>
+        <li>Re-deploy (auto-deploys on Vercel push)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="win">
+    <div class="callout-eyebrow">Done</div>
+    <p>You can now take money. Spend the rest of Day 0 on the pre-flight checklist on the next page.</p>
+  </div>
+</div>
+
+<!-- II — PRE-FLIGHT -->
+<div class="page-break"></div>
+<div class="page acc-money">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part II · Pre-flight</div></div>
+    <div class="ph-title">Day 0 — twelve things that must be true</div>
+    <div class="ph-sub">If any of these are still false on Day 1, you'll lose the launch. Fix first, push later.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <ul class="day-tasks" style="margin-top:18px">
+    <li><strong>thegeminfo.com</strong> resolves with HTTPS</li>
+    <li><strong>thegeminfo.com/app/</strong> loads the GEM app and Demo Mode runs end-to-end without errors</li>
+    <li>The OG share image renders correctly when you paste your URL into <a href="https://www.opengraph.xyz">opengraph.xyz</a></li>
+    <li>Buy button on landing → goes to live Gumroad checkout (test in incognito)</li>
+    <li>You bought your own product as a final test — and the email arrived within 60 seconds with the file</li>
+    <li>The license key activation in the GEM app works with the key from your test purchase</li>
+    <li>The founder counter on the landing page reads <code>100 / 100 remaining</code></li>
+    <li>You have a Twitter/X profile with the GEM avatar (square, 400×400) and banner (1500×500) uploaded</li>
+    <li>You have a list of <strong>30 names</strong> in a text file — your personal network outreach for Day 1</li>
+    <li>Your LinkedIn profile mentions GEM in your headline or about section (one short sentence)</li>
+    <li>You have a simple way to <strong>track sales</strong> daily — a Notion page, a Google Sheet, or just a notes file. Don't over-engineer. Number per day, source if known, and one cell for testimonial quotes</li>
+    <li>You have <strong>blocked off 60–90 minutes per day</strong> for the next 30 days. This isn't optional. The push only works if you actually push</li>
+  </ul>
+
+  <div class="warn">
+    <div class="callout-eyebrow">Most-skipped thing that kills launches</div>
+    <p><strong>Buying your own product as a final test.</strong> 30% of indie launches go live with a broken checkout flow because the founder never tested the full buyer journey end-to-end. Don't be in that 30%. Use a different email address than your Gumroad account email, pay with a real card, refund yourself afterward (Gumroad makes this one click).</p>
+  </div>
+
+  <h2>The mental model for the 30 days</h2>
+  <div class="pq">"In month one, the goal is not revenue. It is reviews. Treat every sale like a research subject, not a transaction."<span class="pq-attr">— Patio11 / Patrick McKenzie</span></div>
+
+  <p>You're not trying to build a $50K month in 30 days. You're trying to:</p>
+  <ul>
+    <li><strong>Validate the product</strong> — does the offer convert at all? At what rate?</li>
+    <li><strong>Find your messaging</strong> — which one-line pitch makes people DM you back?</li>
+    <li><strong>Build proof assets</strong> — testimonials, mentions, screenshots of "I bought this" tweets</li>
+    <li><strong>Earn permission to charge more</strong> — by Day 30 you'll have evidence to defend $29, $79, $149 prices</li>
+  </ul>
+</div>
+
+<!-- III — WEEK 1 -->
+<div class="page-break"></div>
+<div class="page acc-week">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part III · Week 1</div></div>
+    <div class="ph-title">Days 1–7 — Personal network &amp; warm channels</div>
+    <div class="ph-sub">Goal by Sunday: First $1 from a stranger. 10–25 total sales (mix of friends + warm contacts + first strangers).</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 1</div><div class="day-name">Mon · Quiet launch</div><div class="day-mission">No public posting today</div></div>
+    <div class="day-body">
+      <p><strong>Why quiet?</strong> The first 6 hours after launch is when everything that's broken reveals itself. Don't broadcast to thousands until you've fixed it with a few. Today is for friends and family — they're forgiving testers.</p>
+      <ul class="day-tasks">
+        <li>Send personal DMs to <strong>5 closest friends</strong>: <em>"I shipped a thing today. $9. Try it and roast me."</em></li>
+        <li>Send personal DMs to <strong>3 closest mentors / advisors</strong> with the same ask</li>
+        <li>Reply to every "what is it" with a 2-line description + link. Don't oversell</li>
+        <li>If anything breaks (checkout, app, email), fix it tonight</li>
+      </ul>
+      <div class="day-meta"><span><strong>Channels:</strong> DM only</span><span><strong>Goal:</strong> 3–5 sales, find any bugs</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 2</div><div class="day-name">Tue · Personal network DM blast</div><div class="day-mission">Talk to 30 humans</div></div>
+    <div class="day-body">
+      <p>Open your list of 30 names. Send each one a <strong>personalized</strong> DM (not a copy-paste template — you'll get blocked). Use the script in the Launch Playbook, but always reference something specific to that person.</p>
+      <ul class="day-tasks">
+        <li>Send 30 personalized DMs across Twitter, LinkedIn, Email, WhatsApp — wherever you actually talk to that person</li>
+        <li>Reply to every response within 30 minutes during waking hours</li>
+        <li>Add anyone who buys to a "Founders" tag in your contacts — these are your case study candidates</li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic outcome:</strong> 3–8 sales</span><span><strong>Stretch:</strong> 1–3 future affiliates volunteer</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 3</div><div class="day-name">Wed · Twitter/X build-in-public thread</div><div class="day-mission">First public post</div></div>
+    <div class="day-body">
+      <p>This is the post you've been preparing for. Use the build-in-public template from the Launch Playbook. Six tweets. Demo video at tweet 3. Buy link only at tweet 6.</p>
+      <ul class="day-tasks">
+        <li>Post the thread between <strong>9–11 AM in your audience's timezone</strong> (US tech audience: 9 AM PT)</li>
+        <li><strong>Pin it</strong> immediately</li>
+        <li>Spend the next 60 minutes replying to everyone else's tweets in the indie/AI/solo-creator space — give value, don't pitch. Pinned post does the pitching</li>
+        <li>DM every person who replies "cool!" or asks a question — they're warm leads</li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic:</strong> 2K–10K thread views, 2–8 sales</span><span><strong>Stretch:</strong> One bigger account quotes it</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 4</div><div class="day-name">Thu · Indie Hackers + LinkedIn</div><div class="day-mission">Cross-platform coverage</div></div>
+    <div class="day-body">
+      <p>Your Twitter audience caught the launch yesterday. Today, hit two adjacent communities that don't overlap.</p>
+      <ul class="day-tasks">
+        <li>Post on <strong>Indie Hackers</strong> (indiehackers.com/group/indie-makers): use the IH milestone template from the Playbook</li>
+        <li>Post on <strong>LinkedIn</strong>: rewrite your Twitter thread as a single long-form post. LinkedIn loves story arcs — open with the "$11K agency replaced with AI" hook, end with the pitch</li>
+        <li>Reply to every comment within 2 hours for the first 24 hours on both</li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic:</strong> 1–4 sales each</span><span><strong>Stretch:</strong> Front page of IH</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 5</div><div class="day-name">Fri · Reddit (carefully)</div><div class="day-mission">High variance, high reward</div></div>
+    <div class="day-body">
+      <p>Reddit will eat self-promotion alive. It will also send 10x the traffic of any other platform if you do it right. Read each subreddit's rules <strong>twice</strong> before posting.</p>
+      <ul class="day-tasks">
+        <li>Post on <strong>r/SideProject</strong> — built for this, lenient rules, story format works well</li>
+        <li>Post on <strong>r/SaaS</strong> — slightly stricter, lead with the lesson not the link</li>
+        <li>Use the Reddit "journey post" template from the Launch Playbook</li>
+        <li>Stay engaged in the comments for 24 hours — Reddit ranks engagement velocity heavily</li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic:</strong> 2–10 sales (high variance)</span><span><strong>Stretch:</strong> 50+ upvotes, 200+ visitors</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 6</div><div class="day-name">Sat · Maker tools roundup outreach</div><div class="day-mission">Earn first earned mentions</div></div>
+    <div class="day-body">
+      <p>Find 5 newsletters or websites that publish "best indie tools" or "AI tools for creators" roundups. Send each a short, respectful email asking if GEM might fit a future issue.</p>
+      <ul class="day-tasks">
+        <li>Candidates: TLDR (AI), Ben's Bites, The Rundown AI, This Week in Indie Hacking, AI Tool Report, BetaList</li>
+        <li>Use the newsletter outreach template from the Launch Playbook</li>
+        <li>Submit to <strong>BetaList</strong> (free, takes 5 min): betalist.com/submit</li>
+        <li>Submit to <strong>There's An AI For That</strong> (theresanaiforthat.com)</li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic:</strong> 0–1 mentions in 2 weeks</span><span><strong>Stretch:</strong> Featured in a major newsletter</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 7</div><div class="day-name">Sun · Gather, regroup, write tomorrow</div><div class="day-mission">Audit week 1, plan week 2</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Count total sales for week 1. Floor: <strong>10</strong>. Target: <strong>20–30</strong>. Stretch: <strong>50+</strong></li>
+        <li>Read every reply, DM, and comment from this week. Look for the <em>one-line phrase</em> that keeps appearing in positive feedback. That's your new headline</li>
+        <li>Email each buyer: <em>"Thanks for being a founder. What would make GEM 10x more useful for you?"</em> — 30%+ reply rate. Save these</li>
+        <li>Update the founder counter on landing page (subtract sales from 100)</li>
+        <li>Pick one piece of feedback that's mentioned by 2+ buyers — schedule it as a v1.7.1 bug fix or v1.8 feature</li>
+      </ul>
+      <div class="day-meta"><span><strong>Mission:</strong> Don't post today. Listen instead</span></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-eyebrow">If week 1 hits zero sales</div>
+    <p>The problem is almost always one of three things: (1) the buy button doesn't actually work, (2) the landing page doesn't communicate the value in the first 5 seconds, (3) you didn't actually do the outreach. Fix one thing, then keep pushing. Don't change the price.</p>
+  </div>
+</div>
+
+<!-- IV — WEEK 2 -->
+<div class="page-break"></div>
+<div class="page acc-week">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part IV · Week 2</div></div>
+    <div class="ph-title">Days 8–14 — Public broadcast &amp; community</div>
+    <div class="ph-sub">Goal by Sunday: 25–50 total customers. 5+ unsolicited testimonials. First "I bought this" tweet from a stranger.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 8</div><div class="day-name">Mon · Twitter/X demo video</div><div class="day-mission">Visual proof beats text</div></div>
+    <div class="day-body">
+      <p>Record a <strong>60–90 second screen recording</strong> of GEM running end-to-end (Loom or QuickTime, then export as MP4 under 200MB for Twitter). Post as a single tweet: <em>"GEM in 90 seconds. One idea → full content drop. $9 lifetime."</em> + buy link.</p>
+      <ul class="day-tasks">
+        <li>Use Demo Mode so it runs reliably in 90 sec without API calls</li>
+        <li>Add captions (Twitter shows muted by default — captions double watch-through)</li>
+        <li>Quote-tweet your Day 3 thread with <em>"Day 8: people asked for a video. Here's the full pipeline in 90 seconds."</em></li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic:</strong> 5K–30K views, 5–15 sales</span><span><strong>Stretch:</strong> 100K+ views</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 9</div><div class="day-name">Tue · r/SideProject "what I learned"</div><div class="day-mission">Reddit, second touchpoint</div></div>
+    <div class="day-body">
+      <p>Different angle than your Day 5 post. This time: a <strong>retrospective</strong>. <em>"What I learned launching my AI tool on Reddit a week ago"</em> — share metrics, mistakes, and link to the product at the bottom.</p>
+      <ul class="day-tasks">
+        <li>Be honest about numbers — even small numbers earn upvotes if the lessons are useful</li>
+        <li>Lessons people upvote: <em>"Pricing was wrong"</em>, <em>"Reddit hates X"</em>, <em>"Email subject lines that worked"</em></li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic:</strong> 30–200 upvotes, 1–4 sales</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 10</div><div class="day-name">Wed · Hacker News "Show HN"</div><div class="day-mission">High variance, prepare for both</div></div>
+    <div class="day-body">
+      <p>HN is the single highest-variance traffic source. A successful Show HN can do 5,000+ visitors and 50+ sales in a day. A failed one disappears in 90 minutes. Plan for both.</p>
+      <ul class="day-tasks">
+        <li>Post between <strong>8–10 AM ET</strong> on a weekday (highest engagement window)</li>
+        <li>Title format: <code>Show HN: GEM – six AI agents in one HTML file ($9 lifetime)</code></li>
+        <li>First comment (yours): the maker introduction, technical details, and an invitation to feedback</li>
+        <li>Stay glued to the thread for the first 4 hours — replies in the first hour matter most</li>
+        <li>Don't ask anyone to upvote (HN bans this)</li>
+      </ul>
+      <div class="day-meta"><span><strong>Floor:</strong> 5 points, gone in an hour</span><span><strong>Realistic:</strong> 30 points, 200 visitors</span><span><strong>Stretch:</strong> Front page (200+ pts)</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 11</div><div class="day-name">Thu · DM the 10 most engaged people</div><div class="day-mission">Conversion, not broadcast</div></div>
+    <div class="day-body">
+      <p>By now ~10 people have liked, replied, or quoted your launch posts but haven't bought. DM each one personally. Not a pitch — a question.</p>
+      <ul class="day-tasks">
+        <li>Open with their reply: <em>"Saw your reply on the GEM thread — what's your current content stack?"</em></li>
+        <li>If they engage, walk them through the demo URL casually</li>
+        <li>Mention the founder discount window is closing soon (it's true — once 100 sell, it's gone)</li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic:</strong> 2–4 sales from 10 DMs (20–40% conversion on warm leads)</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 12</div><div class="day-name">Fri · LinkedIn carousel post</div><div class="day-mission">B2B-flavored audience</div></div>
+    <div class="day-body">
+      <p>LinkedIn carousels (PDF format) outperform text posts 5–10x. Build a 7–10 slide carousel: cover slide → problem → 6 agent breakdowns → CTA.</p>
+      <ul class="day-tasks">
+        <li>Use Canva (free) — search "LinkedIn carousel template," pick one, swap colors to GEM forest/cream</li>
+        <li>Each slide: bold headline + 1 sentence + screenshot</li>
+        <li>End slide: clean CTA <em>"Get GEM — $9 lifetime · thegeminfo.com"</em></li>
+        <li>Caption: 3-paragraph story with a hook, lesson, and link</li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic:</strong> 1K–10K views, 2–8 sales</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 13</div><div class="day-name">Sat · Day off (mostly)</div><div class="day-mission">Recovery + long-form draft</div></div>
+    <div class="day-body">
+      <p>Saturdays have low conversion across most platforms. Use today to draft your <strong>case study post</strong> for next week — pick the most engaged buyer, write up their workflow with GEM in 600–1000 words.</p>
+      <ul class="day-tasks">
+        <li>Draft only — don't publish today</li>
+        <li>Reply to any DMs/comments from the week</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 14</div><div class="day-name">Sun · Week 2 audit + Product Hunt prep</div><div class="day-mission">Set up the launch that defines week 3</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Total sales count. Floor: <strong>30</strong>. Target: <strong>50</strong>. Stretch: <strong>100</strong></li>
+        <li><strong>Schedule Product Hunt launch for next Tuesday or Wednesday</strong> (Day 16 or 17). PH lets you set the launch date in advance — do this today</li>
+        <li>Prepare PH asset pack: 240×240 logo, 1270×760 main gallery image, 4–6 screenshots, 30-sec demo video (loop), 60-character tagline, 260-character description, the maker's first comment</li>
+        <li>Email past buyers: heads-up that PH launch is Tuesday — would they be willing to support? (Ask for upvotes on PH is allowed; on Twitter it's gray-area)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- V — WEEK 3 -->
+<div class="page-break"></div>
+<div class="page acc-week">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part V · Week 3</div></div>
+    <div class="ph-title">Days 15–21 — Compound effects</div>
+    <div class="ph-sub">Goal by Sunday: 60–120 total customers. Product Hunt fires. First case study live. Affiliate program seeded.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 15</div><div class="day-name">Mon · Case study post drops</div><div class="day-mission">Social proof at scale</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Publish the case study you drafted on Day 13. Post on Twitter (thread), LinkedIn (long-form), Indie Hackers (link)</li>
+        <li>Tag the customer (with their permission). They'll likely retweet/share — instant amplification</li>
+        <li>Update the landing page to add this customer's quote + photo to a "Founders are saying" section</li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic:</strong> 5–15 sales</span><span><strong>Stretch:</strong> Customer's network drives 25+ sales</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 16 or 17</div><div class="day-name">Tue/Wed · Product Hunt launch</div><div class="day-mission">The biggest day of the month</div></div>
+    <div class="day-body">
+      <p>Launch goes live at <strong>12:01 AM PT</strong>. The first 4 hours determine whether you hit the front page.</p>
+      <ul class="day-tasks">
+        <li>12:01 AM PT: launch goes live. You're online. Reply to every comment within 30 minutes</li>
+        <li>1 AM: post in your own networks ("I just launched on PH, would mean a lot if you'd take a look") — never directly ask for upvotes</li>
+        <li>9 AM PT: tweet the launch with a screenshot of the PH page. Reply to your pinned thread</li>
+        <li>Throughout the day: reply to every PH comment within 1 hour</li>
+        <li>Have a special <code>PHLAUNCH</code> discount code ready — gives PH visitors GEM for $5 instead of $9 (meta-cheap impulse buy)</li>
+      </ul>
+      <div class="day-meta"><span><strong>Floor:</strong> 50 upvotes</span><span><strong>Target:</strong> 200 upvotes (Top 10 of the day)</span><span><strong>Stretch:</strong> #1–3 product (500+ upvotes, 50+ sales)</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 18</div><div class="day-name">Thu · PH retro on Twitter</div><div class="day-mission">Squeeze the second wave</div></div>
+    <div class="day-body">
+      <p>Whatever happened on PH, write the retro. <em>"Launched on PH yesterday. Here's what worked, what didn't, and what I learned."</em> Indie audience eats this content.</p>
+      <ul class="day-tasks">
+        <li>Real numbers: visitors, upvotes, sales, refunds</li>
+        <li>One specific lesson — the headline that worked, the comment that hurt, the unexpected win</li>
+        <li>Soft CTA at the end: <em>"GEM is still on PH today if you want to support: [link]"</em></li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic:</strong> 3K–15K views, 3–10 sales</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 19</div><div class="day-name">Fri · Affiliate outreach</div><div class="day-mission">Your future sales team</div></div>
+    <div class="day-body">
+      <p>By now you have 50+ buyers. Email the 20 most engaged with the affiliate pitch from the Launch Playbook. 30% commission, no quotas, paid via Gumroad automatically.</p>
+      <ul class="day-tasks">
+        <li>Email 20 of your most enthusiastic buyers with the affiliate invite</li>
+        <li>Reply to every "yes" within 24 hours with their unique Gumroad affiliate link + 3 pre-written tweets they can use</li>
+        <li>Cap at <strong>10 affiliates</strong> for the first cohort — small group gets attention</li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic:</strong> 5–8 affiliates sign up, drive 5–20 sales over next 30 days each</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 20</div><div class="day-name">Sat · Tool directories submission day</div><div class="day-mission">Compounding SEO traffic</div></div>
+    <div class="day-body">
+      <p>Submit GEM to every relevant directory. Each one is a backlink + a slow-drip traffic source for months.</p>
+      <ul class="day-tasks">
+        <li><strong>There's An AI For That</strong> — theresanaiforthat.com (500K+ monthly visitors)</li>
+        <li><strong>Futurepedia</strong> — futurepedia.io</li>
+        <li><strong>AI Tool Hunt</strong> — aitoolhunt.com</li>
+        <li><strong>SaaSHub</strong> — saashub.com</li>
+        <li><strong>AlternativeTo</strong> — alternativeto.net (list as alternative to Jasper, Copy.ai)</li>
+        <li><strong>Indie Hackers Products</strong> — indiehackers.com/products (already free if you have an IH account)</li>
+        <li><strong>Tiny Launch</strong>, <strong>Uneed</strong>, <strong>Toolify.ai</strong></li>
+      </ul>
+      <div class="day-meta"><span><strong>Time:</strong> ~90 minutes total to submit all</span><span><strong>Payoff:</strong> 5–50 visitors/month each, forever</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 21</div><div class="day-name">Sun · Half-time review</div><div class="day-mission">Are we on track?</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Total sales count. Floor: <strong>50</strong>. Target: <strong>80</strong>. Stretch: <strong>150</strong></li>
+        <li>If you're at 60+: start drafting the "going up to $29" email for next week</li>
+        <li>If you're at 30–60: continue founder pricing through week 4, plan the v1.8 announcement to drive a fresh wave</li>
+        <li>If you're under 30: do a serious diagnostic. Is the offer wrong? The audience? The price? Likely it's the audience targeting — pick one specific niche from the templates and make ALL your week-4 content speak only to that niche</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- VI — WEEK 4 -->
+<div class="page-break"></div>
+<div class="page acc-week">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part VI · Week 4</div></div>
+    <div class="ph-title">Days 22–30 — Scale &amp; price-up</div>
+    <div class="ph-sub">Goal by Day 30: 100+ customers, founder pricing closed, $29 standard live, system that runs without daily grind.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 22</div><div class="day-name">Mon · Twitter "milestone" post</div><div class="day-mission">Social proof + scarcity</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Tweet: <em>"GEM hit X buyers in Y days. Last 20 founder seats — going to $29 next week. Thanks to everyone who shipped me feedback."</em></li>
+        <li>Tag your top 5 buyers/affiliates — they'll likely retweet</li>
+        <li>Pin the tweet</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 23</div><div class="day-name">Tue · YouTube walkthrough video</div><div class="day-mission">SEO long-tail asset</div></div>
+    <div class="day-body">
+      <p>Record a 5–8 minute walkthrough video. Title: <em>"How I built a 6-agent AI content engine in 6 weeks (and sold 100 copies in 30 days)"</em>. Post on YouTube. Embed on landing page.</p>
+      <ul class="day-tasks">
+        <li>Loom + free editor (CapCut) — total time ~2 hours</li>
+        <li>Optimize: title with keyword (AI content tool), description with timestamps, tags</li>
+        <li>YouTube videos compound — this'll bring traffic for years</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 24</div><div class="day-name">Wed · Newsletter-style email to past buyers</div><div class="day-mission">Activate your asset</div></div>
+    <div class="day-body">
+      <p>You have 50–150 buyer emails. Send your first newsletter — even if it's just one short email. Topic: <em>"3 things I shipped in v1.7.1 based on your feedback + a peek at v1.8."</em></p>
+      <ul class="day-tasks">
+        <li>Use Gumroad's built-in email-buyers feature, or export to Buttondown / ConvertKit (both have free tiers)</li>
+        <li>Soft CTA at the end: <em>"Founder price closes in 3 days. Last chance to send to a friend."</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 25</div><div class="day-name">Thu · Reddit second-time</div><div class="day-mission">Different sub, different angle</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Try a new subreddit: <strong>r/EntrepreneurRideAlong</strong> (loves journey posts) or <strong>r/Solopreneur</strong></li>
+        <li>Angle: <em>"30 days since launching my $9 AI tool — full breakdown of what worked"</em></li>
+        <li>Include real metrics, real screenshots, real revenue. Indie audiences trust transparency</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 26</div><div class="day-name">Fri · "Going up" email to past buyers + waitlist</div><div class="day-mission">Drive the final spike</div></div>
+    <div class="day-body">
+      <p>Use the "going up next week" email script from the Launch Playbook. Sent to: past buyers (forward to friends), email subscribers, anyone who DM'd you saying they were "thinking about it."</p>
+      <ul class="day-tasks">
+        <li>Subject line: <em>"GEM founder price closes Sunday at midnight"</em></li>
+        <li>Body: short, factual, no marketing language. Closes Sunday. After that, $29 forever</li>
+        <li>Tweet the same news. Pin it</li>
+      </ul>
+      <div class="day-meta"><span><strong>Realistic:</strong> 5–15 sales spike</span><span><strong>Stretch:</strong> 30+ sales weekend</span></div>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 27</div><div class="day-name">Sat · Founder counter at 5 — scarcity day</div><div class="day-mission">Last-call urgency</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Update landing page founder counter to <code>5 / 100 remaining</code> (do this whether it's true or not — most "limited" launches end with 5 left visible)</li>
+        <li>Tweet: <em>"5 founder seats left. After Sunday it's $29. Last call."</em></li>
+        <li>Reply to every DM from "thinking about it" people with the personal nudge</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 28</div><div class="day-name">Sun · The last hours</div><div class="day-mission">Spike close</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Morning tweet: <em>"Last day of founder pricing. Going to $29 at midnight ET."</em></li>
+        <li>Mid-day: post on every channel where you launched (Twitter, IH, LinkedIn, relevant Reddits) — be honest, factual, brief</li>
+        <li>11 PM: final tweet. <em>"60 minutes left at $9."</em></li>
+        <li>12:01 AM: change Gumroad price to $29. Update landing page. Update launch counter. Done</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 29</div><div class="day-name">Mon · "Founder price closed" post</div><div class="day-mission">Ride the news</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Tweet/IH/LinkedIn: <em>"Founder pricing closed last night at X buyers. Standard pricing $29 starts today. Here's what's next..."</em></li>
+        <li>Share total revenue, retention, biggest surprise — real numbers earn upvotes and inbound</li>
+        <li>This post will <strong>continue driving sales at $29</strong> for the next week — the "I missed founder pricing" cohort still buys at $29</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day"><div class="day-header"><div class="day-num">Day 30</div><div class="day-name">Tue · Plan v1.8 + ongoing rhythm</div><div class="day-mission">Set the next 90 days</div></div>
+    <div class="day-body">
+      <ul class="day-tasks">
+        <li>Final tally. Numbers, lessons, top 3 marketing moves that actually worked</li>
+        <li>Plan v1.8 announcement (timing: ~30 days from now). One headline feature</li>
+        <li>Set up a weekly rhythm: 2 Twitter posts/week, 1 IH milestone post/week, 1 LinkedIn carousel/week</li>
+        <li>Schedule the Day 31–60 plan. The push is over. The grind continues — but at half the intensity</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="win">
+    <div class="callout-eyebrow">By Day 30 you'll have</div>
+    <p>100+ customers · 10–25 testimonials · 5–10 active affiliates · 1 Product Hunt launch · 5+ unsolicited mentions · A YouTube video earning compounding traffic · A list of buyer emails that's your most valuable asset · And the proof you need to defend $29 → $79 → $149 prices.</p>
+  </div>
+</div>
+
+<!-- VII — CHANNEL MATRIX -->
+<div class="page-break"></div>
+<div class="page acc-platform">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part VII · Channel matrix</div></div>
+    <div class="ph-title">Where to spend your hours</div>
+    <div class="ph-sub">Every marketing channel ranked by ROI for a $9 indie product. Skip what's red. Double-down on what's green.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>The 30-day investment ranking</h2>
+  <table>
+    <thead><tr><th>Channel</th><th>Time/post</th><th>Realistic ROI</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Twitter / X (build-in-public)</strong></td><td>30 min</td><td>5–25 sales/post</td><td><span class="tbl-pos">Do daily</span></td></tr>
+      <tr><td><strong>Indie Hackers</strong></td><td>45 min</td><td>3–15 sales/post</td><td><span class="tbl-pos">Weekly</span></td></tr>
+      <tr><td><strong>Reddit (r/SideProject, r/SaaS)</strong></td><td>60 min + replies</td><td>2–20 sales (variance)</td><td><span class="tbl-pos">Weekly, different sub each time</span></td></tr>
+      <tr><td><strong>Hacker News (Show HN)</strong></td><td>30 min + 4hr stand-by</td><td>0–80 sales</td><td>Once or twice in 30 days</td></tr>
+      <tr><td><strong>Product Hunt</strong></td><td>1 day full attention</td><td>20–200 sales</td><td><span class="tbl-pos">Once, mid-month</span></td></tr>
+      <tr><td><strong>LinkedIn (story posts)</strong></td><td>45 min</td><td>2–10 sales</td><td>Weekly</td></tr>
+      <tr><td><strong>LinkedIn (carousels)</strong></td><td>2 hours</td><td>5–25 sales</td><td><span class="tbl-pos">Bi-weekly</span></td></tr>
+      <tr><td><strong>YouTube walkthrough</strong></td><td>2–4 hours</td><td>1–5 sales/wk, compounds for years</td><td><span class="tbl-pos">One in week 4, then monthly</span></td></tr>
+      <tr><td><strong>Personal DMs</strong></td><td>2 min/each</td><td>20–40% conversion on warm leads</td><td><span class="tbl-pos">Daily, 5–10 DMs</span></td></tr>
+      <tr><td><strong>Newsletter outreach</strong></td><td>15 min/email</td><td>1 hit per 10 emails</td><td>Week 1 + week 3</td></tr>
+      <tr><td><strong>Tool directories</strong></td><td>5 min each, batch</td><td>Slow drip, compounds</td><td>One Saturday, batch all</td></tr>
+      <tr><td><strong>Affiliate program</strong></td><td>Setup + outreach</td><td>5–50 sales/affiliate over 90 days</td><td><span class="tbl-pos">Week 3, then maintain</span></td></tr>
+      <tr><td><strong>Cold email outreach</strong></td><td>30 min/10 emails</td><td>1–3% reply rate</td><td>Skip for $9 product</td></tr>
+      <tr><td><strong>Twitter/X paid ads</strong></td><td>Setup</td><td>$5–$15 CAC, only at scale</td><td><span class="tbl-neg">Skip until day 31+</span></td></tr>
+      <tr><td><strong>Google Ads</strong></td><td>Setup</td><td>$10+ CAC for AI tools</td><td><span class="tbl-neg">Skip — math doesn't work at $9</span></td></tr>
+      <tr><td><strong>Meta / FB ads</strong></td><td>Setup</td><td>$8–$20 CAC</td><td><span class="tbl-neg">Skip until $79+ price</span></td></tr>
+      <tr><td><strong>Influencer partnerships</strong></td><td>Days of relationship-building</td><td>50–500 sales if hit lands</td><td>Day 31+, after social proof</td></tr>
+      <tr><td><strong>Cold DMs to strangers</strong></td><td>2 min each</td><td>0–2% conversion</td><td><span class="tbl-neg">Skip — feels spammy</span></td></tr>
+      <tr><td><strong>TikTok</strong></td><td>2 hours/video</td><td>Variable</td><td>Skip unless you already make TikToks</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <div class="callout-eyebrow">The 80/20 of your 30 days</div>
+    <p>If you only do 4 things this month: <strong>(1)</strong> Daily Twitter/X build-in-public — 30 min/day. <strong>(2)</strong> Weekly Indie Hackers + Reddit posts — 90 min/week. <strong>(3)</strong> One Product Hunt launch — one day mid-month. <strong>(4)</strong> Affiliate program seeded by week 3 — 2 hours total. That's it. Everything else is gravy.</p>
+  </div>
+
+  <h2>What to do AFTER day 30</h2>
+  <p>The 30-day push is the launch. After that, the rhythm changes — fewer posts, more compounding assets.</p>
+  <div class="ch-grid">
+    <div class="ch-card"><h4>Days 31–60</h4><p>2 Twitter posts/week. 1 IH/Reddit post/week. 1 LinkedIn carousel/bi-weekly. Maintain affiliate cohort.</p><div class="ch-meta">Goal: 200 customers @ $29</div></div>
+    <div class="ch-card"><h4>Days 61–90</h4><p>Add: 1 YouTube video/month. Reach out to 3 podcasts/month. Test paid ads only if organic conversion at 2%+.</p><div class="ch-meta">Goal: 350 customers @ $79</div></div>
+    <div class="ch-card"><h4>Days 91–180</h4><p>Add: monthly newsletter. Build SEO content (1 long-form blog/week targeting "AI content tool" keywords). Consider AppSumo deal if growth plateaus.</p><div class="ch-meta">Goal: 1000 customers @ $79</div></div>
+    <div class="ch-card"><h4>Months 6–12</h4><p>Launch v2.0 + Agency tier ($497). Hire VA for support. Affiliate program scales to 50+. Test paid Twitter ads on highest-engagement organic posts.</p><div class="ch-meta">Goal: $10K/mo recurring revenue</div></div>
+  </div>
+</div>
+
+<!-- VIII — DASHBOARD -->
+<div class="page-break"></div>
+<div class="page acc-content">
+  <div class="ph">
+    <div class="ph-rule"><div class="ph-rule-line"></div><div class="ph-eyebrow">Part VIII · Dashboard</div></div>
+    <div class="ph-title">The seven numbers you'll track daily</div>
+    <div class="ph-sub">Build this in a Notion page or Google Sheet on Day 0. Update it every evening for 30 days. Don't skip days.</div>
+    <div class="ph-divider"></div>
+  </div>
+
+  <h2>The dashboard</h2>
+  <table>
+    <thead><tr><th>Metric</th><th>Where to find it</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Sales today</strong></td><td>Gumroad → Sales</td><td>The only metric that survives the day</td></tr>
+      <tr><td><strong>Cumulative sales</strong></td><td>Gumroad dashboard</td><td>For founder counter + price-graduation triggers</td></tr>
+      <tr><td><strong>Net revenue today</strong></td><td>Gumroad → Earnings</td><td>What's actually in your account after fees</td></tr>
+      <tr><td><strong>Landing page visitors</strong></td><td>Vercel Analytics (free) or Plausible</td><td>Conversion ratio = sales / visitors</td></tr>
+      <tr><td><strong>Top traffic source</strong></td><td>Vercel referrer report</td><td>Tells you which posts are working</td></tr>
+      <tr><td><strong>Twitter follower count</strong></td><td>Your profile</td><td>Proxy for brand-awareness compound effect</td></tr>
+      <tr><td><strong>Mentions you didn't ask for</strong></td><td>Twitter search "GEM thegeminfo.com"</td><td>The leading indicator of organic growth</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Floor / target / stretch by week</h2>
+  <table>
+    <thead><tr><th>Week</th><th>Sales floor</th><th>Sales target</th><th>Sales stretch</th><th>Net revenue (target)</th></tr></thead>
+    <tbody>
+      <tr><td>Week 1</td><td>10</td><td>20</td><td>50</td><td>~$155</td></tr>
+      <tr><td>Week 2</td><td>15</td><td>25</td><td>50</td><td>~$190</td></tr>
+      <tr><td>Week 3</td><td>20</td><td>40</td><td>100</td><td>~$310 ($9 mostly, some $29 if priced up)</td></tr>
+      <tr><td>Week 4</td><td>15</td><td>30</td><td>80</td><td>~$580 (mix $9/$29 with founder closeout spike)</td></tr>
+      <tr><td><strong>30-day total</strong></td><td><strong>60</strong></td><td><strong>115</strong></td><td><strong>280+</strong></td><td><strong>~$1,235 net</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2>What to do if you're below floor</h2>
+  <ul>
+    <li><strong>Below floor on visitors:</strong> Distribution problem. Post more, post in different places, ask for retweets explicitly</li>
+    <li><strong>Below floor on conversion (visitors high but sales low):</strong> Landing page or pricing problem. The hero headline isn't landing OR the price is somehow still feeling expensive at $9 (rare). Run 5 calls with people who visited but didn't buy</li>
+    <li><strong>Below floor on testimonials:</strong> The product isn't sticking. Email every buyer and ask: <em>"What's the one thing about GEM that's not working for you?"</em> Build that fix into v1.7.1</li>
+    <li><strong>Below floor on mentions:</strong> Your launch posts aren't shareable. Rewrite the next post with a stronger hook, more specific numbers, more vulnerability</li>
+  </ul>
+
+  <h2>What to do if you're hitting stretch</h2>
+  <ul>
+    <li><strong>Do not raise the price early.</strong> The plan is the plan — $9 → $29 → $79 — and arbitrary changes break the founder narrative</li>
+    <li>Spend the surplus time on <strong>testimonial collection</strong>. Email every buyer for permission to feature them. The next price tier needs proof</li>
+    <li>Start drafting v1.8 features based on the patterns in feedback</li>
+    <li>Schedule a second Product Hunt launch for v1.8 in ~45 days</li>
+  </ul>
+
+  <div class="pq">"Day 30 isn't a finish line. It's the moment you've earned the right to charge real money. Now spend the next 60 days proving you can keep them."<span class="pq-attr">— Marketing playbook</span></div>
+</div>
+
+<!-- CLOSING -->
+<div class="page-break"></div>
+<div style="background:var(--forest-deep);color:var(--cream);padding:60px 56px;text-align:center;position:relative">
+  <div style="position:absolute;left:50%;top:24px;transform:translateX(-50%);width:48px;height:1px;background:var(--gold);opacity:.55"></div>
+  <div style="position:absolute;left:50%;bottom:24px;transform:translateX(-50%);width:48px;height:1px;background:var(--gold);opacity:.55"></div>
+  <h1 style="font-family:var(--serif);font-size:30px;font-weight:600;color:#FFFCF6;margin-bottom:12px;line-height:1.25">Day 1 starts tomorrow morning.</h1>
+  <p style="color:rgba(212,239,226,.7);max-width:460px;margin:0 auto;font-size:13px;line-height:1.7">Pre-flight checklist tonight. Five DMs at 9 AM tomorrow. The first dollar arrives by Sunday.</p>
+  <div style="font-family:var(--serif);font-size:11px;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--sage-light);margin-top:32px">GEM · 30-Day Marketing Push v1.0 · thegeminfo.com</div>
+</div>
+
+</body>
+</html>

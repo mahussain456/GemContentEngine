@@ -1,0 +1,45 @@
+# GEM Content Engine — robots.txt
+# https://thegeminfo.com
+
+User-agent: *
+Allow: /
+Allow: /app/
+Allow: /assets/
+
+# Block crawler access to internal/working files
+Disallow: /.claude/
+Disallow: /files/
+Disallow: /files1.6/
+Disallow: /*.zip$
+Disallow: /*.mp4$
+Disallow: /gem.original.html
+
+# Allow Google's specialized crawlers full access
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /assets/
+
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Allow Bing
+User-agent: Bingbot
+Allow: /
+
+# Block known scrapers and bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://thegeminfo.com/sitemap.xml
