@@ -21,6 +21,7 @@ Disallow: /*.zip$
 Disallow: /*.mp4$
 Disallow: /CHANGELOG-v1.7.md
 Disallow: /scripts/
+Disallow: /dist/
 
 # ─── Google ───────────────────────────────────────────────
 User-agent: Googlebot

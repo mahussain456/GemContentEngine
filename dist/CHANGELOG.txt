@@ -1,0 +1,51 @@
+GEM Content Engine — Customer Changelog
+========================================
+
+v1.7  ·  2026-05-13
+-------------------
+- Quality Bar: every drop is now graded against six rules before publish
+  — one idea, two-second hook, specific examples, on-brand visuals,
+  business-goal CTA, human approval beat.
+- "Today's Brief" sample on the landing page: see exactly what a real
+  drop looks like for an AI niche, no signup required.
+- Roadmap teaser: the bigger workflow modules in development are now
+  public on the site. Founder's Edition buyers vote on the order.
+- Trending Mode CORS disclosure surfaced in the live FAQ — honest about
+  the r/popular fallback for Google Trends.
+
+v1.6
+----
+- Trending Mode: live Reddit / HackerNews / Google Trends signals.
+- Photo Post Prompts: 5 ready-to-paste DALL-E 3 / Imagen prompts per
+  piece for IG Feed, IG Reel, FB, TikTok, LinkedIn.
+- Carousel Generator: multi-slide IG + LinkedIn carousels with role,
+  headline, and image prompt per slide.
+- Brand Kit fixed: hex input, native picker, 8 preset palettes.
+
+v1.5
+----
+- My Library: auto-saved content history, one-click reload.
+- 30-Day Calendar: AI-generated strategic content calendar.
+- Tone Presets: 5 voice styles (Balanced / Educational / Entertaining /
+  Controversial / Inspirational).
+- Channel Export / Import: JSON sync across devices.
+
+What's coming next
+------------------
+Founder's Edition buyers shape the roadmap. The four big modules in
+active development:
+
+  - Daily auto-brief — ranked content brief delivered every morning
+  - Approval workflow — approve / edit / regenerate / reject + version history
+  - Direct publish — push to Buffer, Later, Meta, YouTube
+  - Performance loop — yesterday's winners feed tomorrow's brief
+
+Lifetime updates means every release lands in your inbox at no extra
+cost while you're on the v1.x major version. If v2.0 ships as a paid
+upgrade, Founder's Edition buyers get a substantial discount.
+
+Vote: reply to your purchase receipt email with the module you'd
+prioritise. Real feedback drives the next sprint.
+
+— The GEM team
+  thegeminfo.com

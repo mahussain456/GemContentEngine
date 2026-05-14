@@ -1,0 +1,74 @@
+GEM Content Engine — License
+=============================
+
+This file is the generic license summary shipped inside every buyer ZIP.
+Your unique license key, order ID, and tier are in your purchase receipt
+email (and in your Gumroad library at gumroad.com/library).
+
+Reference your license key when contacting support — it confirms your
+support eligibility and tier.
+
+License grant
+-------------
+Your purchase of GEM Content Engine grants you a perpetual, worldwide,
+non-exclusive, non-transferable license to:
+
+  - Use the product for personal and commercial content creation
+  - Modify the single HTML file for your own internal use
+  - Receive lifetime updates within the v1.x major version
+  - Use the output for your own clients, brands, and products
+
+Founder's Edition (first 100 buyers) includes a commercial-use license.
+
+Restrictions
+------------
+You may not:
+
+  - Redistribute, resell, sublicense, or share the gem.html file
+    with anyone outside your purchased seat count
+  - Strip or alter the product's branding without an active
+    white-label license (reserved for future tiers)
+  - Reverse-engineer the product to clone it commercially
+  - Use the product to generate illegal content, harassment,
+    or content designed to commit fraud
+
+Your output, your ownership
+---------------------------
+You own everything you create with the product. GEM has no server.
+We never see your prompts, scripts, or generated assets.
+
+Third-party AI providers
+------------------------
+The product talks to AI providers you choose: Ollama (local), OpenAI,
+Anthropic, or OpenRouter. Each has its own terms. You're responsible
+for using those providers in accordance with their terms.
+
+Refunds
+-------
+14-day no-questions-asked refund on Founder's Edition and Builder tiers,
+processed through the same checkout platform you used. See the live Terms
+of Service for the full policy.
+
+Full terms
+----------
+The authoritative, current version of these terms is published at:
+
+    https://thegeminfo.com/terms.html
+
+Privacy
+-------
+GEM runs 100% locally on Ollama mode. In cloud mode, your prompts go
+directly from your browser to the provider you chose — GEM has no
+intermediary server. Full privacy policy:
+
+    https://thegeminfo.com/privacy.html
+
+Support
+-------
+General:    hello@thegeminfo.com
+Privacy:    privacy@thegeminfo.com
+Legal:      legal@thegeminfo.com
+Press:      press@thegeminfo.com
+
+— The GEM team
+  thegeminfo.com · v1.7

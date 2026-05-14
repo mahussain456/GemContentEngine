@@ -32,9 +32,15 @@ desktop.ini
 *~
 .cache/
 node_modules/
-dist/
 build/
+
+# dist/ contains seller-side buyer-ZIP templates (tracked) — but ignore
+# any per-order generated artifacts so we don't accidentally commit buyer data.
+dist/LICENSE-*.txt
 
 # Local working scratch
 /tmp/
 *.bak
+
+# Generated buyer ZIPs (built by scripts/package_buyer_zip.py)
+GEM-Content-Engine-v*.zip
