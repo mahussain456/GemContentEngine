@@ -19,9 +19,8 @@ Disallow: /Pitch_Deck/
 Disallow: /GEM_Content_Engine_Complete_Branding_Package/
 Disallow: /*.zip$
 Disallow: /*.mp4$
-Disallow: /gem.original.html
-Disallow: /CONVERSATION-LOG.md
 Disallow: /CHANGELOG-v1.7.md
+Disallow: /scripts/
 
 # ─── Google ───────────────────────────────────────────────
 User-agent: Googlebot

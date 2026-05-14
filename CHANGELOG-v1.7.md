@@ -45,8 +45,7 @@
 | File | Status | Notes |
 |---|---|---|
 | `README.md` | **modified** | Aligned with the live ladder. Added positioning wedge, v1.7 additions, notes that the legacy `Personal/Pro/Agency` PDF tiers are no longer active. |
-| `CONVERSATION-LOG.md` | **modified** | Appended an addendum documenting the production-ready pass. |
-| `CHANGELOG-v1.7.md` | **new** | This file. |
+| `CHANGELOG-v1.7.md` | **new** | This file. Consolidates the previous internal dev log into one customer-facing release note. |
 | `GEM-Launch-Playbook.html` | **modified** | Cover meta bumped to v1.7 with the explicit $9 → $149 ladder framing. |
 | `GEM-30-Day-Marketing-Push.html` | **modified** | Cover meta + footer wordmark bumped to v1.7. |
 | `files/README.md` | **replaced** | Now a stale-duplicate notice pointing at the root README. |
