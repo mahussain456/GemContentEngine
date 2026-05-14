@@ -1,6 +1,7 @@
 """
-Regenerate GEM-Sales-Strategy.pdf and GEM-User-Manual.pdf at v1.7
-with the live pricing ladder ($9 -> $29 -> $79 -> $149).
+Regenerate GEM-Sales-Strategy.pdf, GEM-User-Manual.pdf, and
+GEM-Fulfillment-Playbook.pdf at v1.7 with the live pricing ladder
+($9 -> $29 -> $79 -> $149).
 
 Brand palette:
   Forest     #0E2A1F
@@ -18,7 +19,7 @@ from reportlab.lib import colors
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_JUSTIFY
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak,
-    KeepTogether, ListFlowable, ListItem,
+    KeepTogether, ListFlowable, ListItem, Preformatted,
 )
 from reportlab.platypus.flowables import HRFlowable
 
@@ -86,6 +87,18 @@ def make_styles():
             'pull', parent=styles['BodyText'], fontName='Times-Italic',
             fontSize=12, leading=17, textColor=PINE, alignment=TA_LEFT,
             spaceAfter=8, spaceBefore=4, leftIndent=12, borderPadding=4),
+        'code': ParagraphStyle(
+            'code', parent=styles['Code'], fontName='Courier',
+            fontSize=8.5, leading=11.5, textColor=FOREST,
+            backColor=MIST, borderColor=SAGE_TINT, borderWidth=0.5,
+            borderPadding=8, leftIndent=0, rightIndent=0, spaceAfter=10,
+            spaceBefore=4),
+        'callout': ParagraphStyle(
+            'callout', parent=styles['BodyText'], fontName='Helvetica',
+            fontSize=10, leading=14, textColor=CHARCOAL, alignment=TA_LEFT,
+            backColor=MIST, borderColor=GOLD, borderWidth=0,
+            borderPadding=10, leftIndent=0, rightIndent=0,
+            spaceAfter=10, spaceBefore=4),
     }
 
 
@@ -755,13 +768,670 @@ def build_user_manual(out_path):
     doc.build(flowables, onFirstPage=first_page, onLaterPages=later_pages)
 
 
+def build_fulfillment_playbook(out_path):
+    """Seller-facing fulfillment playbook: how to package, generate keys, deliver,
+    support, refund, and run ongoing operations. v1.7."""
+    s = make_styles()
+    flowables = []
+
+    def part(num_word, name):
+        flowables.append(PageBreak())
+        flowables.append(Paragraph(f'PART {num_word}', s['part_eyebrow']))
+        flowables.append(Paragraph(name, s['h1']))
+        flowables.append(HRFlowable(width='30%', thickness=1, color=GOLD, spaceAfter=14))
+
+    def appendix(letter, name):
+        flowables.append(PageBreak())
+        flowables.append(Paragraph(f'APPENDIX {letter}', s['part_eyebrow']))
+        flowables.append(Paragraph(name, s['h1']))
+        flowables.append(HRFlowable(width='30%', thickness=1, color=GOLD, spaceAfter=14))
+
+    def code_block(text):
+        # Preformatted keeps whitespace exactly; we use the 'code' paragraph style.
+        flowables.append(Preformatted(text, s['code']))
+
+    # ═══════════════════════════════════════════════════════════════
+    # PART ONE — The fulfillment flow
+    # ═══════════════════════════════════════════════════════════════
+    part('ONE', 'The Fulfillment Flow')
+    flowables.append(Paragraph(
+        "GEM is a digital product sold one-time, fulfilled instantly, supported lightly. "
+        "Every order should move from <i>card charged</i> to <i>customer using the product</i> "
+        "in under ten minutes with zero manual work from you. This part is the high-level map "
+        "before the rest of the playbook drills into each step.", s['body']))
+
+    flowables.append(Paragraph('The happy path — what happens for every sale', s['h3']))
+    for n, h, body in [
+        ('1', 'Buyer pays on Gumroad', 'Buyer hits "Get GEM — $9" on the landing page, types card details, clicks pay. Gumroad charges, generates the unique license key (auto), and triggers download.'),
+        ('2', 'Buyer downloads the ZIP', 'Gumroad serves the bundled ZIP directly from its CDN. No action from you. The ZIP contains gem.html, the user manual PDF, the LICENSE.txt with their key, and a WELCOME.md.'),
+        ('3', 'Gumroad emails the receipt + key', 'The receipt email includes the license key inline (handy for buyers who lose the ZIP). The same email contains a re-download link valid forever.'),
+        ('4', 'Buyer opens gem.html', 'The product runs locally in their browser. No account, no server-side activation — the license is on the seller side, not the product side (see Part 4).'),
+        ('5', 'You log the sale &amp; bump the counter', 'Update SEATS_REMAINING in landing.html as the Founder cohort fills. Add the order to your seller ledger (Part 8). Send the 24-hour follow-up email if they haven\'t opened gem.html yet (optional).'),
+    ]:
+        flowables.append(Paragraph(f'<b>{n}. {h}.</b> {body}', s['bullet'], bulletText='→'))
+
+    flowables.append(Paragraph('What every buyer receives (the four artifacts)', s['h3']))
+    artifacts = [
+        ['Artifact', 'Format', 'Purpose'],
+        ['gem.html', 'Single 330 KB HTML file', 'The product. Runs locally in any modern browser.'],
+        ['GEM-User-Manual.pdf', '11-page PDF', 'Setup, daily workflow, troubleshooting, license terms.'],
+        ['LICENSE-{order-id}.txt', '1 KB plain text', 'Their unique license key, purchase date, tier, support eligibility.'],
+        ['WELCOME.md', '~2 KB markdown', '60-second getting-started: open gem.html, configure Ollama or cloud key, run first pipeline.'],
+    ]
+    art_data = [[Paragraph(f'<b>{c}</b>' if r == 0 else c, s['small']) for c in row] for r, row in enumerate(artifacts)]
+    art_t = Table(art_data, colWidths=[1.8*inch, 1.5*inch, 3.4*inch])
+    art_t.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), FOREST),
+        ('TEXTCOLOR',  (0, 0), (-1, 0), colors.white),
+        ('GRID',       (0, 0), (-1, -1), 0.3, STONE),
+        ('VALIGN',     (0, 0), (-1, -1), 'TOP'),
+        ('LEFTPADDING', (0, 0), (-1, -1), 6),
+        ('RIGHTPADDING',(0, 0), (-1, -1), 6),
+        ('TOPPADDING', (0, 0), (-1, -1), 6),
+        ('BOTTOMPADDING',(0, 0), (-1, -1), 6),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, MIST]),
+    ]))
+    flowables.append(art_t)
+    flowables.append(Spacer(1, 12))
+    flowables.append(Paragraph(
+        "<b>Service-level promises.</b> Auto-fulfillment within seconds of payment. License key delivered in the same email. "
+        "First support reply within 48 hours business days. Founder's Edition buyers (first 100) get a direct line to the founder.",
+        s['body']))
+
+    # ═══════════════════════════════════════════════════════════════
+    # PART TWO — The seller stack
+    # ═══════════════════════════════════════════════════════════════
+    part('TWO', 'The Seller Stack')
+    flowables.append(Paragraph(
+        "You don’t need a custom backend. Pick one merchant-of-record platform and let it do the heavy lifting: "
+        "checkout, tax, fraud, license keys, refunds, file hosting, email receipts. Below is the decision matrix and the "
+        "recommended setup.", s['body']))
+
+    stack_rows = [
+        ['Platform', 'Fee', 'License keys', 'Tax / VAT', 'Verdict for $9 indie launch'],
+        ['Gumroad', '~10% per sale', 'Built-in toggle', 'Handled by Gumroad', '★ Recommended. Cheapest setup, fastest go-live.'],
+        ['Lemon Squeezy', '5% + $0.50', 'Built-in API', 'Handled (MoR)', 'Best if you outgrow Gumroad. Better UX, higher fee floor.'],
+        ['Stripe + custom', '~2.9% + $0.30', 'You build', 'You handle', 'Highest control, highest build cost. Skip for the first 500 sales.'],
+        ['AppSumo', '~70% revenue share', 'Built-in', 'Handled', 'Use only if you want a 1,000-sale spike. Painful margin.'],
+    ]
+    stack_data = [[Paragraph(f'<b>{c}</b>' if r == 0 else c, s['small']) for c in row] for r, row in enumerate(stack_rows)]
+    stack_t = Table(stack_data, colWidths=[1.1*inch, 1.0*inch, 1.0*inch, 1.0*inch, 2.6*inch])
+    stack_t.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), FOREST),
+        ('TEXTCOLOR',  (0, 0), (-1, 0), colors.white),
+        ('GRID',       (0, 0), (-1, -1), 0.3, STONE),
+        ('VALIGN',     (0, 0), (-1, -1), 'TOP'),
+        ('LEFTPADDING', (0, 0), (-1, -1), 6),
+        ('RIGHTPADDING',(0, 0), (-1, -1), 6),
+        ('TOPPADDING', (0, 0), (-1, -1), 6),
+        ('BOTTOMPADDING',(0, 0), (-1, -1), 6),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, MIST]),
+    ]))
+    flowables.append(stack_t)
+    flowables.append(Spacer(1, 12))
+
+    flowables.append(Paragraph('Gumroad setup — eight steps', s['h3']))
+    for n, txt in [
+        ('1', 'Create a Gumroad account at <font face="Courier">gumroad.com</font>. Free tier is fine until you cross $5K total revenue.'),
+        ('2', 'Create the product: <b>Type:</b> Digital product. <b>Title:</b> "GEM Content Engine — Founder’s Edition". <b>Price:</b> $9.00.'),
+        ('3', 'Upload the bundled ZIP (see Part 3 for what goes in it). Gumroad hosts the file on its CDN. Maximum file size: 16 GB free tier (you’ll use ~400 KB).'),
+        ('4', 'Enable license keys: Product settings → "Generate license keys for this product" → toggle on. Gumroad now auto-creates a unique key per sale, sends it with the download.'),
+        ('5', 'Customize the receipt email: Settings → Emails → Receipt. Paste the template from <b>Appendix A</b>. Include the license key with <font face="Courier">{{license_key}}</font>.'),
+        ('6', 'Set the product URL on the live site. The Get GEM CTA in <font face="Courier">landing.html</font> already points to <font face="Courier">https://gumroad.com/l/gem-founder</font> — update the slug to match yours.'),
+        ('7', 'Connect your payout method: Gumroad → Settings → Payouts. Choose direct deposit, PayPal, or Stripe Express. First payout lands on a Friday 7+ days after first sale.'),
+        ('8', 'Test the flow yourself: place a $9 self-purchase, confirm the ZIP arrives with a valid key, then refund yourself. End-to-end smoke test takes 10 minutes.'),
+    ]:
+        flowables.append(Paragraph(f'<b>Step {n}.</b> {txt}', s['bullet'], bulletText='▸'))
+
+    flowables.append(Paragraph('Lemon Squeezy alternative (when you outgrow Gumroad)', s['h3']))
+    flowables.append(Paragraph(
+        "Roughly the same flow with three differences worth knowing: (1) "
+        "Lemon Squeezy is a true merchant of record in more jurisdictions, so VAT/GST is fully off your plate; "
+        "(2) license-key validation has a proper REST API at <font face=\"Courier\">api.lemonsqueezy.com/v1/licenses/validate</font>; "
+        "(3) the UX is better-looking out of the box. Trade-off is the 5% + $0.50 floor — on a $9 sale you net $7.95 vs $8.10 on Gumroad.",
+        s['body']))
+
+    flowables.append(Paragraph('Stripe + custom flow (when you have the engineering bandwidth)', s['h3']))
+    flowables.append(Paragraph(
+        "Use this only after 500+ sales and a real need for control (custom upsells, white-label, B2B invoicing). "
+        "Minimum build: a small serverless function that listens to <font face=\"Courier\">checkout.session.completed</font>, "
+        "generates an HMAC license key (Part 4), stores the order, and triggers an email with the ZIP link via Postmark or Resend. "
+        "About a weekend of work if you’ve done it before.", s['body']))
+
+    # ═══════════════════════════════════════════════════════════════
+    # PART THREE — The buyer package
+    # ═══════════════════════════════════════════════════════════════
+    part('THREE', 'The Buyer Package')
+    flowables.append(Paragraph(
+        "Everything the buyer gets ships as a single ZIP. Small, clean, no fluff. "
+        "Below is the exact structure to upload to Gumroad.", s['body']))
+
+    code_block(
+        "GEM-Content-Engine-v1.7.zip   (~370 KB total)\n"
+        "├── gem.html                       ← the product (single-file app)\n"
+        "├── GEM-User-Manual.pdf            ← 11-page setup + workflow guide\n"
+        "├── WELCOME.md                     ← 60-second start guide (see below)\n"
+        "├── LICENSE.txt                    ← buyer's license key + terms summary\n"
+        "└── CHANGELOG.txt                  ← what's in v1.7 + roadmap teaser"
+    )
+
+    flowables.append(Paragraph('File-by-file rationale', s['h3']))
+    for label, body in [
+        ('gem.html', 'The single 330 KB HTML file. Self-contained, runs anywhere. <b>Do not minify</b> — buyers need to read it for trust.'),
+        ('GEM-User-Manual.pdf', 'The 11-page user manual regenerated for each release (Part 5 of Sales Strategy explains the doc pipeline).'),
+        ('WELCOME.md', 'A 2 KB markdown file with three things: (1) "Open gem.html in your browser." (2) "Paste your Ollama URL or cloud key in Settings." (3) "Hit Generate Content Drop." That’s it. Buyers want the on-ramp to be a paragraph, not a chapter.'),
+        ('LICENSE.txt', 'Plain-text file with the buyer’s license key, their tier (Founder’s / Builder / Operator / Studio), the purchase date, and a five-line summary of license terms (linking to <font face="Courier">terms.html</font> on the live site).'),
+        ('CHANGELOG.txt', 'A trimmed customer-facing version of <font face="Courier">CHANGELOG-v1.7.md</font> — "what’s new and what’s coming." Sets expectations that updates land in their inbox.'),
+    ]:
+        flowables.append(Paragraph(f'<b>{label}.</b> {body}', s['bullet'], bulletText='⋄'))
+
+    flowables.append(Paragraph('Naming convention', s['h3']))
+    flowables.append(Paragraph(
+        "Always include the version in the ZIP filename: <b>GEM-Content-Engine-v1.7.zip</b>. "
+        "When you ship v1.8, re-upload as <b>GEM-Content-Engine-v1.8.zip</b> — Gumroad serves the latest "
+        "file to <i>all past buyers</i> automatically because lifetime updates are part of the license. "
+        "Past versions stay in your local archive but should not stay on Gumroad.", s['body']))
+
+    flowables.append(Paragraph('Optional: split into core + extras', s['h3']))
+    flowables.append(Paragraph(
+        "If you ever cross the 5 MB mark (custom templates, large branding kit, etc.), split into two Gumroad downloads:\n"
+        "<b>GEM-Core-v1.7.zip</b> — product + manual + WELCOME + LICENSE (~400 KB).\n"
+        "<b>GEM-Extras-v1.7.zip</b> — branding kit, niche templates, design files (anything optional).\n"
+        "Both are gated behind the same purchase.", s['body']))
+
+    # ═══════════════════════════════════════════════════════════════
+    # PART FOUR — Activation keys
+    # ═══════════════════════════════════════════════════════════════
+    part('FOUR', 'Activation Keys')
+    flowables.append(Paragraph(
+        "GEM’s product philosophy is <i>privacy-first, no server, no account</i> — so the activation key is "
+        "intentionally a soft one. It exists for the seller’s records (audit trail, support eligibility, abuse detection), "
+        "not as a runtime lock on the product. Buyers can run gem.html without entering anything. They <i>reference</i> their "
+        "license key when contacting support or upgrading tiers.", s['body']))
+    flowables.append(Paragraph(
+        "<b>Why have keys at all?</b> Three reasons. (1) Audit — you know who bought what when. (2) Support eligibility — "
+        "the buyer quotes their key, you verify it in your seller ledger. (3) Abuse signal — if the same key appears in two "
+        "support tickets from different emails, you have a clear resale signal.", s['callout']))
+
+    flowables.append(Paragraph('Three approaches — pick one', s['h3']))
+    flowables.append(Paragraph(
+        "<b>A. Gumroad built-in (recommended for first 1,000 sales).</b> Toggle the "
+        "<i>Generate license keys for this product</i> setting. Gumroad auto-creates a key per sale, includes it in the receipt "
+        "email, and exposes a verify endpoint at <font face=\"Courier\">api.gumroad.com/v2/licenses/verify</font>. Zero engineering.",
+        s['body']))
+    flowables.append(Paragraph(
+        "<b>B. Custom HMAC (recommended if you ever leave Gumroad).</b> Generate a deterministic key from "
+        "<font face=\"Courier\">HMAC-SHA256(secret, order_id)</font>. You can re-derive any key from the order ID and your secret, "
+        "so you don’t need a database. See the code snippet below.", s['body']))
+    flowables.append(Paragraph(
+        "<b>C. Manual UUIDs (only for &lt; 20 sales).</b> Run <font face=\"Courier\">python -c \"import uuid; print(uuid.uuid4())\"</font> "
+        "per sale and paste the result into a spreadsheet. Fine for a private beta, not for scale.", s['body']))
+
+    flowables.append(Paragraph('Recommended key format', s['h3']))
+    code_block("GEM-XXXX-XXXX-XXXX-XXXX     (e.g. GEM-7B3C-91F0-4A2E-D8B6)")
+    flowables.append(Paragraph(
+        "Four hex groups of 4 characters, prefixed with <b>GEM-</b>. Easy to read aloud over a call. "
+        "Sixteen hex chars = 64 bits of entropy — way more than you need for $9 indie product, but no reason not to.",
+        s['body']))
+
+    flowables.append(Paragraph('Python — custom HMAC key generator', s['h3']))
+    code_block(
+        "# scripts/keygen.py\n"
+        "import hmac, hashlib, os\n"
+        "\n"
+        "SECRET = os.environ['GEM_KEYGEN_SECRET'].encode()   # keep this off Git\n"
+        "\n"
+        "def make_key(order_id: str) -> str:\n"
+        "    raw = hmac.new(SECRET, order_id.encode(), hashlib.sha256).hexdigest()\n"
+        "    chunks = [raw[0:4], raw[4:8], raw[8:12], raw[12:16]]\n"
+        "    return 'GEM-' + '-'.join(c.upper() for c in chunks)\n"
+        "\n"
+        "def verify_key(order_id: str, claimed_key: str) -> bool:\n"
+        "    return hmac.compare_digest(make_key(order_id), claimed_key)\n"
+        "\n"
+        "# Usage at sale time:\n"
+        "#   key = make_key('gumroad-order-12345')\n"
+        "#   write key into LICENSE.txt, email to buyer.\n"
+        "# Usage at support time:\n"
+        "#   if verify_key(order_id, buyer_quoted_key): grant support."
+    )
+
+    flowables.append(Paragraph('Seller ledger — the spreadsheet you actually keep', s['h3']))
+    ledger = [
+        ['Column', 'Why it matters'],
+        ['order_id', 'The Gumroad / Stripe order reference. Primary key.'],
+        ['license_key', 'The key you emailed the buyer. Deterministic if HMAC.'],
+        ['email', 'Customer email. Used for support and revocation.'],
+        ['tier', 'Founder’s / Builder / Operator / Studio. Drives support depth.'],
+        ['purchased_at', 'ISO date. Used for the 14-day refund window.'],
+        ['version_at_purchase', 'e.g. v1.7. So you know which manual they got.'],
+        ['status', 'active / refunded / revoked. Filter on this in every support ticket.'],
+        ['notes', 'Free-text. Refund reason, upgrade history, escalation flags.'],
+    ]
+    led_data = [[Paragraph(f'<b>{c}</b>' if r == 0 else c, s['small']) for c in row] for r, row in enumerate(ledger)]
+    led_t = Table(led_data, colWidths=[1.6*inch, 5.1*inch])
+    led_t.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), FOREST),
+        ('TEXTCOLOR',  (0, 0), (-1, 0), colors.white),
+        ('GRID',       (0, 0), (-1, -1), 0.3, STONE),
+        ('VALIGN',     (0, 0), (-1, -1), 'TOP'),
+        ('LEFTPADDING', (0, 0), (-1, -1), 6),
+        ('RIGHTPADDING',(0, 0), (-1, -1), 6),
+        ('TOPPADDING', (0, 0), (-1, -1), 6),
+        ('BOTTOMPADDING',(0, 0), (-1, -1), 6),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, MIST]),
+    ]))
+    flowables.append(led_t)
+    flowables.append(Spacer(1, 10))
+    flowables.append(Paragraph(
+        "A Google Sheet works for the first 500 sales. After that, move to a SQLite file or Airtable — "
+        "Gumroad’s export covers most of this but doesn’t carry your <i>notes</i> column.", s['body']))
+
+    flowables.append(Paragraph('Optional — gentle in-product license display', s['h3']))
+    flowables.append(Paragraph(
+        "If you want gem.html to <i>display</i> the license key (not gate behind it), paste this snippet inside "
+        "the existing Settings panel. Pure display, no validation, no server call — true to the privacy promise.",
+        s['body']))
+    code_block(
+        "<!-- Drop inside the Settings tab in gem.html -->\n"
+        "<div class=\"gem-license\">\n"
+        "  <label for=\"gem-license-key\">License key</label>\n"
+        "  <input id=\"gem-license-key\" type=\"text\"\n"
+        "         placeholder=\"GEM-XXXX-XXXX-XXXX-XXXX\"\n"
+        "         pattern=\"GEM-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}\">\n"
+        "  <small>From your LICENSE.txt. Stored locally only. Not validated online.</small>\n"
+        "</div>\n"
+        "<script>\n"
+        "  const el = document.getElementById('gem-license-key');\n"
+        "  el.value = localStorage.getItem('gem_license') || '';\n"
+        "  el.addEventListener('change', () =>\n"
+        "    localStorage.setItem('gem_license', el.value.trim()));\n"
+        "</script>"
+    )
+
+    # ═══════════════════════════════════════════════════════════════
+    # PART FIVE — Delivery
+    # ═══════════════════════════════════════════════════════════════
+    part('FIVE', 'Delivery')
+    flowables.append(Paragraph(
+        "On Gumroad, delivery is automatic. The buyer downloads the ZIP from a unique URL, and a receipt email lands "
+        "in their inbox containing the license key plus a permanent re-download link. Your job is to make the receipt "
+        "email and the WELCOME.md feel like a person wrote them, not a vending machine.", s['body']))
+
+    flowables.append(Paragraph('The three emails the buyer should receive', s['h3']))
+    emails = [
+        ['When', 'Email', 'Goal'],
+        ['T+0 seconds', 'Receipt + license key', 'Confirm purchase, surface key, reduce re-download friction.'],
+        ['T+30 minutes (if first run not detected)', '“First-run nudge” (optional)', 'Catch buyers who downloaded and got distracted before opening gem.html.'],
+        ['T+24 hours', '“How’s it going?” follow-up', 'Open the support conversation. Most buyers will reply with one specific question.'],
+        ['T+14 days', '“Welcome past the refund window”', 'Celebrate the milestone, ask for a one-line testimonial. Optional but high-ROI.'],
+    ]
+    em_data = [[Paragraph(f'<b>{c}</b>' if r == 0 else c, s['small']) for c in row] for r, row in enumerate(emails)]
+    em_t = Table(em_data, colWidths=[1.8*inch, 2.4*inch, 2.5*inch])
+    em_t.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), FOREST),
+        ('TEXTCOLOR',  (0, 0), (-1, 0), colors.white),
+        ('GRID',       (0, 0), (-1, -1), 0.3, STONE),
+        ('VALIGN',     (0, 0), (-1, -1), 'TOP'),
+        ('LEFTPADDING', (0, 0), (-1, -1), 6),
+        ('RIGHTPADDING',(0, 0), (-1, -1), 6),
+        ('TOPPADDING', (0, 0), (-1, -1), 6),
+        ('BOTTOMPADDING',(0, 0), (-1, -1), 6),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, MIST]),
+    ]))
+    flowables.append(em_t)
+    flowables.append(Spacer(1, 12))
+    flowables.append(Paragraph(
+        "Full email templates are in Appendix A. Use Gumroad’s built-in receipt customizer for the T+0 email; "
+        "everything past that goes through whatever email tool you already use (ConvertKit, Buttondown, Mailerlite, Resend).",
+        s['body']))
+
+    flowables.append(Paragraph('Re-delivery (when someone loses the file)', s['h3']))
+    flowables.append(Paragraph(
+        "Gumroad already handles this — every receipt email contains a permanent re-download link. If a buyer emails "
+        "anyway: ask for the email they purchased with, look up the order in Gumroad, click <i>Resend receipt</i>. Total "
+        "time: 90 seconds. Don’t treat re-delivery as a chore — it’s a chance to remind them v1.7 is the latest and "
+        "they’re still on lifetime updates.", s['body']))
+
+    # ═══════════════════════════════════════════════════════════════
+    # PART SIX — Post-purchase support
+    # ═══════════════════════════════════════════════════════════════
+    part('SIX', 'Post-Purchase Support')
+    flowables.append(Paragraph(
+        "Support for a $9 product needs to be cheap enough to fit the price. Keep response targets generous and "
+        "channel the bulk of questions to self-serve.", s['body']))
+
+    sup_rows = [
+        ['Channel', 'When to use', 'Response target'],
+        ['Email (hello@thegeminfo.com)', 'Setup issues, refund requests, account questions', 'Within 48 business hours'],
+        ['Discord community', 'Tips, sharing outputs, feature requests, peer help', 'Best-effort; community helps community'],
+        ['Founder DM (Founder’s Edition only)', 'Strategic feedback, roadmap input, escalations', 'Within 7 days'],
+        ['Knowledge base / FAQ', 'Most questions are answered here first', 'Live on the site'],
+    ]
+    sup_data = [[Paragraph(f'<b>{c}</b>' if r == 0 else c, s['small']) for c in row] for r, row in enumerate(sup_rows)]
+    sup_t = Table(sup_data, colWidths=[2.2*inch, 3.0*inch, 1.5*inch])
+    sup_t.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), FOREST),
+        ('TEXTCOLOR',  (0, 0), (-1, 0), colors.white),
+        ('GRID',       (0, 0), (-1, -1), 0.3, STONE),
+        ('VALIGN',     (0, 0), (-1, -1), 'TOP'),
+        ('LEFTPADDING', (0, 0), (-1, -1), 6),
+        ('RIGHTPADDING',(0, 0), (-1, -1), 6),
+        ('TOPPADDING', (0, 0), (-1, -1), 6),
+        ('BOTTOMPADDING',(0, 0), (-1, -1), 6),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, MIST]),
+    ]))
+    flowables.append(sup_t)
+    flowables.append(Spacer(1, 12))
+
+    flowables.append(Paragraph('Common support questions &amp; canned replies', s['h3']))
+    for q, a in [
+        ('"Ollama says connection failed."', 'They forgot CORS. Reply with one line: "Quit Ollama and relaunch with <font face=\"Courier\">OLLAMA_ORIGINS=“*” ollama serve</font>. Then refresh gem.html and click Test Connection again."'),
+        ('"Trending Mode only shows Reddit posts."', 'Expected behavior. Google Trends is CORS-blocked; we fall back to r/popular. Documented in the live FAQ and Chapter 7 of the manual. If they want unrestricted Google Trends, point them to the one-line proxy in the manual.'),
+        ('"My API key is showing ‘Invalid.’"', 'Ask which provider. Confirm the prefix: <font face="Courier">sk-</font> (OpenAI), <font face="Courier">sk-ant-</font> (Anthropic), <font face="Courier">sk-or-</font> (OpenRouter). If correct, ask them to paste it freshly — pasting from password managers sometimes inserts trailing whitespace.'),
+        ('"Can I use GEM for client work?"', 'Yes — Founder’s Edition includes a commercial-use license. Point them to <font face="Courier">terms.html § 5</font> on the live site for the formal grant.'),
+        ('"My PDF export is blank."', 'Browser print blocked custom fonts. Switch to Chrome / Edge and re-export. If still blank: Settings → Export → "Use system fonts" toggle.'),
+        ('"Will there be a v2.0?"', 'Yes. Daily auto-brief, approvals, direct publish, performance loop are all on the roadmap and Founder’s Edition buyers will receive a substantial discount on v2.0 if it ships as a separate paid upgrade. Linked from the live <font face="Courier">#roadmap</font> section.'),
+    ]:
+        flowables.append(Paragraph(f'<b>Q.</b> {q}', s['h3']))
+        flowables.append(Paragraph(f'<b>A.</b> {a}', s['body']))
+
+    # ═══════════════════════════════════════════════════════════════
+    # PART SEVEN — Refunds, revocations, abuse
+    # ═══════════════════════════════════════════════════════════════
+    part('SEVEN', 'Refunds, Revocations, and Abuse')
+    flowables.append(Paragraph(
+        "The shorter your refund window and the cleaner your policy, the fewer disputes you’ll see. "
+        "The Terms of Service (live on the site) already locks in the policy below — this part is the operational "
+        "side: what you actually click.", s['body']))
+
+    flowables.append(Paragraph('Refund policy (already published on terms.html § 7)', s['h3']))
+    for b in [
+        '<b>14-day no-questions-asked refund</b> on Founder’s and Builder tiers.',
+        '<b>30-day refund</b> on Operator tier, conditional on the buyer documenting the issue.',
+        '<b>Studio tier refunds are pro-rated</b> against any setup-call or onboarding hours already delivered.',
+        '<b>Refunds are processed via the same merchant of record</b> the purchase used (Gumroad / Lemon Squeezy).',
+        'Refund triggers automatic license revocation in the seller ledger (Part 4).',
+    ]:
+        flowables.append(Paragraph(b, s['bullet'], bulletText='⋄'))
+
+    flowables.append(Paragraph('Refund procedure — five clicks on Gumroad', s['h3']))
+    for n, txt in [
+        ('1', 'Open Gumroad → Sales → find the order by email or order ID.'),
+        ('2', 'Click <i>Refund</i>. Gumroad reverses the charge and emails the buyer.'),
+        ('3', 'In your seller ledger, set <font face="Courier">status = refunded</font>, paste a one-line note (e.g. "didn’t work for their niche").'),
+        ('4', 'Mark the license key as revoked (Part 4) so any future support ticket quoting that key gets the gentle reply: "I can see this order was refunded. Happy to help still, but the license key isn’t active."'),
+        ('5', 'Update the public seat counter on landing.html if the refunded sale was inside the Founder cohort (e.g. seats remaining goes from 73 back to 74).'),
+    ]:
+        flowables.append(Paragraph(f'<b>Step {n}.</b> {txt}', s['bullet'], bulletText='▸'))
+
+    flowables.append(Paragraph('Abuse detection — patterns to watch', s['h3']))
+    for b in [
+        '<b>Same key, two emails.</b> Resale. Revoke the key and email both addresses.',
+        '<b>Refund-then-redownload.</b> Gumroad already blocks downloads post-refund, but if you used a custom delivery, build the same gate in.',
+        '<b>Bulk purchases from disposable email addresses.</b> Sometimes legitimate (gift cards, agency buying for seats), sometimes credit-card fraud. Gumroad flags most; review unusual orders manually.',
+        '<b>Chargebacks.</b> Always reply to the dispute with the receipt email + license key + download log. Most disputes resolve in your favor with a single screenshot of the buyer downloading the file.',
+    ]:
+        flowables.append(Paragraph(b, s['bullet'], bulletText='▸'))
+
+    flowables.append(Paragraph('Tier upgrade path (Builder → Operator → Studio)', s['h3']))
+    flowables.append(Paragraph(
+        "If a Founder’s buyer asks to upgrade later: don’t build a separate product. Send them a one-time "
+        "Gumroad discount link for <b>(new tier price − amount already paid)</b>. Update their tier in the ledger. "
+        "They keep their original license key — it now maps to the higher tier. Total operator time: ~5 minutes per upgrade.",
+        s['body']))
+
+    # ═══════════════════════════════════════════════════════════════
+    # PART EIGHT — Operational cadence
+    # ═══════════════════════════════════════════════════════════════
+    part('EIGHT', 'Operational Cadence')
+    flowables.append(Paragraph(
+        "Most of the work in selling GEM is the ongoing, low-energy rhythm — not the launch sprint. "
+        "Below is the realistic cadence for a one-person operation past the launch window.", s['body']))
+
+    cadence = [
+        ['Cadence', 'Task', 'Time'],
+        ['Daily', 'Skim Gumroad sales notifications. Triage support inbox.', '5–10 min'],
+        ['Daily', 'Reply to anything blocking a buyer (CORS errors, key questions).', '10–20 min'],
+        ['Weekly', 'Update <font face="Courier">SEATS_REMAINING</font> in <font face="Courier">landing.html</font> as Founder cohort fills.', '2 min'],
+        ['Weekly', 'Sync Gumroad sales into the seller ledger (CSV export).', '10 min'],
+        ['Weekly', 'Ship one piece of organic content (Twitter thread, YouTube short, or blog).', '60–90 min'],
+        ['Monthly', 'Refund the chargebacks worth refunding; dispute the rest.', '15 min'],
+        ['Monthly', 'Tag a release in this repo if you shipped fixes — update <font face="Courier">CHANGELOG-v1.7.md</font> or open <font face="Courier">CHANGELOG-v1.8.md</font>.', '20 min'],
+        ['Monthly', 'Re-run <font face="Courier">scripts/regenerate_pdfs.py</font> if any PDF content changed; bundle new ZIP, re-upload to Gumroad.', '10 min'],
+        ['Quarterly', 'Reconcile payouts. Lemon Squeezy / Gumroad handle the VAT side; you reconcile income tax in your jurisdiction.', '30–60 min'],
+        ['Quarterly', 'Audit the seller ledger for revoked keys still active, stale notes, unsubscribes.', '15 min'],
+        ['As needed', 'Crossed a price-ratchet threshold? Bump price in Gumroad, update landing.html copy, send announce email.', '20 min'],
+    ]
+    cd_data = [[Paragraph(f'<b>{c}</b>' if r == 0 else c, s['small']) for c in row] for r, row in enumerate(cadence)]
+    cd_t = Table(cd_data, colWidths=[1.0*inch, 4.7*inch, 1.0*inch])
+    cd_t.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), FOREST),
+        ('TEXTCOLOR',  (0, 0), (-1, 0), colors.white),
+        ('GRID',       (0, 0), (-1, -1), 0.3, STONE),
+        ('VALIGN',     (0, 0), (-1, -1), 'TOP'),
+        ('LEFTPADDING', (0, 0), (-1, -1), 6),
+        ('RIGHTPADDING',(0, 0), (-1, -1), 6),
+        ('TOPPADDING', (0, 0), (-1, -1), 6),
+        ('BOTTOMPADDING',(0, 0), (-1, -1), 6),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, MIST]),
+    ]))
+    flowables.append(cd_t)
+
+    # ═══════════════════════════════════════════════════════════════
+    # APPENDIX A — Email templates
+    # ═══════════════════════════════════════════════════════════════
+    appendix('A', 'Email Templates')
+    flowables.append(Paragraph(
+        "Paste these into Gumroad’s receipt customizer (template 1) and your email tool (templates 2–4). "
+        "Replace bracketed placeholders. Keep the tone direct and operator-grade — these are not corporate auto-emails.",
+        s['body']))
+
+    flowables.append(Paragraph('Template 1 — Order receipt + license key (T+0)', s['h3']))
+    code_block(
+        "Subject: Your GEM Content Engine download + license key\n"
+        "\n"
+        "Hi {{purchaser_name}},\n"
+        "\n"
+        "Thanks for buying GEM Content Engine — Founder's Edition.\n"
+        "Your license key is below; tuck it somewhere safe.\n"
+        "\n"
+        "    License key: {{license_key}}\n"
+        "    Tier:        Founder's Edition (first 100 buyers)\n"
+        "    Purchased:   {{purchased_at}}\n"
+        "\n"
+        "Download (lifetime re-download from this link):\n"
+        "{{download_url}}\n"
+        "\n"
+        "Two minutes to your first content drop:\n"
+        "  1. Unzip and open gem.html in your browser.\n"
+        "  2. Settings -> paste your Ollama URL or cloud API key.\n"
+        "  3. Hit Generate Content Drop.\n"
+        "\n"
+        "Direct line for Founder's Edition buyers: hello@thegeminfo.com.\n"
+        "Reply to this email anytime.\n"
+        "\n"
+        "-- The GEM team\n"
+        "thegeminfo.com"
+    )
+
+    flowables.append(Paragraph('Template 2 — 24-hour follow-up', s['h3']))
+    code_block(
+        "Subject: Did GEM open OK?\n"
+        "\n"
+        "Hey {{first_name}},\n"
+        "\n"
+        "Yesterday you grabbed GEM Content Engine. Three quick things:\n"
+        "\n"
+        "1. The fastest first run is on Ollama (free, local). If you don't have it,\n"
+        "   the manual's Chapter 3 walks through the 5-minute install.\n"
+        "\n"
+        "2. If you'd rather use a cloud LLM, paste any OpenAI / Anthropic /\n"
+        "   OpenRouter key in Settings. A full pipeline run costs about 2-5 cents.\n"
+        "\n"
+        "3. If something's broken, hit reply. I read every email.\n"
+        "\n"
+        "What I'd love back: one sentence on the first piece of content you ship\n"
+        "with GEM. I'm building the v1.8 roadmap from real feedback.\n"
+        "\n"
+        "-- {{your_first_name}}\n"
+        "GEM Content Engine"
+    )
+
+    flowables.append(Paragraph('Template 3 — Past-refund-window check-in (T+14 days)', s['h3']))
+    code_block(
+        "Subject: 14 days in -- how's GEM treating you?\n"
+        "\n"
+        "Hey {{first_name}},\n"
+        "\n"
+        "Two weeks ago you bought GEM Content Engine.\n"
+        "You're officially past the no-questions refund window -- which means\n"
+        "you've already gotten enough value to keep it (or you forgot we exist;\n"
+        "either is fine).\n"
+        "\n"
+        "If GEM has earned its keep on your channels, would you reply with a\n"
+        "single sentence I can quote on the site? Founder-cohort testimonials\n"
+        "are the most valuable thing I have right now.\n"
+        "\n"
+        "If GEM hasn't earned its keep, tell me why. I'd rather refund you on\n"
+        "day 15 than keep $9 you regret.\n"
+        "\n"
+        "-- {{your_first_name}}"
+    )
+
+    flowables.append(Paragraph('Template 4 — Refund acknowledgment', s['h3']))
+    code_block(
+        "Subject: Refund processed -- GEM Content Engine\n"
+        "\n"
+        "Hi {{first_name}},\n"
+        "\n"
+        "Refund processed via {{merchant_of_record}}; you should see the credit\n"
+        "back on your card within 5-10 business days.\n"
+        "\n"
+        "Your license key ({{license_key}}) is now marked inactive in our records.\n"
+        "Please delete the gem.html file and the user manual from your machine.\n"
+        "\n"
+        "Two quick asks (totally optional):\n"
+        "  - One sentence on what didn't work for you. Helps the next 100 buyers.\n"
+        "  - Permission to email you if v2.0 ships something you'd want.\n"
+        "\n"
+        "Thanks for trying it.\n"
+        "\n"
+        "-- {{your_first_name}}\n"
+        "GEM Content Engine"
+    )
+
+    # ═══════════════════════════════════════════════════════════════
+    # APPENDIX B — Code & scripts
+    # ═══════════════════════════════════════════════════════════════
+    appendix('B', 'Code &amp; Scripts')
+    flowables.append(Paragraph(
+        "Three small scripts that automate the boring parts of fulfillment. Drop into <font face=\"Courier\">scripts/</font> "
+        "alongside <font face=\"Courier\">regenerate_pdfs.py</font>.",
+        s['body']))
+
+    flowables.append(Paragraph('B.1 — Package the buyer ZIP (Bash)', s['h3']))
+    code_block(
+        "# scripts/package_buyer_zip.sh\n"
+        "#!/usr/bin/env bash\n"
+        "set -euo pipefail\n"
+        "VERSION=\"v1.7\"\n"
+        "OUTPUT=\"GEM-Content-Engine-${VERSION}.zip\"\n"
+        "STAGING=\"$(mktemp -d)\"\n"
+        "\n"
+        "cp gem.html \"$STAGING/\"\n"
+        "cp GEM-User-Manual.pdf \"$STAGING/\"\n"
+        "cp dist/WELCOME.md \"$STAGING/\"\n"
+        "cp dist/LICENSE.template.txt \"$STAGING/LICENSE.txt\"\n"
+        "cp dist/CHANGELOG.txt \"$STAGING/\"\n"
+        "\n"
+        "(cd \"$STAGING\" && zip -r \"$OLDPWD/$OUTPUT\" .)\n"
+        "rm -rf \"$STAGING\"\n"
+        "echo \"Built $OUTPUT ($(du -h \"$OUTPUT\" | cut -f1))\""
+    )
+
+    flowables.append(Paragraph('B.2 — Render LICENSE.txt per order (Python)', s['h3']))
+    code_block(
+        "# scripts/render_license.py\n"
+        "import sys, datetime, hmac, hashlib, os\n"
+        "\n"
+        "SECRET = os.environ['GEM_KEYGEN_SECRET'].encode()\n"
+        "\n"
+        "def make_key(order_id):\n"
+        "    raw = hmac.new(SECRET, order_id.encode(), hashlib.sha256).hexdigest()\n"
+        "    return 'GEM-' + '-'.join(raw[i:i+4].upper() for i in (0,4,8,12))\n"
+        "\n"
+        "def render(order_id, email, tier='Founder’s Edition'):\n"
+        "    today = datetime.date.today().isoformat()\n"
+        "    return f'''GEM Content Engine -- License\n"
+        "\n"
+        "License key:    {make_key(order_id)}\n"
+        "Order ID:       {order_id}\n"
+        "Licensee:       {email}\n"
+        "Tier:           {tier}\n"
+        "Purchased:      {today}\n"
+        "Version:        v1.7\n"
+        "\n"
+        "Lifetime license for personal and commercial content creation.\n"
+        "Lifetime updates within the v1.x major version.\n"
+        "Full terms: https://thegeminfo.com/terms.html\n"
+        "'''\n"
+        "\n"
+        "if __name__ == '__main__':\n"
+        "    order_id, email = sys.argv[1], sys.argv[2]\n"
+        "    print(render(order_id, email))"
+    )
+
+    flowables.append(Paragraph('B.3 — Verify a quoted key (Python one-liner)', s['h3']))
+    code_block(
+        "$ python -c \"\\\n"
+        "from scripts.render_license import make_key; \\\n"
+        "import os, sys; \\\n"
+        "print(make_key(sys.argv[1]) == sys.argv[2])\" \\\n"
+        "  gumroad-order-12345  GEM-7B3C-91F0-4A2E-D8B6"
+    )
+
+    flowables.append(Paragraph('Final note', s['h3']))
+    flowables.append(Paragraph(
+        "<i>The playbook above is the steady-state operating manual. The first 100 sales will be messier than this — "
+        "and that’s fine. Founder’s Edition is for the cohort, not the spreadsheet. Once you cross 100 buyers, the "
+        "playbook stops being theoretical and starts running itself.</i>", s['pull']))
+
+    # ═══════════════════════════════════════════════════════════════
+    # BUILD
+    # ═══════════════════════════════════════════════════════════════
+    doc = SimpleDocTemplate(
+        out_path, pagesize=LETTER,
+        leftMargin=0.6*inch, rightMargin=0.6*inch,
+        topMargin=0.8*inch, bottomMargin=0.7*inch,
+        title='GEM Content Engine — Fulfillment Playbook (v1.7)',
+        author='GEM Content Engine',
+    )
+
+    def first_page(c, d):
+        cover_page(c, d,
+            eyebrow='SELLER FULFILLMENT PLAYBOOK · v1.7 · CONFIDENTIAL',
+            title_top='The Fulfillment',
+            title_em='Playbook.',
+            subtitle='From card-charged to activated customer in under ten minutes.\n'
+                     'The seller stack. The activation-key system. The email templates.\n'
+                     'The refund flow. The ongoing cadence.')
+    def later_pages(c, d):
+        header_footer(c, d, title_text='FULFILLMENT PLAYBOOK')
+
+    doc.build(flowables, onFirstPage=first_page, onLaterPages=later_pages)
+
+
 if __name__ == '__main__':
     import os
     base = r'D:\AI_Stuff\Gem_Content_Machine'
     sales = os.path.join(base, 'GEM-Sales-Strategy.pdf')
     manual = os.path.join(base, 'GEM-User-Manual.pdf')
+    playbook = os.path.join(base, 'GEM-Fulfillment-Playbook.pdf')
     print(f'Writing {sales} ...')
     build_sales_strategy(sales)
     print(f'Writing {manual} ...')
     build_user_manual(manual)
+    print(f'Writing {playbook} ...')
+    build_fulfillment_playbook(playbook)
     print('Done.')
