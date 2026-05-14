@@ -1,0 +1,13 @@
+# GEM Content Engine — ads.txt (IAB ads.txt 1.1)
+# https://thegeminfo.com/ads.txt
+#
+# This file authorizes which sellers may sell advertising on this domain.
+# Until Google AdSense (or another network) is activated, no sellers are
+# authorized — meaning no third-party ad inventory should be sold on this
+# domain. Replace the line below with your AdSense publisher ID once you
+# are approved, e.g.:
+#
+#     google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+#
+# Until activation:
+placeholder.example.com, placeholder, DIRECT, placeholder

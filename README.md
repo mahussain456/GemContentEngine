@@ -1,25 +1,36 @@
-# GEM Content Engine — Complete Sales Package (v1.6)
+# GEM Content Engine — Complete Sales Package (v1.7)
 
-**Version 1.6** · One-time purchase AI content generation tool
+**Version 1.7** · One-time purchase AI content generation tool · Founder's Edition $9
 
-This package contains everything you need to use, sell, and scale GEM as a digital product business.
+This package contains everything you need to use, sell, and scale GEM as a digital product business. The live site at [thegeminfo.com](https://thegeminfo.com/) is the source of truth for pricing and positioning.
 
 ---
 
-## 🆕 What's new in v1.6
+## Positioning wedge
+
+GEM leads with **AI, tech, and solo creators** — the niches where trends move daily, the audience wants concrete workflows, and monetization paths are clear. Dogfood on AI Decoded and Tools That Work first, broaden once the Founder cohort produces real case studies.
+
+The defensible product is not generation. It's a repeatable content decision system — Brand voice → Scout trend → Architect structure → Writer draft → Visual prompts → Channel-perfect copy, with a Quality Bar gate between each agent.
+
+---
+
+## 🆕 What's new in v1.7
 
 | Feature | What it does |
 |---------|--------------|
-| **⚡ Trending Mode** | Live scraping of Reddit, HackerNews, Google Trends. Trend Scout uses real viral signals from the internet, not just LLM guesses. |
-| **📷 Photo Post Prompts** | 5 ready-to-paste ChatGPT/DALL-E 3/Imagen prompts per content piece — IG Feed, IG Reel, FB, TikTok, LinkedIn. |
-| **▦ Carousel Post Generator** | Multi-slide IG + LinkedIn carousels with role (Hook/Setup/Reveal/CTA), headline text, and ChatGPT image prompt per slide. |
-| **🎨 Brand Kit (Fixed)** | Color picker now properly works with hex input, native picker, and 8 preset palettes (Forest, Ocean, Sunset, Royal, Rose, Mono, Earth, Mint). |
+| **Quality Bar checks** | Each agent's output is graded against six rules before downstream agents run — one idea, two-second hook, specific examples, on-brand visuals, business-goal CTA, human approval beat. |
+| **Today's Brief sample** | The live page ships a real "AI agents replacing office work" pack so prospects see exactly what GEM hands them on every run. |
+| **Roadmap teaser + voting** | Daily auto-brief, approval workflow, direct publish, and performance loop are now public on the site. Founder's Edition buyers vote on the order. |
+| **FAQ honesty pass** | Trending Mode CORS fallback (Google Trends → r/popular) is documented on the live page, not hidden. |
 
-### Plus all v1.5 features still included:
+### v1.6 features still included
 
+- ⚡ **Trending Mode** — live Reddit / HackerNews / Google Trends signals (with r/popular fallback for Google Trends; CORS-honest disclosure on the site)
+- 📷 **Photo Post Prompts** — 5 per piece, IG Feed / Reel / FB / TikTok / LinkedIn
+- ▦ **Carousel Generator** — multi-slide IG + LinkedIn with role, headline, and image prompt per slide
+- 🎨 **Brand Kit** — fixed color picker with 8 preset palettes (Forest, Ocean, Sunset, Royal, Rose, Mono, Earth, Mint)
 - **My Library** — auto-saved content history
 - **30-Day Calendar** — strategic planning
-- **Brand Kit** — visual identity memory
 - **Tone Presets** — 5 voice styles
 - **Channel Export/Import** — JSON sync
 
@@ -28,90 +39,96 @@ This package contains everything you need to use, sell, and scale GEM as a digit
 ## 📦 What's in this package
 
 ### `gem.html` — The product itself
-228KB single HTML file. Open in browser. Runs locally via Ollama. No installation, no account, no server.
+~330 KB single HTML file. Open in browser. Runs locally via Ollama or any cloud LLM (OpenAI, Anthropic, OpenRouter). No installation, no account, no server.
+
+### `landing.html` — The live sales page
+Mirrors thegeminfo.com. Single-tier Founder's Edition pricing ($9, first 100 buyers; auto-ratchets to $29 → $79 → $149). Sections: Hero · Proof · Problem · Features · Today's Brief sample · Comparison · Quality Bar · Pricing · FAQ · Roadmap · Final CTA.
 
 ### `GEM-User-Manual.pdf` — End-user documentation (8 chapters)
-Hand this to every customer. Now covers all v1.6 features:
+Hand this to every customer. Covers all v1.7 features:
 
 1. Welcome
 2. The Six AI Agents
 3. Setup & Installation
 4. Daily Workflow
-5. Complete Feature Reference (now 17+ asset types)
-6. **Power Features (v1.6)** — Trending Mode, Photo Posts, Carousels, Library, Calendar, Brand Kit, Tone Presets, Export/Import
+5. Complete Feature Reference (17+ asset types)
+6. Power Features — Trending Mode, Photo Posts, Carousels, Library, Calendar, Brand Kit, Tone Presets, Export/Import
 7. Troubleshooting
 8. License & Final Notes
 
-### `GEM-Sales-Strategy.pdf` — Your business blueprint (7 parts)
+### `GEM-Sales-Strategy.pdf` — Business blueprint (7 parts)
 1. Market Positioning
-2. Pricing Strategy (3-tier ladder)
+2. Pricing Strategy
 3. Alternative Pricing Models
 4. How to Sell GEM
 5. Sales Page Copy
-6. Product Roadmap (v1.6 shipped + v1.7 quick wins + v2.0 majors)
+6. Product Roadmap
 7. Revenue Projections
 
----
+> **Note:** The pricing table inside this PDF predates v1.7 and may still show the legacy `$97 / $197 / $497` ladder. The live site's `$9 → $29 → $79 → $149` ladder is the source of truth. Update the PDF on the next packaging pass.
 
-## 🚀 Quick Start (For You)
-
-1. **Test the product:**
-   - Open `gem.html` in your browser
-   - Configure Ollama → add a test channel
-   - Try **Trending Mode** toggle on launch screen
-   - Visit Brand Kit → try the new color picker
-   - Run pipeline → review Photo Posts and Carousels tabs in Visual Director output
-
-2. **Read both PDFs** to understand what you're selling
-
-3. **Set up sales:** Gumroad/Lemon Squeezy product page using copy from Sales Strategy PDF
-
-4. **Bundle:** Customers get `gem.html` + `GEM-User-Manual.pdf`
-
-5. **Price it:** $197 launch (Professional tier)
+### Plus
+`GEM-Launch-Playbook.html`, `GEM-30-Day-Marketing-Push.html`, `GEM-Brand-Guide.html`, `GEM-Deploy-GitHub-Vercel.html`, full branding ZIP, sitemap.xml, robots.txt.
 
 ---
 
-## 💰 Recommended Pricing
+## 🚀 Quick Start (for you)
 
-| Tier | Price | Includes |
-|------|-------|----------|
-| **Personal** | $97 | gem.html + user manual + 30-day support |
-| **Professional** ★ | $197 | + Unlimited channels + commercial license + Discord |
-| **Agency** | $497 | + 5 team seats + white-label + setup call |
-
----
-
-## 📈 Revenue Math
-
-At **$197 average** with **95% margin**, you only need **50 sales/month** to clear **$100K+/year in profit** (~1.7 sales/day).
-
-The new v1.6 trending mode and ChatGPT carousel features are **massively demoable** — show the trending toggle pulling real Reddit posts, then watch carousel slides generate. That's a winning Twitter/YouTube hook.
+1. Open `landing.html` in a browser — review the live sales page locally
+2. Open `gem.html` in the same browser session — try Ollama first, then a cloud key
+3. Run a full pipeline on the AI / tech niche to see the Quality Bar in action
+4. Hook up Gumroad or Lemon Squeezy with the $9 Founder's Edition SKU (URL already wired in landing.html: `https://gumroad.com/l/gem-founder`)
+5. Manually update `SEATS_REMAINING` at the bottom of `landing.html` as sales come in
 
 ---
 
-## 🎯 v1.6 Marketing Hook
+## 💰 Pricing — matches landing.html
 
-> "GEM scrapes the internet for what's trending — Reddit, HackerNews, Google Trends — and turns it into a complete content package. Six AI agents. Master prompts for Midjourney, DALL-E 3, and Kling AI. Photo posts and carousels for every platform. One purchase. Forever."
+| Tier | Price | When |
+|------|-------|------|
+| **Founder's Edition** ★ | $9 once · lifetime | First 100 buyers — **current** |
+| Builder | $29 once · lifetime | Sales 101–500 |
+| Operator | $79 once · lifetime | Sales 501–2000 |
+| Studio | $149 once · lifetime | After 2000 sales |
+
+All tiers are one-time purchase with lifetime updates. Higher tiers from the legacy Sales Strategy PDF (`Personal / Professional / Agency` at `$97 / $197 / $497`) are **not active** on the live site.
 
 ---
 
-## 📁 File Sizes
+## 📈 Revenue math (honest)
+
+The Founder's Edition is a deliberate loss-leader for feedback. Math compounds once price ratchets:
+
+- **100 founders × $9** = $900 (cohort-builder)
+- **400 builders × $29** = $11,600
+- **1500 operators × $79** = $118,500
+- **2000 studios × $149** = $298,000
+
+Cumulative ceiling: **~$429K gross** over the four price tiers at ~95% margin. Real-world conversion will be lower — the point is to keep the ladder honest and the feedback channel open.
+
+---
+
+## 🎯 v1.7 marketing hook
+
+> "GEM ships a complete content drop in 90 seconds — script, image prompts, video prompts, carousels, captions — for every channel. Six AI agents. One purchase. Forever. The first 100 founders set the roadmap."
+
+---
+
+## 📁 File sizes
 
 | File | Size |
 |------|------|
-| `gem.html` | ~228 KB |
+| `gem.html` | ~330 KB |
+| `landing.html` | ~62 KB |
 | `GEM-User-Manual.pdf` | ~33 KB |
 | `GEM-Sales-Strategy.pdf` | ~27 KB |
 
-Total under 290 KB.
+---
+
+## ⚠️ Trending Mode — honest disclosure
+
+Reddit and HackerNews work directly from the browser (CORS-friendly). Google Trends has stricter CORS — GEM falls back to using `r/popular` as the trending proxy. This is documented in the User Manual **and** surfaced in the live FAQ ("How does Scout pull trends — and where does it fall short?"). Power users can run a one-line local proxy for unrestricted Google Trends data, but the default works for 95% of users out of the box.
 
 ---
 
-## ⚠️ Important note on Trending Mode
-
-Reddit and HackerNews work directly from the browser (CORS-friendly). Google Trends has stricter CORS — GEM falls back to using r/popular as the trending proxy. This is documented in the user manual. Power users can run a 1-line proxy if they want unrestricted trending data, but the default works for 95% of users out of the box.
-
----
-
-**Ship it.** The market is waiting.
+**Ship it.** The wedge is AI & tech creators first; broaden once Founder cohort produces real case studies.

@@ -355,3 +355,59 @@ D:\AI_Stuff\Gem_Content_Machine\
 *Generated as a complete record of the build session that took GEM from v1.6 to v1.7-launch-ready.*
 
 *GEM Content Engine · v1.7 · thegeminfo.com · 2026*
+
+---
+
+## Addendum — 2026-05-13 · v1.7 production-ready pass (SEO / AEO / AdSense)
+
+A second pass that converted the v1.7 release from "alignment-only" to "indexable, citable, AdSense-approvable."
+
+### Landing page (`landing.html`)
+- New section: **Today's Brief sample** (AI / tech niche pack) between Features and Compare.
+- New section: **Quality Bar** (six rules every drop must clear) between Compare and Pricing.
+- New section: **Roadmap teaser** (daily auto-brief, approval workflow, direct publish, performance loop) between FAQ and Final CTA.
+- New hero credibility byline referencing AI Decoded and Tools That Work.
+- Comparison row pricing fixed: legacy `$197 once` → `$9 once · lifetime`.
+- FAQ patched: removed orphaned "Professional and Agency tiers" mention; added honest Trending Mode CORS / r/popular disclosure; added roadmap Q.
+- Header nav extended (`Sample`, `Roadmap`) with a new `@media (max-width: 1139px)` rule hiding the full nav until viewport ≥ 1140 px to avoid intermediate-width wrap.
+- `.btn` updated with `white-space:nowrap` so CTAs never break.
+- Footer rebuilt to include About / Terms / Privacy / Contact, with a redundant Privacy/Terms strip in the copyright row.
+
+### Structured data
+- Existing `Organization` + `WebSite` + `SoftwareApplication` + `FAQPage` + `BreadcrumbList` kept.
+- Added **`HowTo`** schema for the five-step Ollama setup (with `totalTime`, `supply`, `tool`, `step` array) so AI assistants and Google can cite setup steps directly.
+- Added **`ContactPoint`** entries on the Organization (general, privacy, legal).
+- Added **`WebPage`** entries for `/about.html`, `/privacy.html`, `/terms.html`.
+- FAQ schema gained two entries: Scout/Trending Mode honest disclosure, and Roadmap.
+
+### New pages
+- `privacy.html` — full privacy policy (GDPR / UK GDPR / CCPA, AdSense disclosure, third-party services, cookies, data retention, children's privacy). 13-section TOC. Brand-matched.
+- `terms.html` — full terms of service (license grant, restrictions, output ownership, third-party AI providers, payments / refunds / taxes, warranty disclaimer, limitation of liability, indemnification, governing law). 16-section TOC. Brand-matched.
+- `about.html` — about + contact in one page (mission, who builds GEM, dogfooding statement, principles, four-channel contact grid). Brand-matched. Carries `AboutPage` + `ContactPage` + `Organization` JSON-LD.
+
+### SEO / crawl files
+- `robots.txt` — added `Mediapartners-Google` (AdSense crawler), `Google-Extended`, AEO crawlers (`GPTBot`, `ChatGPT-User`, `OAI-SearchBot`, `PerplexityBot`, `ClaudeBot`, `anthropic-ai`, `Applebot-Extended`, `cohere-ai`). Added `Allow:` for new pages; explicitly disallowed `/scripts/`, `/Pitch_Deck/`, `CONVERSATION-LOG.md`, `CHANGELOG-v1.7.md`.
+- `sitemap.xml` — added `/about.html`, `/privacy.html`, `/terms.html` + the new `#sample`, `#quality`, `#roadmap` anchors. All `lastmod` set to 2026-05-13.
+- `ads.txt` — placeholder file at the domain root (replace with the real `pub-XXXXXXXXXXXXXXXX` line once Google AdSense approval lands).
+
+### PDFs (regenerated at v1.7)
+- `GEM-Sales-Strategy.pdf` — full 8-page regeneration via `scripts/regenerate_pdfs.py` (reportlab). Replaces legacy `$97 / $197 / $497` table with the live `$9 → $29 → $79 → $149` ladder. Updated competitor analysis, alternative pricing models, sales-page copy, v1.7 roadmap, and revenue projections that now compute the ladder honestly (cumulative ceiling ~$429 K gross across the four rungs).
+- `GEM-User-Manual.pdf` — full 11-page regeneration at v1.7. Added the Quality Bar to Chapter 6 (Power Features), surfaced the Trending Mode CORS fallback in Chapter 7 (Troubleshooting), updated comparison table to remove the legacy pricing, and updated the license chapter to reference the Founder's Edition.
+
+### Ancillary docs
+- `GEM-Launch-Playbook.html` — cover meta updated to v1.7 with explicit `$9 → $149` ladder framing. Strategic content (which already argues against the legacy $197 anchor) preserved.
+- `GEM-30-Day-Marketing-Push.html` — cover meta + footer wordmark bumped to v1.7. HighLevel comparison tables left intact (they reference HighLevel's pricing, not GEM's).
+- `files/README.md` — replaced with a stale-duplicate notice pointing at the root README.
+
+### Production-readiness checklist
+- ✓ Single H1 per page, clean H2 → H3 hierarchy on every page.
+- ✓ All images either inline SVG with `role="img"` + `aria-label`, or fully decorative (`aria-hidden="true"`).
+- ✓ Canonical tags on every public page.
+- ✓ Open Graph + Twitter Card on every public page.
+- ✓ JSON-LD on every public page.
+- ✓ Mobile viewport meta + responsive CSS verified at 375 / 1024 / 1280.
+- ✓ Sticky header with skip-link for keyboard users.
+- ✓ External links to Google ad settings / aboutads.info use `rel="noopener" target="_blank"`.
+- ✓ Console clean (zero errors during sectional walkthrough).
+- ✓ All pricing on public pages is `$9 / $29 / $79 / $149`. Zero legacy `$97 / $197 / $497` references in indexable assets.
+

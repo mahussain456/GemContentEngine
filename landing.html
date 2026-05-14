@@ -6,7 +6,7 @@
 
 <!-- ─── Primary SEO ─── -->
 <title>GEM Content Engine | Six AI Agents That Replace Your Content Stack — $9 Lifetime</title>
-<meta name="description" content="GEM is a six-agent AI content engine that turns one idea into a complete drop — script, image prompts, video prompts, captions, hashtags, carousels — for YouTube, Instagram, Facebook, and your blog. One HTML file. One purchase. $9 Founder's Edition (first 100 buyers).">
+<meta name="description" content="GEM is a six-agent AI content engine built for AI, tech, and solo creators — turns one idea into a complete content drop (script, image prompts, video prompts, captions, hashtags, carousels) for YouTube, Instagram, Facebook, and your blog. One HTML file. One purchase. $9 Founder's Edition (first 100 buyers).">
 <meta name="keywords" content="AI content generator, content marketing tool, AI writing software, social media content, YouTube script generator, Instagram caption generator, Midjourney prompt generator, Kling AI prompts, content automation, solopreneur tools, indie maker tools, multi-agent AI, ChatGPT alternative, Jasper alternative, Copy.ai alternative, AI for creators, lifetime AI tool, Ollama tools, OpenAI tools, Claude tools">
 <meta name="author" content="GEM Content Engine">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -86,7 +86,12 @@
       },
       "description": "GEM is a six-agent AI content engine that turns one idea into a complete content drop for every channel.",
       "foundingDate": "2026",
-      "sameAs": []
+      "sameAs": [],
+      "contactPoint": [
+        {"@type": "ContactPoint", "email": "hello@thegeminfo.com", "contactType": "customer support", "availableLanguage": ["en"]},
+        {"@type": "ContactPoint", "email": "privacy@thegeminfo.com", "contactType": "privacy", "availableLanguage": ["en"]},
+        {"@type": "ContactPoint", "email": "legal@thegeminfo.com", "contactType": "legal", "availableLanguage": ["en"]}
+      ]
     },
     {
       "@type": "WebSite",
@@ -143,7 +148,9 @@
         {"@type": "Question", "name": "Is my content private when using GEM?", "acceptedAnswer": {"@type": "Answer", "text": "In Ollama mode, your data never leaves your computer. In cloud mode, your prompts go to whichever provider you chose (OpenAI, Anthropic, OpenRouter) — same as if you used ChatGPT directly. GEM itself has no server. We never see your work."}},
         {"@type": "Question", "name": "Can I use GEM for client work?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — Founder's Edition includes a commercial-use license. Use the output for your own clients, your own brand, or your own products."}},
         {"@type": "Question", "name": "What is the difference between GEM and ChatGPT alone?", "acceptedAnswer": {"@type": "Answer", "text": "ChatGPT is a generalist with a blank prompt. GEM is six specialist agents with locked schemas — Brand, Scout, Architect, Writer, Visual Director, Channel Adapter — each with its own system prompt, output validation, and downstream handoff. The result is a complete content drop in 90 seconds, not a Slack thread of follow-up prompts."}},
-        {"@type": "Question", "name": "Why is GEM only $9?", "acceptedAnswer": {"@type": "Answer", "text": "I am building GEM in public and the first 100 buyers are worth more to me as conversation partners than as revenue. Each Founder gets direct access to me for feedback. Once we hit 100 sales the price goes to $29, then $79, then $149."}}
+        {"@type": "Question", "name": "Why is GEM only $9?", "acceptedAnswer": {"@type": "Answer", "text": "I am building GEM in public and the first 100 buyers are worth more to me as conversation partners than as revenue. Each Founder gets direct access to me for feedback. Once we hit 100 sales the price goes to $29, then $79, then $149."}},
+        {"@type": "Question", "name": "How does Scout pull trends, and where does it fall short?", "acceptedAnswer": {"@type": "Answer", "text": "Scout pulls live signals from Reddit and HackerNews directly in your browser (CORS-friendly). Google Trends has stricter CORS, so by default Scout falls back to r/popular as a trending proxy, which covers 95% of niches well. If you want unrestricted Google Trends data, you can run a one-line local proxy documented in the User Manual. The point is: you always know exactly what Scout is reading."}},
+        {"@type": "Question", "name": "What is on the GEM roadmap?", "acceptedAnswer": {"@type": "Answer", "text": "Founder's Edition buyers vote on what ships next. The bigger modules in development are a daily auto-brief tailored to your niche, an approve/edit/regenerate/reject workflow with version history, direct publish to Buffer/Later/Meta, and a performance loop where yesterday's winners feed tomorrow's brief. Lifetime updates means every release lands at no extra cost."}}
       ]
     },
     {
@@ -153,6 +160,50 @@
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://thegeminfo.com/"},
         {"@type": "ListItem", "position": 2, "name": "Try Demo", "item": "https://thegeminfo.com/app/"}
       ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://thegeminfo.com/#howto-setup",
+      "name": "Set up GEM Content Engine in five steps",
+      "description": "Install Ollama, pull a model, enable CORS, open gem.html, and add your channels. Total time about 10 minutes.",
+      "totalTime": "PT10M",
+      "supply": [
+        {"@type": "HowToSupply", "name": "8 GB RAM minimum (16 GB+ recommended for 14B models)"},
+        {"@type": "HowToSupply", "name": "10 GB free disk for the Ollama model"},
+        {"@type": "HowToSupply", "name": "Modern browser (Chrome 100+ / Firefox 100+ / Edge)"}
+      ],
+      "tool": [
+        {"@type": "HowToTool", "name": "Ollama"},
+        {"@type": "HowToTool", "name": "GEM Content Engine (gem.html)"}
+      ],
+      "step": [
+        {"@type": "HowToStep", "position": 1, "name": "Install Ollama", "text": "Download Ollama from ollama.ai for your platform. On macOS or Linux, run: curl -fsSL https://ollama.ai/install.sh | sh", "url": "https://thegeminfo.com/#how"},
+        {"@type": "HowToStep", "position": 2, "name": "Pull a model", "text": "For 16GB+ systems, run: ollama pull qwen2.5:14b. For 8GB systems, use qwen2.5:7b.", "url": "https://thegeminfo.com/#how"},
+        {"@type": "HowToStep", "position": 3, "name": "Start Ollama with CORS", "text": "Open a terminal and run: OLLAMA_ORIGINS=\"*\" ollama serve. This lets the GEM browser interface talk to Ollama.", "url": "https://thegeminfo.com/#how"},
+        {"@type": "HowToStep", "position": 4, "name": "Open GEM", "text": "Double-click gem.html. In Settings, paste http://localhost:11434, pick your model, click Test Connection. Green dot means success.", "url": "https://thegeminfo.com/#how"},
+        {"@type": "HowToStep", "position": 5, "name": "Add your channels", "text": "In the left sidebar, click Add Channel for each YouTube, Facebook, Instagram, or blog you manage. Channels live in your browser only.", "url": "https://thegeminfo.com/#how"}
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://thegeminfo.com/privacy.html",
+      "url": "https://thegeminfo.com/privacy.html",
+      "name": "Privacy Policy — GEM Content Engine",
+      "isPartOf": {"@id": "https://thegeminfo.com/#website"}
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://thegeminfo.com/terms.html",
+      "url": "https://thegeminfo.com/terms.html",
+      "name": "Terms of Service — GEM Content Engine",
+      "isPartOf": {"@id": "https://thegeminfo.com/#website"}
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://thegeminfo.com/about.html",
+      "url": "https://thegeminfo.com/about.html",
+      "name": "About & Contact — GEM Content Engine",
+      "isPartOf": {"@id": "https://thegeminfo.com/#website"}
     }
   ]
 }
@@ -199,7 +250,7 @@ img,svg{display:block;max-width:100%}
 .nav{display:flex;align-items:center;gap:24px}
 .nav a{font-size:13px;color:var(--t2);font-weight:500;transition:.15s}
 .nav a:hover{color:var(--g1)}
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:8px;border:1.5px solid transparent;cursor:pointer;transition:.18s;text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:8px;border:1.5px solid transparent;cursor:pointer;transition:.18s;text-decoration:none;white-space:nowrap}
 .btn-primary{background:var(--g1);color:#fff;box-shadow:0 2px 10px rgba(26,56,40,.22)}
 .btn-primary:hover{background:var(--g0);transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,56,40,.32)}
 .btn-ghost{background:transparent;color:var(--g1);border-color:var(--g3)}
@@ -331,8 +382,10 @@ img,svg{display:block;max-width:100%}
 .proof-inner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:32px;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--g2);font-weight:600}
 .proof-divider{color:var(--g4);opacity:.5}
 
-@media (max-width: 760px){
+@media (max-width: 1139px){
   .nav{display:none}
+}
+@media (max-width: 760px){
   .feature{grid-template-columns:1fr;gap:32px;margin-bottom:80px}
   .feature:nth-child(even){grid-template-columns:1fr}
   .feature:nth-child(even) .feature-text{order:initial}
@@ -379,8 +432,10 @@ img,svg{display:block;max-width:100%}
     <nav class="nav" aria-label="Primary">
       <a href="#how">How it works</a>
       <a href="#features">Features</a>
+      <a href="#sample">Sample</a>
       <a href="#compare">Compare</a>
       <a href="#pricing">Pricing</a>
+      <a href="#roadmap">Roadmap</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div style="display:flex;gap:10px;align-items:center">
@@ -403,6 +458,7 @@ img,svg{display:block;max-width:100%}
       <a href="app/" class="btn btn-ghost btn-lg">▶ Try the demo first</a>
     </div>
     <div class="cta-mini">One-time payment · No subscription · <strong>Lifetime updates</strong> · Instant download</div>
+    <div class="cta-mini" style="margin-top:8px">Built by the operator behind <strong>AI Decoded</strong> &amp; <strong>Tools That Work</strong> — dogfooded on real channels before you ever see it.</div>
 
     <!-- Hero showcase card -->
     <div class="hero-card">
@@ -548,6 +604,42 @@ img,svg{display:block;max-width:100%}
   </div>
 </section>
 
+<!-- ───── DAILY BRIEF SAMPLE ───── -->
+<section class="section" id="sample" style="padding-top:0" aria-labelledby="sample-h2">
+  <div class="wrap">
+    <div class="section-eyebrow">A real run, today</div>
+    <h2 class="h2" id="sample-h2">What GEM hands you when you sit down to <em>actually publish</em>.</h2>
+    <p class="section-lede">One trend in. A full pack out — sized for the AI &amp; tech creator wedge, where ideas move daily and audiences want concrete workflows, not vibes.</p>
+
+    <div class="feature">
+      <div class="feature-text">
+        <h3 class="h3">Today's pack: <em>AI agents replacing office work</em>.</h3>
+        <p>Pulled by Scout, framed by Architect, drafted by Writer, illustrated by Visual, and adapted per platform — no follow-up prompts, no "tighten this for me," no Slack thread of regenerations.</p>
+        <ul class="feature-list">
+          <li><strong>Audience pain</strong> — people hear about AI agents but don't know what to automate first</li>
+          <li><strong>Hook</strong> — "Stop using AI like Google. Use it like an employee."</li>
+          <li><strong>Carousel angle</strong> — 5 boring tasks AI agents can handle today</li>
+          <li><strong>CTA</strong> — Comment "agent" and I'll share the beginner workflow</li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div class="fv-card">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="fv-pill">◯ Scout · Trend</span><span style="font-size:10.5px;color:var(--g2);font-weight:600">Viral score: 88%</span></div>
+          <div class="fv-mini">AI agents replacing repetitive office work — high search velocity, low creator saturation, strong monetization fit for AI &amp; SaaS audiences.</div>
+        </div>
+        <div class="fv-card">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="fv-pill" style="background:#FFE4E4;color:#CC0000">▶ YouTube Short</span><span style="font-size:10.5px;color:var(--t3);margin-left:auto">60s</span></div>
+          <div class="fv-mini">Beginner explainer with one clear automation example — inbox triage to first-draft response in 90 seconds. Hook · proof · CTA.</div>
+        </div>
+        <div class="fv-card">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="fv-pill" style="background:#FCE7F3;color:#BE185D">◉ IG Carousel</span><span style="font-size:10.5px;color:var(--t3);margin-left:auto">5 slides</span></div>
+          <div class="fv-mini">"5 boring tasks AI agents can handle today" — hook · setup · 3 examples · CTA. Image prompt per slide.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ───── COMPARISON ───── -->
 <section class="section" id="compare" style="padding-top:0" aria-labelledby="compare-h2">
   <div class="wrap">
@@ -563,7 +655,7 @@ img,svg{display:block;max-width:100%}
         <div class="cc">Copy.ai</div>
         <div class="cc">ChatGPT alone</div>
       </div>
-      <div class="compare-row"><div class="cc label">Pricing model</div><div class="cc us">$197 once</div><div class="cc">$49+/mo</div><div class="cc">$49+/mo</div><div class="cc">$20/mo</div></div>
+      <div class="compare-row"><div class="cc label">Pricing model</div><div class="cc us">$9 once · lifetime</div><div class="cc">$49+/mo</div><div class="cc">$49+/mo</div><div class="cc">$20/mo</div></div>
       <div class="compare-row"><div class="cc label">Multi-agent pipeline</div><div class="cc us"><span class="check">✓</span></div><div class="cc"><span class="x">—</span></div><div class="cc"><span class="x">—</span></div><div class="cc"><span class="x">—</span></div></div>
       <div class="compare-row"><div class="cc label">Image prompts (MJ + DALL-E + FLUX)</div><div class="cc us"><span class="check">✓</span></div><div class="cc"><span class="x">Partial</span></div><div class="cc"><span class="x">—</span></div><div class="cc"><span class="x">DALL-E only</span></div></div>
       <div class="compare-row"><div class="cc label">Video scene prompts (Kling / RunwayML)</div><div class="cc us"><span class="check">✓</span></div><div class="cc"><span class="x">—</span></div><div class="cc"><span class="x">—</span></div><div class="cc"><span class="x">—</span></div></div>
@@ -572,6 +664,24 @@ img,svg{display:block;max-width:100%}
       <div class="compare-row"><div class="cc label">100% local / private mode</div><div class="cc us"><span class="check">Ollama ✓</span></div><div class="cc"><span class="x">—</span></div><div class="cc"><span class="x">—</span></div><div class="cc"><span class="x">—</span></div></div>
       <div class="compare-row"><div class="cc label">Bring your own LLM</div><div class="cc us"><span class="check">✓</span></div><div class="cc"><span class="x">—</span></div><div class="cc"><span class="x">—</span></div><div class="cc"><span class="x">N/A</span></div></div>
       <div class="compare-row"><div class="cc label">Designer-grade PDF export</div><div class="cc us"><span class="check">✓</span></div><div class="cc"><span class="x">—</span></div><div class="cc"><span class="x">—</span></div><div class="cc"><span class="x">—</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── QUALITY BAR ───── -->
+<section class="section" id="quality" style="padding-top:0" aria-labelledby="quality-h2">
+  <div class="wrap">
+    <div class="section-eyebrow">The quality bar</div>
+    <h2 class="h2" id="quality-h2">Six rules every drop must <em>actually clear</em>.</h2>
+    <p class="section-lede">Most AI tools fail by shipping average content faster. GEM's pipeline is wired to refuse the obvious filler — each agent's output is graded against the bar below before the next agent runs.</p>
+
+    <div class="problem-grid" style="grid-template-columns:repeat(auto-fit,minmax(310px,1fr))">
+      <div class="problem"><div class="problem-num">i.</div><div class="problem-h">One clear idea per post</div><div class="problem-p">If the post tries to say three things, it says nothing. Architect picks one angle and kills the rest.</div></div>
+      <div class="problem"><div class="problem-num">ii.</div><div class="problem-h">A two-second hook</div><div class="problem-p">Curiosity, tension, or a contrarian frame in the first line. No "in today's video," no warm-up filler.</div></div>
+      <div class="problem"><div class="problem-num">iii.</div><div class="problem-h">Specific examples, not generic advice</div><div class="problem-p">Real numbers, real workflows, real tools. Writer rejects its own draft when it goes vague.</div></div>
+      <div class="problem"><div class="problem-num">iv.</div><div class="problem-h">Visuals that match the brand</div><div class="problem-p">Brand voice flows into every Midjourney, DALL-E, and FLUX prompt — no random AI art slop.</div></div>
+      <div class="problem"><div class="problem-num">v.</div><div class="problem-h">A CTA tied to the business goal</div><div class="problem-p">Not "follow for more." Save, share, reply, comment, or click — picked per channel, per intent.</div></div>
+      <div class="problem"><div class="problem-num">vi.</div><div class="problem-h">A human approval beat</div><div class="problem-p">Pipeline output is a draft, not a publish. You always read and edit before anything ships.</div></div>
     </div>
   </div>
 </section>
@@ -639,7 +749,13 @@ img,svg{display:block;max-width:100%}
         <div class="faq-a">In Ollama mode, your data never leaves your computer. In cloud mode, your prompts go to whichever provider you chose (OpenAI, Anthropic, OpenRouter) — same as if you used ChatGPT directly. GEM itself has no server. We never see your work.</div>
       </details>
       <details class="faq-item"><summary class="faq-q">Can I use it for client work?</summary>
-        <div class="faq-a">Yes — Professional and Agency tiers include a commercial-use license. Agency tier adds white-label rebranding so you can ship GEM to clients under your own name.</div>
+        <div class="faq-a">Yes — Founder's Edition includes a commercial-use license. Use the output for your own clients, your own brand, or your own products. White-label rebranding is on the roadmap for higher tiers once GEM ships its team features.</div>
+      </details>
+      <details class="faq-item"><summary class="faq-q">How does Scout pull trends — and where does it fall short?</summary>
+        <div class="faq-a">Scout pulls live signals from Reddit and HackerNews directly in your browser (CORS-friendly). Google Trends has stricter CORS, so by default Scout falls back to <code style="font-family:var(--mono);font-size:13px;background:var(--g7);padding:1px 6px;border-radius:4px;color:var(--g1)">r/popular</code> as a trending proxy — covers 95% of niches well. If you want unrestricted Google Trends data, run a one-line local proxy (documented in the User Manual). The point: you always know exactly what Scout is reading.</div>
+      </details>
+      <details class="faq-item"><summary class="faq-q">What's on the roadmap after I buy?</summary>
+        <div class="faq-a">Founder's Edition buyers vote on what ships next. The bigger workflow modules in development: a daily auto-brief tailored to your niche, an approve/edit/regenerate/reject workflow with version history, direct publish to Buffer/Later/Meta, and a performance loop where yesterday's winners feed tomorrow's brief. Lifetime updates means every release lands at no extra cost.</div>
       </details>
       <details class="faq-item"><summary class="faq-q">What's the difference vs. ChatGPT alone?</summary>
         <div class="faq-a">ChatGPT is a generalist with a blank prompt. GEM is six specialist agents with locked schemas — Brand, Scout, Architect, Writer, Visual Director, Channel Adapter — each with its own system prompt, output validation, and downstream handoff. The result is a complete content drop in 90 seconds, not a Slack thread of follow-up prompts.</div>
@@ -650,6 +766,22 @@ img,svg{display:block;max-width:100%}
       <details class="faq-item"><summary class="faq-q">Why so cheap?</summary>
         <div class="faq-a">Honestly: I'm building GEM in public and the first 100 buyers are worth more to me as conversation partners than as revenue. Each Founder gets direct access to me for feedback. Once we hit 100 sales the price goes to $29, then $79, then $149.</div>
       </details>
+    </div>
+  </div>
+</section>
+
+<!-- ───── ROADMAP / WHAT'S NEXT ───── -->
+<section class="section" id="roadmap" style="padding-top:0" aria-labelledby="roadmap-h2">
+  <div class="wrap" style="text-align:center">
+    <div class="section-eyebrow" style="display:inline-block">What's next</div>
+    <h2 class="h2" id="roadmap-h2" style="margin-left:auto;margin-right:auto">Founders shape the <em>roadmap</em>.</h2>
+    <p class="section-lede" style="margin-left:auto;margin-right:auto">Founder's Edition buyers vote on what ships next. Lifetime updates means every release lands in your inbox at no extra cost — including the workflow modules below.</p>
+
+    <div class="problem-grid" style="text-align:left">
+      <div class="problem"><div class="problem-num">→</div><div class="problem-h">Daily auto-brief</div><div class="problem-p">A ranked daily content brief tailored to your niche, audience, and competitors — delivered every morning.</div></div>
+      <div class="problem"><div class="problem-num">→</div><div class="problem-h">Approval workflow</div><div class="problem-p">Approve, edit, regenerate, or reject each asset. Version history baked in.</div></div>
+      <div class="problem"><div class="problem-num">→</div><div class="problem-h">Direct publish &amp; schedule</div><div class="problem-p">Push approved drops to Buffer, Later, and Meta — no copy-paste round trip.</div></div>
+      <div class="problem"><div class="problem-num">→</div><div class="problem-h">Performance loop</div><div class="problem-p">Wins from yesterday feed tomorrow's brief. The pipeline learns what your audience actually saves.</div></div>
     </div>
   </div>
 </section>
@@ -705,9 +837,13 @@ img,svg{display:block;max-width:100%}
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
       <a href="app/">Try Demo</a>
+      <a href="about.html">About</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:hello@thegeminfo.com">Contact</a>
     </div>
   </div>
-  <div class="footer-bottom">© 2026 GEM Content Engine · thegeminfo.com · One purchase, forever yours</div>
+  <div class="footer-bottom">© 2026 GEM Content Engine · thegeminfo.com · One purchase, forever yours · <a href="privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="terms.html" style="color:inherit;text-decoration:underline">Terms</a></div>
 </footer>
 
 <script>

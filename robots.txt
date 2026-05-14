@@ -1,20 +1,29 @@
 # GEM Content Engine — robots.txt
 # https://thegeminfo.com
 
+# ─── Default ──────────────────────────────────────────────
 User-agent: *
 Allow: /
 Allow: /app/
 Allow: /assets/
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /about.html
 
 # Block crawler access to internal/working files
 Disallow: /.claude/
 Disallow: /files/
 Disallow: /files1.6/
+Disallow: /scripts/
+Disallow: /Pitch_Deck/
+Disallow: /GEM_Content_Engine_Complete_Branding_Package/
 Disallow: /*.zip$
 Disallow: /*.mp4$
 Disallow: /gem.original.html
+Disallow: /CONVERSATION-LOG.md
+Disallow: /CHANGELOG-v1.7.md
 
-# Allow Google's specialized crawlers full access
+# ─── Google ───────────────────────────────────────────────
 User-agent: Googlebot
 Allow: /
 
@@ -24,11 +33,50 @@ Allow: /assets/
 User-agent: Googlebot-Mobile
 Allow: /
 
-# Allow Bing
+# AdSense crawler — must be allowed for ads to serve correctly
+User-agent: Mediapartners-Google
+Allow: /
+
+# Google's AI training crawler — allow for AEO citation
+User-agent: Google-Extended
+Allow: /
+
+# ─── Bing ─────────────────────────────────────────────────
 User-agent: Bingbot
 Allow: /
 
-# Block known scrapers and bad bots
+User-agent: BingPreview
+Allow: /
+
+# ─── AI / AEO crawlers (allow for citation in AI answers) ─
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# ─── Block known scrapers and SEO-tool bots ───────────────
 User-agent: AhrefsBot
 Disallow: /
 
@@ -41,5 +89,14 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
-# Sitemap location
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+# ─── Sitemap ──────────────────────────────────────────────
 Sitemap: https://thegeminfo.com/sitemap.xml
