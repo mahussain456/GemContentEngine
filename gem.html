@@ -666,7 +666,8 @@ body{
 .hoff-arr{font-size:10px;color:var(--t5)}
 .hoff-lab{font-size:9px;font-family:var(--mono);color:var(--t5);margin-left:auto;text-transform:uppercase;letter-spacing:.1em}
 
-.act-report{border-radius:var(--r);border:1px solid var(--s4);overflow:hidden;margin-bottom:5px;animation:aSlide .25s ease both}
+.act-report{border-radius:var(--r);border:1px solid var(--s4);overflow:hidden;margin-bottom:5px;animation:aSlide .25s ease both;cursor:help;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.act-report:hover{transform:translateX(-2px);box-shadow:0 4px 14px rgba(0,0,0,.08);border-color:var(--s5,#bcb6a7)}
 .ar-head{padding:6px 10px;display:flex;justify-content:space-between;align-items:center}
 .ar-agent{font-size:9.5px;font-weight:700;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em}
 .ar-label{font-size:9px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;color:rgba(26,21,16,.25)}
@@ -676,6 +677,19 @@ body{
 .ar-k{font-size:9.5px;font-family:var(--mono);color:var(--t5);text-transform:uppercase;letter-spacing:.06em}
 .ar-v{font-size:9.5px;font-family:var(--mono);color:var(--t1)}
 .ar-v.ok{color:var(--ok)}.ar-v.w{color:var(--warn)}.ar-v.hi{color:var(--g2)}
+
+/* Hover-card popover for act-report tiles — shows full untruncated content */
+.gem-hover-card{position:fixed;z-index:300;background:var(--w);border:1px solid var(--s3);border-radius:var(--r3);box-shadow:0 10px 36px rgba(15,35,24,.18),0 4px 12px rgba(15,35,24,.08);padding:0;max-width:380px;min-width:300px;font-family:var(--sans);opacity:0;pointer-events:none;transition:opacity .14s ease;visibility:hidden;overflow:hidden}
+.gem-hover-card.show{opacity:1;visibility:visible;pointer-events:auto}
+.gem-hover-card .hc-head{display:flex;justify-content:space-between;align-items:center;padding:11px 14px 9px;background:var(--s1);border-bottom:1px solid var(--s3)}
+.gem-hover-card .hc-agent{font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em}
+.gem-hover-card .hc-title{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--t3)}
+.gem-hover-card .hc-body{padding:6px 14px 12px}
+.gem-hover-card .hc-row{padding:9px 0;border-bottom:1px solid var(--s2)}
+.gem-hover-card .hc-row:last-child{border-bottom:none}
+.gem-hover-card .hc-k{font-family:var(--mono);font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--t4);margin-bottom:4px}
+.gem-hover-card .hc-v{font-size:13px;color:var(--t1);line-height:1.55;word-break:break-word;white-space:normal}
+.gem-hover-card .hc-v.ok{color:var(--ok)}.gem-hover-card .hc-v.w{color:var(--warn)}.gem-hover-card .hc-v.hi{color:var(--g2)}
 
 .typing-bub{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--s1);border-radius:var(--r);border:1px solid var(--s3)}
 .typing-lbl{font-size:11px;font-family:var(--mono);color:var(--t3)}
@@ -2741,7 +2755,114 @@ function addActReport(agent,title,rows){
   el.className='act-report';
   el.style.borderColor=`rgba(${rgba},.2)`;
   el.innerHTML=`<div class="ar-head" style="background:rgba(${rgba},.06)"><span class="ar-agent" style="color:${col}">${labels[agent]||agent}</span><span class="ar-title">${title}</span></div><div class="ar-body">${rowsH}</div>`;
+  // Stash full untruncated rows for the hover-card popover.
+  // Each row may carry a 4th element with the full value; fallback to the displayed value.
+  el.dataset.agent=agent;
+  el.dataset.agentLabel=labels[agent]||agent;
+  el.dataset.agentColor=col;
+  el.dataset.agentRgba=rgba;
+  el.dataset.title=title;
+  el.dataset.rows=JSON.stringify(rows.map(r=>[r[0], (r[3]!==undefined?String(r[3]):String(r[1]??'')), r[2]||'']));
+  el.tabIndex=0; // keyboard reachable
+  _initActReportHover();
   feed.appendChild(el); feed.scrollTop=feed.scrollHeight;
+}
+
+/* ───── Hover-card singleton for act-report tiles ─────
+   On hover (or keyboard focus), show a brand-styled popover next to the tile
+   with the full untruncated content for every row. Pure delegation — no
+   per-tile listeners. */
+function _initActReportHover(){
+  if(window._gemHoverInit) return;
+  window._gemHoverInit = true;
+  const card = document.createElement('div');
+  card.className = 'gem-hover-card';
+  card.setAttribute('role','tooltip');
+  document.body.appendChild(card);
+  let activeEl = null, hideTimer = null;
+
+  function buildContent(el){
+    let rows = [];
+    try { rows = JSON.parse(el.dataset.rows||'[]'); } catch(e){ rows = []; }
+    const agent = el.dataset.agentLabel || el.dataset.agent || '';
+    const title = el.dataset.title || '';
+    const agentColor = el.dataset.agentColor || 'var(--t3)';
+    const rgba = el.dataset.agentRgba || '79,110,247';
+    const rowsH = rows.map(r => {
+      const k = r[0]||'', v = r[1]||'', cls = r[2]||'';
+      return `<div class="hc-row"><div class="hc-k">${k}</div><div class="hc-v ${cls}">${v}</div></div>`;
+    }).join('');
+    return `<div class="hc-head" style="background:rgba(${rgba},.06)">`
+         + `<span class="hc-agent" style="color:${agentColor}">${agent}</span>`
+         + `<span class="hc-title">${title}</span>`
+         + `</div><div class="hc-body">${rowsH}</div>`;
+  }
+
+  function position(el){
+    // Make visible (off-screen) to measure, then position.
+    card.classList.add('show');
+    const tile = el.getBoundingClientRect();
+    const cardR = card.getBoundingClientRect();
+    const pad = 10;
+    const spaceLeft = tile.left;
+    const spaceRight = window.innerWidth - tile.right;
+    let left;
+    if(spaceLeft >= cardR.width + pad + 4){
+      left = tile.left - cardR.width - pad;
+    } else if(spaceRight >= cardR.width + pad + 4){
+      left = tile.right + pad;
+    } else {
+      // Center horizontally as a fallback.
+      left = Math.max(pad, (window.innerWidth - cardR.width)/2);
+    }
+    // Vertically align with the tile, clamped to viewport.
+    let top = tile.top;
+    if(top + cardR.height > window.innerHeight - pad){
+      top = Math.max(pad, window.innerHeight - cardR.height - pad);
+    }
+    card.style.left = Math.round(left) + 'px';
+    card.style.top  = Math.round(top) + 'px';
+  }
+
+  function show(el){
+    if(activeEl === el) return;
+    activeEl = el;
+    card.innerHTML = buildContent(el);
+    // Defer position to next frame so layout has settled.
+    requestAnimationFrame(()=>position(el));
+  }
+  function hideSoon(){
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(()=>{ card.classList.remove('show'); activeEl = null; }, 140);
+  }
+  function cancelHide(){ clearTimeout(hideTimer); }
+
+  document.addEventListener('mouseover', (e)=>{
+    const t = e.target && e.target.closest ? e.target.closest('.act-report') : null;
+    if(t){ cancelHide(); show(t); }
+  });
+  document.addEventListener('mouseout', (e)=>{
+    const t = e.target && e.target.closest ? e.target.closest('.act-report') : null;
+    if(!t) return;
+    if(e.relatedTarget && t.contains(e.relatedTarget)) return;
+    if(e.relatedTarget === card || (card.contains && card.contains(e.relatedTarget))) return;
+    hideSoon();
+  });
+  // Keyboard parity: focus shows, blur hides.
+  document.addEventListener('focusin', (e)=>{
+    const t = e.target && e.target.closest ? e.target.closest('.act-report') : null;
+    if(t){ cancelHide(); show(t); }
+  });
+  document.addEventListener('focusout', (e)=>{
+    const t = e.target && e.target.closest ? e.target.closest('.act-report') : null;
+    if(t) hideSoon();
+  });
+  card.addEventListener('mouseenter', cancelHide);
+  card.addEventListener('mouseleave', hideSoon);
+  // Scroll inside the activity feed should hide the popover so it doesn't drift.
+  document.addEventListener('scroll', ()=>{ if(activeEl) card.classList.remove('show'); activeEl=null; }, true);
+  // Escape hides.
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ card.classList.remove('show'); activeEl=null; } });
 }
 
 function addTyping(agent,label){
@@ -3932,10 +4053,10 @@ async function stepBrandBrain(){
 
   addAct('brain','brain',`Strategy complete. Brand voice: <strong>"${brand.brandVoice?.slice(0,60)}..."</strong>. ${(brand.contentPillars||[]).length} content pillars defined.`);
   addActReport('brain','Brand Strategy',[
-    ['Brand Voice', brand.brandVoice?.slice(0,40)+'...', 'hi'],
-    ['Channels', S.channels.length, 'ok'],
-    ['Pillars', (brand.contentPillars||[]).length, 'ok'],
-    ['Hook', brand.contentHook?.slice(0,38)+'...', ''],
+    ['Brand Voice', brand.brandVoice?.slice(0,40)+'...', 'hi', brand.brandVoice||''],
+    ['Channels', S.channels.length, 'ok', S.channels.map((c,i)=>`${i+1}. ${c.name||c.handle||'channel'}`).join('\n') || String(S.channels.length)],
+    ['Pillars', (brand.contentPillars||[]).length, 'ok', (brand.contentPillars||[]).map((p,i)=>`${i+1}. ${p}`).join('\n') || '—'],
+    ['Hook', brand.contentHook?.slice(0,38)+'...', '', brand.contentHook||''],
   ]);
   await delay(200);
   appendHandoff('brain','scout');
@@ -4044,11 +4165,11 @@ async function stepScout(){
 
   addAct('scout','scout',`Found <strong>${topics.length} viral angles</strong>. Top pick: <strong>"${best.topic}"</strong> — ${best.viralScore}% viral score.`);
   addActReport('scout','Scout Report',[
-    ['Top Topic', best.topic?.slice(0,35)+'...', 'hi'],
-    ['Viral Score', (best.viralScore||0)+'%', 'ok'],
-    ['Competition', best.competition||'—', best.competition==='LOW'?'ok':'w'],
-    ['Candidates', topics.length, ''],
-    ...(S.trendingMode && S.trendData?.length ? [['Trends Used', S.trendData.length, 'ok']] : []),
+    ['Top Topic', best.topic?.slice(0,35)+'...', 'hi', best.topic||''],
+    ['Viral Score', (best.viralScore||0)+'%', 'ok', `${best.viralScore||0}% — ${best.reasoning||'no reasoning provided'}`],
+    ['Competition', best.competition||'—', best.competition==='LOW'?'ok':'w', `${best.competition||'—'}${best.competitorAnalysis?'\n\n'+best.competitorAnalysis:''}`],
+    ['Candidates', topics.length, '', topics.map((t,i)=>`${i+1}. ${t.topic} — ${t.viralScore||0}%`).join('\n')],
+    ...(S.trendingMode && S.trendData?.length ? [['Trends Used', S.trendData.length, 'ok', S.trendData.slice(0,15).map((t,i)=>`${i+1}. ${t.title||t.text||t.name||'trend'}${t.source?' ('+t.source+')':''}`).join('\n')]] : []),
   ]);
   await delay(200);
   appendHandoff('scout','arch');
@@ -4141,10 +4262,10 @@ async function stepArchitect(){
 
   addAct('arch','arch',`Framework complete. Optimized title: <strong>"${arch.titleOptimized}"</strong>. ${(arch.contentStructure||[]).length} sections planned.`);
   addActReport('arch','Content Framework',[
-    ['Title', arch.titleOptimized?.slice(0,38)+'...', 'hi'],
-    ['Sections', (arch.contentStructure||[]).length, 'ok'],
-    ['Retention Hooks', (arch.retentionHooks||[]).length, 'ok'],
-    ['Upload Time', arch.uploadTime||'—', ''],
+    ['Title', arch.titleOptimized?.slice(0,38)+'...', 'hi', arch.titleOptimized||''],
+    ['Sections', (arch.contentStructure||[]).length, 'ok', (arch.contentStructure||[]).map((s,i)=>`${i+1}. ${s.title||s.section||'section'}${s.timestamp?' ('+s.timestamp+')':''}`).join('\n') || '—'],
+    ['Retention Hooks', (arch.retentionHooks||[]).length, 'ok', (arch.retentionHooks||[]).map((h,i)=>`${i+1}. ${h.text||h.hook||h}${h.timestamp?' @ '+h.timestamp:''}`).join('\n') || '—'],
+    ['Upload Time', arch.uploadTime||'—', '', arch.uploadTime||'—'],
   ]);
   await delay(200);
   appendHandoff('arch','writer');
