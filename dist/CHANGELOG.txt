@@ -1,6 +1,25 @@
 GEM Content Engine — Customer Changelog
 ========================================
 
+v1.7  ·  2026-05-13 (patched 2026-05-15)
+----------------------------------------
+Patches since the v1.7 release (no version bump — same lifetime license):
+
+  - Carousel slides now ship ready-to-publish copy on first run. The
+    Visual Director's per-slide "text" field used to occasionally echo
+    schema labels like "Bold opening text" or "First key insight"; the
+    prompt has been rewritten so every slide returns a finished hook,
+    setup, point, reveal, or CTA in the niche you chose.
+
+  - Agent Activity tiles are now interactive. Hover (or keyboard-focus)
+    any mini-report tile in the right-hand activity panel and a styled
+    card slides in next to it showing every field in its full,
+    untruncated form — including expanded lists for Channels, Pillars,
+    Candidate Topics, Trending Items, Sections, and Retention Hooks.
+    Escape dismisses; scrolling auto-hides.
+
+Original v1.7 release notes follow.
+
 v1.7  ·  2026-05-13
 -------------------
 - Quality Bar: every drop is now graded against six rules before publish
