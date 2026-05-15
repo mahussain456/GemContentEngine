@@ -1904,8 +1904,14 @@ const safeStr = v => {
   if(typeof v==='string') return v;
   if(typeof v==='number'||typeof v==='boolean') return String(v);
   if(typeof v==='object'){
-    for(const k of ['text','value','brief','content','description','summary']){
-      if(typeof v[k]==='string'&&v[k]) return v[k];
+    // Try common text-bearing keys first (added 'hook' for retentionHooks,
+    // 'title'/'message'/'name' for misc LLM deviations).
+    for(const k of ['text','hook','value','brief','content','description','summary','title','message','name']){
+      if(typeof v[k]==='string'&&v[k]){
+        // If the object also carries a timestamp/time/at field, append it for context.
+        const ts = v.timestamp || v.time || v.at || v.position || '';
+        return ts ? `${v[k]} @ ${ts}` : v[k];
+      }
     }
     try{return JSON.stringify(v);}catch(e){return '[object]';}
   }
@@ -4250,21 +4256,29 @@ async function stepArchitect(){
   addTyping('arch','Structuring content...');
 
   const raw=await callOllama(
-    'You are an expert content strategist. Design content frameworks. Return raw JSON only.',
-    `Topic: "${topic.topic}"\nHook: "${safeStr(topic.hook)}"\nNiche: "${S.niche}"\nAudience: "${S.brandPkg?.targetAudience}"\nBrand voice: "${S.brandPkg?.brandVoice}"\n\nReturn raw JSON only:\n{"titleOptimized":"SEO-optimized title 55-60 chars","hook30s":"First 30 seconds — what happens","contentStructure":[{"section":"name","timestamp":"0:00-1:00","purpose":"why this section","keyPoints":["point1","point2"]}],"retentionHooks":["hook at 30s","hook at 2min","hook at 5min"],"thumbnailConcept":"detailed thumbnail idea","callToAction":"exact CTA text","targetScore":88,"uploadTime":"best day and time","estimatedRevenue":"$X-$Y per 1000 views","topicTags":["tag1","tag2","tag3"],"contentWarnings":[],"competitorGap":"what existing videos miss"}`,
+    'You are an expert content strategist. Design content frameworks. Return raw JSON only. CRITICAL: every item in the retentionHooks, topicTags, and contentWarnings arrays MUST be a plain string — never an object like {hook, timestamp}. If you need to convey a timestamp, embed it inside the string (e.g. "Pattern interrupt at 0:30").',
+    `Topic: "${topic.topic}"\nHook: "${safeStr(topic.hook)}"\nNiche: "${S.niche}"\nAudience: "${S.brandPkg?.targetAudience}"\nBrand voice: "${S.brandPkg?.brandVoice}"\n\nReturn raw JSON only:\n{"titleOptimized":"SEO-optimized title 55-60 chars","hook30s":"First 30 seconds — what happens","contentStructure":[{"section":"name","timestamp":"0:00-1:00","purpose":"why this section","keyPoints":["point1","point2"]}],"retentionHooks":["plain string hook with timestamp embedded — e.g. Pattern interrupt at 0:30","another plain string at 2:00","another at 5:00"],"thumbnailConcept":"detailed thumbnail idea","callToAction":"exact CTA text","targetScore":88,"uploadTime":"best day and time","estimatedRevenue":"$X-$Y per 1000 views","topicTags":["tag1","tag2","tag3"],"contentWarnings":[],"competitorGap":"what existing videos miss"}`,
     1400
   );
   rmTyping();
   const arch=pj(raw);
   ['titleOptimized','hook30s','thumbnailConcept','callToAction','competitorGap','uploadTime','estimatedRevenue']
     .forEach(k=>{ if(arch[k]) arch[k]=safeStr(arch[k]); });
+  // Defensive: smaller LLMs occasionally return retentionHooks / topicTags / contentWarnings
+  // as arrays of objects instead of plain strings. Coerce each item through safeStr so every
+  // downstream render path (the framework card, the hover popover, exports) gets a string.
+  for(const k of ['retentionHooks','topicTags','contentWarnings']){
+    if(typeof arch[k] === 'string') arch[k] = [arch[k]];
+    if(!Array.isArray(arch[k])) arch[k] = [];
+    arch[k] = arch[k].map(safeStr).filter(Boolean);
+  }
   S.archPkg=arch;
 
   addAct('arch','arch',`Framework complete. Optimized title: <strong>"${arch.titleOptimized}"</strong>. ${(arch.contentStructure||[]).length} sections planned.`);
   addActReport('arch','Content Framework',[
     ['Title', arch.titleOptimized?.slice(0,38)+'...', 'hi', arch.titleOptimized||''],
     ['Sections', (arch.contentStructure||[]).length, 'ok', (arch.contentStructure||[]).map((s,i)=>`${i+1}. ${s.title||s.section||'section'}${s.timestamp?' ('+s.timestamp+')':''}`).join('\n') || '—'],
-    ['Retention Hooks', (arch.retentionHooks||[]).length, 'ok', (arch.retentionHooks||[]).map((h,i)=>`${i+1}. ${h.text||h.hook||h}${h.timestamp?' @ '+h.timestamp:''}`).join('\n') || '—'],
+    ['Retention Hooks', (arch.retentionHooks||[]).length, 'ok', (arch.retentionHooks||[]).map((h,i)=>`${i+1}. ${safeStr(h)}`).join('\n') || '—'],
     ['Upload Time', arch.uploadTime||'—', '', arch.uploadTime||'—'],
   ]);
   await delay(200);
@@ -4285,8 +4299,8 @@ function renderArchOutput(a,originalTopic){
       </div>
     </div>`).join('');
 
-  const rHooksH=(a.retentionHooks||[]).map(h=>`<span class="r-tag">${h}</span>`).join('');
-  const tagsH=(a.topicTags||[]).map(t=>`<span class="r-tag">${t}</span>`).join('');
+  const rHooksH=(a.retentionHooks||[]).map(h=>`<span class="r-tag">${safeStr(h)}</span>`).join('');
+  const tagsH=(a.topicTags||[]).map(t=>`<span class="r-tag">${safeStr(t)}</span>`).join('');
 
   document.getElementById('out-arch').innerHTML=`
   <div class="report">
@@ -5159,7 +5173,7 @@ function downloadScript(){
     ['Optimized Title', safeStr(ar.titleOptimized)],
     ['Upload Time', safeStr(ar.uploadTime)],
     ['Est. Revenue', safeStr(ar.estimatedRevenue)],
-    ['Retention Hooks', (ar.retentionHooks||[]).join(' · ')],
+    ['Retention Hooks', (ar.retentionHooks||[]).map(safeStr).join(' · ')],
     ['Competitor Gap', safeStr(ar.competitorGap)],
     ['Call to Action', safeStr(ar.callToAction)],
   ]));
