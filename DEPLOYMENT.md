@@ -90,11 +90,24 @@ From this point on, **every push to `main` auto-deploys to production** within 3
 4. Remove any default Parked / Redirect URL records Namecheap added at signup (they'll override your A record otherwise).
 5. Save.
 
+### GoDaddy (battle-tested, what we actually used)
+
+GoDaddy ships every new domain with two locked NS records (`ns47.domaincontrol.com` and `ns48.domaincontrol.com`) and a default A record pointing at GoDaddy's parking page. To wire it to Vercel:
+
+1. GoDaddy dashboard → Domain → DNS Management.
+2. **Delete every existing A record at `@`** that isn't the IP Vercel currently shows. GoDaddy's default A record points at their parked-page server. If you also have legacy Cloudflare-edge IPs from a previous Vercel setup (`162.159.142.117`, `172.66.2.113`, etc.), delete those too.
+3. **Add the A record Vercel shows in its UI right now.** This rotates. As of mid-2026, it's been `216.198.79.1`. Always copy the value from Vercel's dashboard, not from older docs.
+4. **Add the `www` CNAME**: name `www`, value `cname.vercel-dns.com`, TTL 1 Hour.
+5. **Leave the email CNAMEs alone** if you use GoDaddy email or Microsoft 365: `autodiscover`, `email`, `lyncdiscover`, `msoid`, `pay` are all email routing and email-DNS records. They don't conflict with Vercel — they handle traffic to different subdomains.
+
+After save, check from terminal that `dig thegeminfo.com +short` returns **exactly one IP** (whatever Vercel asked for). If you see multiple IPs come back, you still have stale A records to delete.
+
 ### Other registrars
 
 The pattern is identical:
-- Apex `@` → A record → `76.76.21.21`
+- Apex `@` → A record → whatever IP Vercel's UI currently shows (do not hardcode from old docs)
 - `www` → CNAME → `cname.vercel-dns.com`
+- Delete every other A record at the apex to avoid the round-robin trap
 
 ---
 
@@ -172,7 +185,20 @@ When you get the approval email:
 
 ## Troubleshooting
 
-**"Vercel says Invalid Configuration."**
+**"Vercel says Invalid Configuration" and I added the records Vercel asked for.**
+This was the actual deployment trap that bit us in v1.7. Vercel rotates which apex IP it shows as required in the dashboard. If you followed older instructions or earlier deployment guides, you may end up with **multiple A records at the apex** (some pointing to old Cloudflare-edge IPs Vercel used to route through, some pointing to Vercel's current target). Your DNS will round-robin between them, and roughly two-thirds of queries land on the wrong host (often a default page from whichever service shares that Cloudflare IP block as a tenant).
+
+**The fix:** check what Vercel's UI shows *right now* as the required A record value. Delete every other A record at `@` from your DNS provider so only that single value remains. Then wait 10–15 minutes for propagation and click Refresh in Vercel.
+
+Verify from terminal:
+```bash
+dig thegeminfo.com +short
+# Expected: exactly one IP (whatever Vercel currently shows)
+```
+
+Multiple IPs in the output means you still have conflicting A records to delete. The Vercel dashboard banner about "old records of cname.vercel-dns.com and 76.76.21.21 will continue to work but we recommend you use the new ones" can be misleading — it's only true if you don't *also* have records pointing to IPs that aren't Vercel-managed anymore.
+
+**"Vercel says Invalid Configuration" and I'm sure my DNS is right.**
 DNS hasn't propagated yet. Wait 10 more minutes. If still red after an hour, double-check the A-record value matches Vercel's current IP (re-copy from the dashboard).
 
 **"Site loads but `/` shows the file listing instead of the landing page."**
