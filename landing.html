@@ -57,6 +57,21 @@
 <meta name="twitter:label2" content="License">
 <meta name="twitter:data2" content="One-time purchase">
 
+<!-- Article tags for topical signal (top target keywords) -->
+<meta property="article:tag" content="AI content generator">
+<meta property="article:tag" content="AI content engine">
+<meta property="article:tag" content="multi-agent AI">
+<meta property="article:tag" content="Jasper alternative">
+<meta property="article:tag" content="Copy.ai alternative">
+<meta property="article:tag" content="ChatGPT alternative">
+<meta property="article:tag" content="Midjourney prompt generator">
+<meta property="article:tag" content="Kling AI prompts">
+<meta property="article:tag" content="Ollama AI tools">
+<meta property="article:tag" content="faceless YouTube">
+<meta property="article:tag" content="social media manager tools">
+<meta property="article:tag" content="lifetime deal AI">
+<meta property="article:section" content="Software">
+
 <!-- ─── DNS prefetch for external resources ─── -->
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -137,7 +152,41 @@
         "Lifetime updates"
       ],
       "author": {"@id": "https://thegeminfo.com/#organization"},
-      "publisher": {"@id": "https://thegeminfo.com/#organization"}
+      "publisher": {"@id": "https://thegeminfo.com/#organization"},
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".lede", ".section-lede", ".faq-a", "#problem-h2", "#features-h2", "#pricing-h2"]
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://thegeminfo.com/#agents",
+      "name": "The six AI agents in GEM Content Engine",
+      "description": "GEM Content Engine runs six specialist AI agents in sequence. Each agent has its own system prompt, JSON schema, and job. Together they turn one content idea into a finished pack for every channel.",
+      "numberOfItems": 6,
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "item": {"@type": "Thing", "name": "Brand Brain", "description": "Reads your niche, audience, and competitors. Sets the brand voice that every other agent uses. Defines three to five content pillars and a primary content hook."}},
+        {"@type": "ListItem", "position": 2, "item": {"@type": "Thing", "name": "Trend Scout", "description": "Pulls live signals from Reddit and HackerNews (CORS-friendly), with an r/popular fallback for Google Trends. Ranks five or six topic candidates by viral score and platform fit."}},
+        {"@type": "ListItem", "position": 3, "item": {"@type": "Thing", "name": "Content Architect", "description": "Designs the section-by-section structure of the content, places retention hooks at 30 seconds, 2 minutes, and 5 minutes, writes the SEO title, and recommends an upload time."}},
+        {"@type": "ListItem", "position": 4, "item": {"@type": "Thing", "name": "Script Writer", "description": "Drafts the humanized voiceover script in natural speech with contractions, pause markers, rhetorical questions, and tension-before-reveal pacing."}},
+        {"@type": "ListItem", "position": 5, "item": {"@type": "Thing", "name": "Visual Director", "description": "Writes ultra-detailed master prompts for Midjourney v6, DALL-E 3 / Imagen, FLUX.1, Kling AI, and RunwayML across every aspect ratio: YouTube thumbnail, Instagram post, Story / Reel cover, Facebook cover, blog hero."}},
+        {"@type": "ListItem", "position": 6, "item": {"@type": "Thing", "name": "Channel Adapter", "description": "Rewrites the master content per platform: YouTube SEO package, Instagram caption and Reel hook, Facebook caption, TikTok and Shorts hooks, LinkedIn post, blog intro. Each channel gets its own tone, length, and hashtag bundle."}}
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://thegeminfo.com/#service",
+      "name": "GEM Content Engine",
+      "description": "Six AI agents that turn one content idea into a finished pack of script, image prompts, video prompts, captions, hashtags, and carousels for YouTube, Instagram, Facebook, TikTok, LinkedIn, and blog.",
+      "provider": {"@id": "https://thegeminfo.com/#organization"},
+      "areaServed": "Worldwide",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Solo creators, social media managers, faceless YouTube operators, indie makers, AI and tech newsletter writers, small content agencies"
+      },
+      "serviceType": "AI content generation software",
+      "offers": {"@type": "Offer", "price": "9.00", "priceCurrency": "USD"}
     },
     {
       "@type": "FAQPage",
@@ -150,7 +199,14 @@
         {"@type": "Question", "name": "What is the difference between GEM and ChatGPT alone?", "acceptedAnswer": {"@type": "Answer", "text": "ChatGPT is a generalist that hands you a blank prompt. GEM is six specialist agents with locked schemas (Brand, Scout, Architect, Writer, Visual Director, and Channel Adapter), each with its own system prompt, output validation, and handoff to the next agent. You get a finished content pack in about ninety seconds instead of a long thread of follow-up prompts."}},
         {"@type": "Question", "name": "Why is GEM only $9?", "acceptedAnswer": {"@type": "Answer", "text": "I am building GEM in public, and the first hundred buyers matter more to me as people I can talk to than as revenue. Every Founder gets a direct line for feedback. Once I hit a hundred sales, the price moves up to $29, then $79, then $149."}},
         {"@type": "Question", "name": "How does Scout pull trends, and where does it fall short?", "acceptedAnswer": {"@type": "Answer", "text": "Scout reads live signals from Reddit and HackerNews directly in your browser, since those services are CORS-friendly. Google Trends is stricter about CORS, so by default Scout falls back to r/popular as a trending proxy. That covers about 95% of niches well. If you want the full Google Trends feed, the User Manual walks you through a one-line local proxy. The point is, you always know exactly what Scout is reading."}},
-        {"@type": "Question", "name": "What is on the GEM roadmap?", "acceptedAnswer": {"@type": "Answer", "text": "Founder's Edition buyers vote on what ships next. The bigger modules I am working on are a daily auto-brief tailored to your niche, an approve / edit / regenerate / reject workflow with version history, direct publishing to Buffer, Later, and Meta, and a performance loop where yesterday's winners feed tomorrow's brief. Because lifetime updates are part of the license, every release lands at no extra cost."}}
+        {"@type": "Question", "name": "What is on the GEM roadmap?", "acceptedAnswer": {"@type": "Answer", "text": "Founder's Edition buyers vote on what ships next. The bigger modules I am working on are a daily auto-brief tailored to your niche, an approve / edit / regenerate / reject workflow with version history, direct publishing to Buffer, Later, and Meta, and a performance loop where yesterday's winners feed tomorrow's brief. Because lifetime updates are part of the license, every release lands at no extra cost."}},
+        {"@type": "Question", "name": "Does GEM Content Engine work with Claude or other Anthropic models?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. GEM Content Engine supports Anthropic's Claude through the Anthropic API. Paste your API key (it starts with sk-ant-) into Settings, select Claude as the provider, and you are running. The Writer and Visual Director agents work particularly well with Claude's longer context window. A full pipeline run on Claude Sonnet costs roughly twelve cents."}},
+        {"@type": "Question", "name": "Can I use GEM Content Engine without internet access?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, completely. Install Ollama locally on your machine, pull a model like qwen2.5:14b, and GEM runs entirely offline. Your prompts and generated content never touch the internet in Ollama mode. The only thing that needs internet is the initial download of gem.html and the Ollama installer."}},
+        {"@type": "Question", "name": "Is GEM Content Engine beginner-friendly?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The thirty-second on-ramp is in the WELCOME.md file inside your buyer ZIP. Open gem.html, paste your provider key (or point at local Ollama), pick a niche from the twelve quick-start templates, and click Generate. Most buyers ship their first finished content pack within ten minutes of downloading."}},
+        {"@type": "Question", "name": "How long does GEM Content Engine take to generate one content pack?", "acceptedAnswer": {"@type": "Answer", "text": "About ninety seconds end to end. Six agents run in sequence: Brand voice (10 seconds), Scout trends (15 seconds), Architect structure (15 seconds), Writer script (20 seconds), Visual prompts (25 seconds), and Channel Adapter (15 seconds). Times vary based on your LLM provider and connection speed."}},
+        {"@type": "Question", "name": "What is the difference between GEM Founder's Edition and the Builder, Operator, and Studio tiers?", "acceptedAnswer": {"@type": "Answer", "text": "The four tiers ship the same gem.html with identical features. The only difference is timing and price. Founder's Edition ($9) is the first 100 buyers. After that the price moves to $29 (Builder), then $79 (Operator), then $149 (Studio). All four tiers receive lifetime updates within the v1.x major version. Future tiers above $149 will introduce team seats and white-label rebranding."}},
+        {"@type": "Question", "name": "Is GEM Content Engine open source?", "acceptedAnswer": {"@type": "Answer", "text": "No, GEM Content Engine is proprietary commercial software with a one-time purchase license. The single HTML file ships unminified, so you can read every line of the code if you want to. You can also modify it for your own internal use under the license terms documented in terms.html."}},
+        {"@type": "Question", "name": "Can GEM Content Engine generate full videos?", "acceptedAnswer": {"@type": "Answer", "text": "GEM writes the video prompts (Kling AI, RunwayML, scene-by-scene) but does not generate the video itself. You paste those prompts into your preferred video AI to produce the final clips. This keeps GEM free of recurring video-generation API costs and lets you pick whichever video model fits your budget."}}
       ]
     },
     {
@@ -537,6 +593,15 @@ img,svg{display:block;max-width:100%}
   </div>
 </div>
 
+<!-- ───── WHAT IS GEM (semantic definition for featured snippets + AEO) ───── -->
+<section class="section" id="what" style="padding-top:64px;padding-bottom:40px" aria-labelledby="what-h2">
+  <div class="wrap">
+    <div class="section-eyebrow">What is GEM Content Engine?</div>
+    <h2 class="h2" id="what-h2">A single-file AI tool that ships a <em>complete content pack</em> from one idea.</h2>
+    <p class="section-lede">GEM Content Engine is a single-file desktop AI tool that turns one content idea into a finished pack of script, image prompts, video prompts, captions, and carousels for every channel you run. Six specialist AI agents handle the work in about ninety seconds. One-time purchase, lifetime updates, runs locally on Ollama or against any cloud LLM with your own key.</p>
+  </div>
+</section>
+
 <!-- ───── PROBLEM ───── -->
 <section class="section" id="how" aria-labelledby="problem-h2">
   <div class="wrap">
@@ -635,6 +700,48 @@ img,svg{display:block;max-width:100%}
           <strong style="color:var(--g0)">gpt-4o-mini:</strong> ~$0.02–0.05<br>
           <strong style="color:var(--g0)">Claude 3.5 Sonnet:</strong> ~$0.12<br>
           <strong style="color:var(--g0)">Jasper / Copy.ai:</strong> $49–$129 / month, forever</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── WHO IS GEM FOR (target audience clarity + long-tail SEO) ───── -->
+<section class="section" id="for" style="padding-top:0" aria-labelledby="for-h2">
+  <div class="wrap">
+    <div class="section-eyebrow">Who is GEM for</div>
+    <h2 class="h2" id="for-h2">Built for the people doing the work of a <em>six-person team</em>.</h2>
+    <p class="section-lede">GEM Content Engine targets operators who publish daily across multiple platforms and don't have a team behind them. If you recognize yourself in any of the six profiles below, GEM was built for you.</p>
+
+    <div class="problem-grid">
+      <div class="problem">
+        <div class="problem-num">✦</div>
+        <div class="problem-h">Faceless YouTube operators</div>
+        <div class="problem-p">You run one or several faceless channels and need scripts, thumbnails, and YouTube SEO packages every week. GEM cuts the production time on each video by roughly 80%.</div>
+      </div>
+      <div class="problem">
+        <div class="problem-num">✦</div>
+        <div class="problem-h">Social media managers at small agencies</div>
+        <div class="problem-p">You manage between 5 and 30 client channels. GEM gives every client per-platform copy, image prompts, and hashtags without the per-seat SaaS bill.</div>
+      </div>
+      <div class="problem">
+        <div class="problem-num">✦</div>
+        <div class="problem-h">Indie creators with 3 to 10 brand accounts</div>
+        <div class="problem-p">You operate a stable of niche brand accounts. Brand Kit memory keeps the voice consistent across every channel, and JSON save/load lets you snapshot a campaign.</div>
+      </div>
+      <div class="problem">
+        <div class="problem-num">✦</div>
+        <div class="problem-h">AI and tech newsletter writers</div>
+        <div class="problem-p">You publish daily on a fast-moving topic. Scout pulls live signals from Reddit and HackerNews so your content stays ahead of the wave instead of three days behind.</div>
+      </div>
+      <div class="problem">
+        <div class="problem-num">✦</div>
+        <div class="problem-h">Solopreneurs building in public</div>
+        <div class="problem-p">You don't want another monthly subscription draining your runway. GEM is one purchase, runs on your machine, and the data stays yours forever.</div>
+      </div>
+      <div class="problem">
+        <div class="problem-num">✦</div>
+        <div class="problem-h">Course creators and coaches</div>
+        <div class="problem-p">You need polished scripts, image prompts, and per-platform copy to fuel your content funnel. GEM ships the whole pack in one pipeline run, no agency required.</div>
       </div>
     </div>
   </div>
@@ -801,6 +908,27 @@ img,svg{display:block;max-width:100%}
       </details>
       <details class="faq-item"><summary class="faq-q">Why so cheap?</summary>
         <div class="faq-a">Honestly: I'm building GEM in public, and the first hundred buyers matter more to me as people I can talk to than as revenue. Every Founder gets a direct line for feedback. Once I hit a hundred sales, the price moves up to $29, then $79, then $149.</div>
+      </details>
+      <details class="faq-item"><summary class="faq-q">Does GEM work with Claude or other Anthropic models?</summary>
+        <div class="faq-a">Yes. GEM supports Anthropic's Claude through the Anthropic API. Paste your API key (it starts with <code style="font-family:var(--mono);font-size:13px;background:var(--g7);padding:1px 6px;border-radius:4px;color:var(--g1)">sk-ant-</code>) into Settings, select Claude as the provider, and you're running. The Writer and Visual Director agents work particularly well with Claude's longer context window. A full pipeline run on Claude Sonnet costs roughly twelve cents.</div>
+      </details>
+      <details class="faq-item"><summary class="faq-q">Can I use GEM without internet access?</summary>
+        <div class="faq-a">Yes, completely. Install Ollama locally on your machine, pull a model like <code style="font-family:var(--mono);font-size:13px;background:var(--g7);padding:1px 6px;border-radius:4px;color:var(--g1)">qwen2.5:14b</code>, and GEM runs entirely offline. Your prompts and generated content never touch the internet in Ollama mode. The only thing that needs internet is the initial download of gem.html and the Ollama installer.</div>
+      </details>
+      <details class="faq-item"><summary class="faq-q">Is GEM beginner-friendly?</summary>
+        <div class="faq-a">Yes. The thirty-second on-ramp is in the WELCOME.md file inside your buyer ZIP. Open gem.html, paste your provider key (or point at local Ollama), pick a niche from the twelve quick-start templates, and click Generate. Most buyers ship their first finished content pack within ten minutes of downloading.</div>
+      </details>
+      <details class="faq-item"><summary class="faq-q">How long does it take to generate one content pack?</summary>
+        <div class="faq-a">About ninety seconds end to end. Six agents run in sequence: Brand voice (10 seconds), Scout trends (15 seconds), Architect structure (15 seconds), Writer script (20 seconds), Visual prompts (25 seconds), and Channel Adapter (15 seconds). Times vary based on your LLM provider and connection speed.</div>
+      </details>
+      <details class="faq-item"><summary class="faq-q">What's the difference between Founder's Edition and Builder, Operator, and Studio tiers?</summary>
+        <div class="faq-a">The four tiers ship the same gem.html with identical features. The only difference is timing and price. Founder's Edition ($9) is the first 100 buyers. After that the price moves to $29 (Builder), then $79 (Operator), then $149 (Studio). All four tiers receive lifetime updates within the v1.x major version. Future tiers above $149 will introduce team seats and white-label rebranding.</div>
+      </details>
+      <details class="faq-item"><summary class="faq-q">Is GEM open source?</summary>
+        <div class="faq-a">No. GEM Content Engine is proprietary commercial software with a one-time purchase license. The single HTML file ships unminified, so you can read every line of the code if you want to. You can also modify it for your own internal use under the license terms documented in <a href="terms.html">Terms of Service</a>.</div>
+      </details>
+      <details class="faq-item"><summary class="faq-q">Can GEM generate full videos?</summary>
+        <div class="faq-a">GEM writes the video prompts (Kling AI, RunwayML, scene-by-scene) but doesn't generate the video itself. You paste those prompts into your preferred video AI to produce the final clips. This keeps GEM free of recurring video-generation API costs and lets you pick whichever video model fits your budget.</div>
       </details>
     </div>
   </div>
