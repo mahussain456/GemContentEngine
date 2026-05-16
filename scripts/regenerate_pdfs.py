@@ -877,7 +877,7 @@ def build_fulfillment_playbook(out_path):
         ('3', 'Upload the bundled ZIP (see Part 3 for what goes in it). Gumroad hosts the file on its CDN. Maximum file size: 16 GB free tier (you’ll use ~400 KB).'),
         ('4', 'Enable license keys: Product settings → "Generate license keys for this product" → toggle on. Gumroad now auto-creates a unique key per sale, sends it with the download.'),
         ('5', 'Customize the receipt email: Settings → Emails → Receipt. Paste the template from <b>Appendix A</b>. Include the license key with <font face="Courier">{{license_key}}</font>.'),
-        ('6', 'Set the product URL on the live site. The Get GEM CTA in <font face="Courier">landing.html</font> already points to <font face="Courier">https://gumroad.com/l/gem-founder</font> — update the slug to match yours.'),
+        ('6', 'Set the product URL on the live site. The Get GEM CTA in <font face="Courier">landing.html</font> already points to <font face="Courier">https://hussain412.gumroad.com/l/qlqsa</font> — update the slug to match yours.'),
         ('7', 'Connect your payout method: Gumroad → Settings → Payouts. Choose direct deposit, PayPal, or Stripe Express. First payout lands on a Friday 7+ days after first sale.'),
         ('8', 'Test the flow yourself: place a $9 self-purchase, confirm the ZIP arrives with a valid key, then refund yourself. End-to-end smoke test takes 10 minutes.'),
     ]:

@@ -77,7 +77,7 @@ Hand this to every customer. Covers all v1.7 features:
 1. Open `landing.html` in a browser — review the live sales page locally
 2. Open `gem.html` in the same browser session — try Ollama first, then a cloud key
 3. Run a full pipeline on the AI / tech niche to see the Quality Bar in action
-4. Hook up Gumroad or Lemon Squeezy with the $9 Founder's Edition SKU (URL already wired in landing.html: `https://gumroad.com/l/gem-founder`)
+4. Hook up Gumroad or Lemon Squeezy with the $9 Founder's Edition SKU (URL already wired in landing.html: `https://hussain412.gumroad.com/l/qlqsa`)
 5. Manually update `SEATS_REMAINING` at the bottom of `landing.html` as sales come in
 
 ---
