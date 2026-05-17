@@ -183,6 +183,42 @@ When you get the approval email:
 
 ---
 
+## Verifying the live site is server-rendered (not a JS-only app)
+
+The site is pure static HTML. There is no React, Vue, Next.js, or any JS framework. The only JavaScript on `landing.html` is a small block at the very bottom that updates the seat counter from 100 to whatever `SEATS_REMAINING` is. Without JS, the counter shows 100 (a sensible fallback). Every other piece of content renders from server-delivered HTML.
+
+If you ever need to prove this (to a crawler, a colleague, or yourself after a cache scare), run these from any terminal:
+
+```bash
+# What Googlebot actually sees
+curl -sL -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" \
+  https://thegeminfo.com/ | head -20
+
+# Expected: <!DOCTYPE html>, then your title, then your meta tags. No "You need to enable JavaScript".
+
+# Confirm no JS-required messaging in the served HTML
+curl -sL https://thegeminfo.com/ | grep -i "you need to enable"
+# Expected: empty output. If anything returns, something's wrong.
+
+# Confirm Vercel is the host (not some other tenant intercepting)
+curl -sIL https://thegeminfo.com/ | grep -i "^server:"
+# Expected: Server: Vercel
+
+# Confirm the file being served is yours
+curl -sIL https://thegeminfo.com/ | grep -i "content-disposition"
+# Expected: Content-Disposition: inline; filename="landing.html"
+```
+
+If any of those return unexpected output, the most likely cause is **stale browser cache** from before the DNS was clean (when one of the conflicting Cloudflare-edge IPs was routing requests to an unrelated site). Hard-refresh with `Ctrl+Shift+R` (Windows/Linux) or `Cmd+Shift+R` (Mac), or open an incognito window, and the live content appears.
+
+If you used a third-party SEO inspection tool (Lighthouse, GTmetrix, Screaming Frog, etc.), some of those have their own server-side cache. Re-run the audit after 1 hour or use the "clear cache" option in the tool.
+
+For an absolute clean test, use these zero-cache services:
+- <https://www.diffbot.com/dev/playground/?url=https%3A%2F%2Fthegeminfo.com> (server-side HTML extraction)
+- <https://cards-dev.twitter.com/validator?url=https%3A%2F%2Fthegeminfo.com> (Twitter Card preview, reads OG tags)
+- <https://developers.facebook.com/tools/debug/?q=https%3A%2F%2Fthegeminfo.com> (Facebook Sharing Debugger, force-refreshes the preview)
+- <https://search.google.com/test/rich-results?url=https%3A%2F%2Fthegeminfo.com> (Google Rich Results Test, runs Googlebot)
+
 ## Troubleshooting
 
 **"Vercel says Invalid Configuration" and I added the records Vercel asked for.**
