@@ -321,8 +321,74 @@ img,svg{display:block;max-width:100%}
 .hero{padding:80px 0 60px;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,var(--g6) 0%,transparent 60%);opacity:.5;z-index:-1}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-family:var(--mono);font-weight:600;text-transform:uppercase;letter-spacing:.22em;color:var(--g2);background:var(--g7);border:1px solid var(--g6);border-radius:99px;padding:7px 16px;margin-bottom:24px}
-.eyebrow .dot{width:6px;height:6px;background:var(--g3);border-radius:50%;animation:pulse 2s infinite}
+.eyebrow .dot{width:6px;height:6px;background:var(--g3);border-radius:50%;animation:pulse 2s infinite;position:relative}
+.eyebrow .dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1.5px solid var(--g3);opacity:0;animation:ringPulse 2s ease-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes ringPulse{0%{transform:scale(.6);opacity:.7}80%,100%{transform:scale(1.8);opacity:0}}
+
+/* ─── Hero motion: ambient breath, agent wave, gold sweep, counter
+   All inside (prefers-reduced-motion: no-preference) so reduced-motion
+   users see the static UI without any animation cost. ─── */
+@media (prefers-reduced-motion: no-preference) {
+  .hero::before{animation:heroBreath 14s ease-in-out infinite}
+  @keyframes heroBreath{
+    0%,100%{transform:translateX(-50%) scale(1);opacity:.5}
+    50%{transform:translateX(-50%) scale(1.16);opacity:.68}
+  }
+
+  /* Subtle conic sweep behind the hero card itself — slow rotation gives the
+     card a sense of energy without being distracting. */
+  .hero-card::before{
+    content:'';position:absolute;inset:-2px;border-radius:20px;z-index:-1;
+    background:conic-gradient(from 0deg at 50% 50%,
+      transparent 0%, rgba(200,169,106,.18) 8%, transparent 18%,
+      transparent 50%, rgba(168,216,191,.22) 58%, transparent 68%, transparent 100%);
+    animation:cardSpin 16s linear infinite;
+    opacity:.55;
+  }
+  .hero-card{position:relative}
+  @keyframes cardSpin{to{transform:rotate(360deg)}}
+
+  /* Staggered pulse wave through the six agents. Each cell lifts and glows
+     ~0.35s after the previous one, then settles. Loop runs every 5.4s. */
+  .agents-flow .agent{animation:agentWave 5.4s cubic-bezier(.4,0,.6,1) infinite}
+  .agents-flow .agent:nth-child(1){animation-delay:0s}
+  .agents-flow .agent:nth-child(2){animation-delay:.35s}
+  .agents-flow .agent:nth-child(3){animation-delay:.70s}
+  .agents-flow .agent:nth-child(4){animation-delay:1.05s}
+  .agents-flow .agent:nth-child(5){animation-delay:1.40s}
+  .agents-flow .agent:nth-child(6){animation-delay:1.75s}
+  @keyframes agentWave{
+    0%,60%,100%{
+      background:rgba(255,255,255,.08);
+      border-color:rgba(168,216,191,.18);
+      transform:translateY(0);
+      box-shadow:none
+    }
+    20%,30%{
+      background:rgba(255,255,255,.16);
+      border-color:rgba(200,169,106,.55);
+      transform:translateY(-3px);
+      box-shadow:0 8px 22px rgba(168,216,191,.22)
+    }
+  }
+  .agents-flow .agent .agent-ic{transition:color .4s ease,transform .4s ease}
+  .agents-flow .agent:nth-child(1){animation-name:agentWave}
+
+  /* Gold-light sweep along a line under the agents, synced with the wave. */
+  .agents-flow{position:relative}
+  .agents-flow::after{
+    content:'';position:absolute;left:6%;right:6%;bottom:-10px;height:1px;
+    background:linear-gradient(90deg,transparent 0%,rgba(200,169,106,.55) 50%,transparent 100%);
+    background-size:25% 100%;background-repeat:no-repeat;
+    animation:goldSweep 5.4s linear infinite;
+    pointer-events:none
+  }
+  @keyframes goldSweep{
+    0%{background-position:-25% 0}
+    100%{background-position:125% 0}
+  }
+}
 .h1{font-family:var(--serif);font-size:clamp(40px,6vw,72px);font-weight:500;line-height:1.05;letter-spacing:-.02em;color:var(--g0);margin-bottom:24px;max-width:900px;margin-left:auto;margin-right:auto}
 .h1 em{font-style:italic;color:var(--g2)}
 .lede{font-size:clamp(16px,1.6vw,19px);color:var(--t2);max-width:680px;margin:0 auto 36px;line-height:1.6}
@@ -576,8 +642,8 @@ img,svg{display:block;max-width:100%}
           <div class="agent"><div class="agent-ic">▣</div><div class="agent-name">Adapter</div><div class="agent-role">Channels</div></div>
         </div>
         <div class="flow-meta">
-          <div><span class="flow-meta-num">90s</span><div class="flow-meta-block">end-to-end</div></div>
-          <div><span class="flow-meta-num">17+</span><div class="flow-meta-block">asset types</div></div>
+          <div><span class="flow-meta-num" data-counter data-target="90" data-suffix="s">90s</span><div class="flow-meta-block">end-to-end</div></div>
+          <div><span class="flow-meta-num" data-counter data-target="17" data-suffix="+">17+</span><div class="flow-meta-block">asset types</div></div>
           <div><span class="flow-meta-num">$0</span><div class="flow-meta-block">recurring · run locally</div></div>
         </div>
       </div>
@@ -1023,6 +1089,43 @@ img,svg{display:block;max-width:100%}
   const SEATS_REMAINING = 100;
   const el = document.getElementById('founderCount');
   if (el) el.textContent = SEATS_REMAINING;
+
+  // Animated number counters for the hero stats (90s, 17+).
+  // Triggers once on scroll-into-view via IntersectionObserver.
+  // Respects prefers-reduced-motion: if the user prefers reduced motion,
+  // numbers render their static target value with no animation.
+  (function () {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const counters = document.querySelectorAll('[data-counter]');
+    if (!counters.length || prefersReduced) return;
+    function animate(node) {
+      const target = parseFloat(node.dataset.target);
+      const suffix = node.dataset.suffix || '';
+      const duration = 1400;
+      const startTime = performance.now();
+      node.textContent = '0' + suffix;
+      function step(now) {
+        const t = Math.min(1, (now - startTime) / duration);
+        const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+        node.textContent = Math.round(target * eased) + suffix;
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    if (!('IntersectionObserver' in window)) {
+      counters.forEach(animate);
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !e.target.dataset.counted) {
+          e.target.dataset.counted = '1';
+          animate(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(c => obs.observe(c));
+  })();
 </script>
 </body>
 </html>
