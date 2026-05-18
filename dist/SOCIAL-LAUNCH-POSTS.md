@@ -37,7 +37,7 @@ Facebook tolerates longer copy, clickable inline links, and paragraph breaks. Le
 ```
 After 3 weeks of dogfooding on AI Decoded and Tools That Work, I'm shipping GEM Content Engine today.
 
-One idea in. A complete content drop out — script, image prompts, video prompts, carousels, captions for every channel — in about 90 seconds.
+One idea in. A complete content drop out — script, image prompts, video prompts, carousels, captions for every channel — in about 5 minutes.
 
 Six specialist AI agents do the work:
 • Brand Brain sets the voice
@@ -74,7 +74,7 @@ Every week the same loop:
 
 That's the work of a 6-person team. So you ship 10% of what's in your head.
 
-GEM Content Engine collapses that into one single HTML file with six AI agents that hand the work down a pipeline. One idea in. Full content drop out. About 90 seconds.
+GEM Content Engine collapses that into one single HTML file with six AI agents that hand the work down a pipeline. One idea in. Full content drop out. About 5 minutes.
 
 $9 once. Lifetime updates. First 100 buyers only.
 
@@ -177,7 +177,7 @@ Six AI agents. One full content drop. Forever, for nine dollars. ↓
 
 I'm launching GEM Content Engine today.
 
-Drop one content idea in. Walk away for 90 seconds. Come back to:
+Drop one content idea in. Walk away for 5 minutes. Come back to:
 
 • A 60-second YouTube Short script
 • Two carousels (Instagram + LinkedIn)
@@ -205,7 +205,7 @@ First 100 buyers get Founder's Edition at $9 → $29 → $79 → $149 after that
 ```
 I typed one sentence into GEM yesterday: "AI agents replacing repetitive office work."
 
-90 seconds later I had →
+5 minutes later I had →
 
 ✓ A YouTube Short script with a 2-second hook
 ✓ A 5-slide IG carousel with image prompts per slide
@@ -255,7 +255,7 @@ The reason GEM beats "one AI agent" tools is in the architecture.
 
 Six specialist agents. Each with locked schemas, validated handoffs, and a Quality Bar gate. Each agent can be rerun independently.
 
-That's how you get a finished content drop in 90 seconds instead of a Slack thread of "tighten this for me" follow-up prompts.
+That's how you get a finished content drop in 5 minutes instead of a Slack thread of "tighten this for me" follow-up prompts.
 
 Swipe to meet them →
 

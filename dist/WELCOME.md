@@ -40,7 +40,7 @@ Paste an API key in Settings. GEM works with OpenAI (`sk-…`), Anthropic (`sk-a
 
 Pick a niche from the dropdown (12 templates ship in the box — AI tools, fitness, finance, real estate, food, etc.), drop in one specific content idea, and hit **Generate Content Drop**.
 
-About 90 seconds later you'll have:
+About five minutes later you'll have:
 
 - A 60-second YouTube Short script
 - 2 carousel outlines (Instagram + LinkedIn)

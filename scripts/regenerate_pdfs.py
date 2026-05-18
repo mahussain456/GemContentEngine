@@ -386,7 +386,7 @@ def build_sales_strategy(out_path):
         '"One idea. Every channel. Six AI agents." — GEM’s live hero.',
         '"Stop paying $50/month for generic AI content. Own your tool forever."',
         '"The daily content drop for AI &amp; tech creators — runs on your laptop, never expires."',
-        '"A complete content pack in 90 seconds. Forever, for nine dollars."',
+        '"A complete content pack in 5 minutes. Forever, for nine dollars."',
     ]:
         flowables.append(Paragraph(h, s['bullet'], bulletText='→'))
     flowables.append(Spacer(1, 10))

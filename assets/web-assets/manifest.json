@@ -1,0 +1,58 @@
+{
+  "name": "GEM Content Engine",
+  "short_name": "GEM",
+  "description": "Six AI agents. One full content drop in 5 minutes. One purchase, lifetime updates.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F4EFE6",
+  "theme_color": "#1B4D3E",
+  "lang": "en-US",
+  "categories": ["productivity", "business", "marketing"],
+  "icons": [
+    {
+      "src": "/assets/web-assets/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/web-assets/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/web-assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/web-assets/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/web-assets/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/social/GEM_open_graph_1200x630.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "label": "GEM Content Engine — One idea. Every channel. Six AI agents."
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Try Demo",
+      "short_name": "Demo",
+      "description": "Try the GEM content pipeline with sample data",
+      "url": "/app/"
+    }
+  ]
+}

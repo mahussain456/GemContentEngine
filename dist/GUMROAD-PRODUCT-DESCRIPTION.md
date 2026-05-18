@@ -13,7 +13,7 @@ GEM Content Engine — Six AI Agents, One Content Drop ($9 Founder's Edition)
 ## SUMMARY / TAGLINE (one-liner shown in search & cards · ~140 chars)
 
 ```
-Six specialist AI agents. One full content drop in 90 seconds — script, image prompts, video prompts, carousels, captions. $9 once, forever.
+Six specialist AI agents. One full content drop in 5 minutes — script, image prompts, video prompts, carousels, captions. $9 once, forever.
 ```
 
 ## PRICE
@@ -35,17 +35,17 @@ jasper alternative, copy.ai alternative, ollama, openai, anthropic, openrouter
 
 ---
 
-**Six AI agents. One full content drop in 90 seconds. One purchase, forever.**
+**Six AI agents. One full content drop in 5 minutes. One purchase, forever.**
 
 You're running multiple content channels — YouTube, Instagram, Facebook, maybe a blog. Every week you need fresh ideas, scripts, hashtags, image prompts, video prompts. And you're paying $50–$200/month for AI tools that produce generic, lifeless output you can spot from a mile away.
 
-**GEM flips that.** One purchase. Six specialist AI agents working as a pipeline. A complete content drop — script, image prompts, video prompts, carousels, per-platform captions — in about 90 seconds. Runs locally on Ollama for free, or against your own OpenAI / Anthropic / OpenRouter key. No server. No subscription. No account. Your data never leaves your computer.
+**GEM flips that.** One purchase. Six specialist AI agents working as a pipeline. A complete content drop — script, image prompts, video prompts, carousels, per-platform captions — in about 5 minutes. Runs locally on Ollama for free, or against your own OpenAI / Anthropic / OpenRouter key. No server. No subscription. No account. Your data never leaves your computer.
 
 ---
 
 ### What you actually get on every run
 
-Drop a single content idea in, hit Generate, walk away for 90 seconds. Come back to:
+Drop a single content idea in, hit Generate, walk away for 5 minutes. Come back to:
 
 - **A 60-second YouTube Short script** — humanized, with [pause] markers and tension-before-reveal pacing
 - **2 multi-slide carousels** — Instagram (7 slides) + LinkedIn (5 slides), each with role, headline copy, and image prompt per slide

@@ -110,7 +110,7 @@ Cumulative ceiling: **~$429K gross** over the four price tiers at ~95% margin. R
 
 ## 🎯 v1.7 marketing hook
 
-> "GEM ships a complete content drop in 90 seconds — script, image prompts, video prompts, carousels, captions — for every channel. Six AI agents. One purchase. Forever. The first 100 founders set the roadmap."
+> "GEM ships a complete content drop in 5 minutes — script, image prompts, video prompts, carousels, captions — for every channel. Six AI agents. One purchase. Forever. The first 100 founders set the roadmap."
 
 ---
 
