@@ -1,13 +1,22 @@
 """
 Generate GEM Content Engine brand assets.
 
-Outputs:
-  assets/social/GEM_avatar_400x400.png        — square avatar (Twitter / X,
-                                                  LinkedIn, Discord, GitHub
-                                                  profile photo)
-  assets/social/GEM_banner_1500x500.png       — Twitter / X header banner
-                                                  (also works for LinkedIn
-                                                  cover and similar)
+Outputs (assets/social/):
+  GEM_avatar_400x400.png              square avatar (Twitter / X, LinkedIn,
+                                       Discord, GitHub profile photo)
+  GEM_banner_1500x500.png             Twitter / X header
+  GEM_linkedin_banner_1584x396.png    LinkedIn personal profile banner
+  GEM_open_graph_1200x630.jpg         Facebook / LinkedIn / Twitter share
+                                       preview (referenced by landing.html
+                                       <meta property="og:image">)
+  GEM_instagram_1080x1080.png         Instagram post / square format
+
+Outputs (assets/web-assets/):
+  favicon-16x16.png                   browser tab favicon (low-DPI)
+  favicon-32x32.png                   browser tab favicon (high-DPI)
+  apple-touch-icon.png                180x180 iOS home screen icon
+  android-chrome-192x192.png          Android home screen / PWA icon
+  android-chrome-512x512.png          PWA splash icon
 
 Brand palette matches landing.html. Hex mark mirrors the inline SVG geometry
 on the live site (pointy-top hexagon with six 3D-facet trapezoids, an inner
@@ -316,15 +325,330 @@ def build_banner():
     print(f'Wrote {out.name} ({W}x{H}, {os.path.getsize(out)/1024:.1f} KB)')
 
 
+# ─── LinkedIn banner (1584x396) ──────────────────────────────────────
+def build_linkedin_banner():
+    """
+    LinkedIn personal profile banner. Wider and shorter than Twitter (4:1
+    instead of 3:1). Profile photo on LinkedIn overlaps the bottom-left
+    corner at roughly 80px from left and bottom, so critical content stays
+    in the upper 70% and right 70% of the canvas.
+    """
+    W, H = 1584, 396
+    img = Image.new('RGB', (W, H), CREAM)
+
+    # Soft sage glow on the right
+    overlay = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    od = ImageDraw.Draw(overlay)
+    for i in range(36):
+        r = 100 + i * 14
+        a = max(0, int(16 - i * 0.4))
+        if a <= 0:
+            continue
+        od.ellipse(
+            [W - 250 - r, H // 2 - 40 - r, W - 250 + r, H // 2 - 40 + r],
+            fill=(*SAGE_TINT, a)
+        )
+    overlay = overlay.filter(ImageFilter.GaussianBlur(radius=50))
+    img.paste(overlay, (0, 0), overlay)
+    draw = ImageDraw.Draw(img)
+
+    # Hex on left (upper area, out of the bottom-left profile-photo overlap)
+    draw_gem_mark(draw, cx=240, cy=160, R=110)
+
+    # Gold vertical divider
+    draw.line([(400, 60), (400, 260)], fill=GOLD, width=4)
+
+    # GEM wordmark
+    font_gem = get_serif(140, bold=True)
+    draw.text((445, 50), 'GEM', font=font_gem, fill=FOREST)
+
+    # CONTENT ENGINE subtitle
+    font_sub = get_sans(22, bold=False)
+    draw_letter_spaced(draw, 450, 200, 'CONTENT ENGINE',
+                       font=font_sub, fill=PINE, spacing=8)
+
+    # Tagline (centered horizontally below)
+    font_tag = get_serif(30, bold=False)
+    tag = 'One idea. Every channel. Six AI agents.'
+    tbbox = draw.textbbox((0, 0), tag, font=font_tag)
+    tw = tbbox[2] - tbbox[0]
+    draw.text(((W - tw) // 2, 290), tag, font=font_tag, fill=CHARCOAL)
+
+    # Stats line
+    font_stats = get_sans(15, bold=True)
+    stats = '6 AI AGENTS  ·  17+ ASSET TYPES  ·  5 MIN END-TO-END  ·  LOCAL OR CLOUD'
+    sbbox = draw.textbbox((0, 0), stats, font=font_stats)
+    sw = sbbox[2] - sbbox[0]
+    draw.text(((W - sw) // 2, 338), stats, font=font_stats, fill=MIDFOREST)
+
+    # URL top-left
+    font_url = get_sans(16, bold=False)
+    draw.text((40, 24), 'thegeminfo.com', font=font_url, fill=PINE)
+
+    # $9 LIFETIME pill top-right
+    pill_w, pill_h = 210, 54
+    pill_x, pill_y = W - pill_w - 60, 40
+    draw.rounded_rectangle(
+        [pill_x, pill_y, pill_x + pill_w, pill_y + pill_h],
+        radius=27, fill=PINE
+    )
+    font_pill = get_sans(20, bold=True)
+    pill_text = '$9 LIFETIME'
+    pbbox = draw.textbbox((0, 0), pill_text, font=font_pill)
+    pw = pbbox[2] - pbbox[0]
+    ph = pbbox[3] - pbbox[1]
+    draw.text(
+        (pill_x + (pill_w - pw) // 2, pill_y + (pill_h - ph) // 2 - 3),
+        pill_text, font=font_pill, fill=CREAM_WHITE
+    )
+
+    out = ASSETS_DIR / 'GEM_linkedin_banner_1584x396.png'
+    img.save(out, 'PNG', optimize=True)
+    print(f'Wrote {out.name} ({W}x{H}, {os.path.getsize(out)/1024:.1f} KB)')
+
+
+# ─── Open Graph image (1200x630) ─────────────────────────────────────
+def build_og_image():
+    """
+    Open Graph share preview. Used by Facebook, LinkedIn shares, Slack,
+    Discord, iMessage link previews. Twitter falls back to this if no
+    twitter:image is set. Saved as JPG to match the URL already referenced
+    in landing.html <meta property="og:image">.
+    """
+    W, H = 1200, 630
+    img = Image.new('RGB', (W, H), CREAM)
+
+    # Subtle radial sage glow center-right
+    overlay = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    od = ImageDraw.Draw(overlay)
+    for i in range(40):
+        r = 100 + i * 12
+        a = max(0, int(18 - i * 0.42))
+        if a <= 0:
+            continue
+        od.ellipse(
+            [W - 200 - r, H // 2 - r, W - 200 + r, H // 2 + r],
+            fill=(*SAGE_TINT, a)
+        )
+    overlay = overlay.filter(ImageFilter.GaussianBlur(radius=60))
+    img.paste(overlay, (0, 0), overlay)
+    draw = ImageDraw.Draw(img)
+
+    # === TOP ZONE: hex + wordmark side-by-side ===
+    # Hex sized so the bottom sits above the tagline zone (y < 400)
+    draw_gem_mark(draw, cx=240, cy=235, R=130)
+    # Hex now spans y=105 to y=365, x=128 to x=352 — clears the bottom zone
+
+    # Gold vertical divider between hex and wordmark
+    draw.line([(420, 140), (420, 340)], fill=GOLD, width=5)
+
+    # GEM wordmark (right of divider)
+    font_gem = get_serif(180, bold=True)
+    draw.text((465, 105), 'GEM', font=font_gem, fill=FOREST)
+
+    # CONTENT ENGINE subtitle
+    font_sub = get_sans(28, bold=False)
+    draw_letter_spaced(draw, 472, 295, 'CONTENT ENGINE',
+                       font=font_sub, fill=PINE, spacing=12)
+
+    # Subtle horizontal gold accent to separate top and bottom zones
+    draw.line([(W // 2 - 50, 410), (W // 2 + 50, 410)], fill=GOLD, width=2)
+
+    # === BOTTOM ZONE: tagline + stats + URL (centered, clear of the hex) ===
+    # Tagline (Playfair, centered)
+    font_tag = get_serif(40, bold=False)
+    tag = 'One idea. Every channel. Six AI agents.'
+    tbbox = draw.textbbox((0, 0), tag, font=font_tag)
+    tw = tbbox[2] - tbbox[0]
+    draw.text(((W - tw) // 2, 445), tag, font=font_tag, fill=CHARCOAL)
+
+    # Stats line below tagline
+    font_stats = get_sans(20, bold=True)
+    stats = '6 AI AGENTS  ·  17+ ASSET TYPES  ·  5 MIN END-TO-END  ·  $9 LIFETIME'
+    sbbox = draw.textbbox((0, 0), stats, font=font_stats)
+    sw = sbbox[2] - sbbox[0]
+    draw.text(((W - sw) // 2, 515), stats, font=font_stats, fill=MIDFOREST)
+
+    # URL bottom-center
+    font_url = get_sans(22, bold=False)
+    url = 'thegeminfo.com'
+    ubbox = draw.textbbox((0, 0), url, font=font_url)
+    uw = ubbox[2] - ubbox[0]
+    draw.text(((W - uw) // 2, 570), url, font=font_url, fill=PINE)
+
+    # JPG output (matches the existing landing.html OG meta URL)
+    out = ASSETS_DIR / 'GEM_open_graph_1200x630.jpg'
+    img.save(out, 'JPEG', quality=92, optimize=True, progressive=True)
+    print(f'Wrote {out.name} ({W}x{H}, {os.path.getsize(out)/1024:.1f} KB)')
+
+
+# ─── Instagram square (1080x1080) ────────────────────────────────────
+def build_instagram_square():
+    """
+    Instagram post / feed cover format. 1:1 square. Bolder than the
+    avatar — meant to scroll past as a feed post.
+    """
+    W, H = 1080, 1080
+    img = Image.new('RGB', (W, H), FOREST)
+
+    # Radial midforest glow for depth
+    overlay = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    od = ImageDraw.Draw(overlay)
+    cx, cy = W // 2, int(H * 0.42)
+    for i in range(40):
+        r = 100 + i * 16
+        a = max(0, int(30 - i * 0.9))
+        if a <= 0:
+            continue
+        od.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(*MIDFOREST, a))
+    overlay = overlay.filter(ImageFilter.GaussianBlur(radius=80))
+    img.paste(overlay, (0, 0), overlay)
+    draw = ImageDraw.Draw(img)
+
+    # Hex centered slightly above middle
+    draw_gem_mark(draw, cx=W // 2, cy=int(H * 0.36), R=260)
+
+    # GEM wordmark below hex
+    font_gem = get_serif(180, bold=True)
+    wm_text = 'GEM'
+    wbbox = draw.textbbox((0, 0), wm_text, font=font_gem)
+    ww = wbbox[2] - wbbox[0]
+    draw.text(((W - ww) // 2, 690), wm_text, font=font_gem, fill=CREAM_WHITE)
+
+    # CONTENT ENGINE letter-spaced
+    font_sub = get_sans(28, bold=False)
+    sub_text = 'CONTENT ENGINE'
+    # Compute total spaced width
+    spaced_width = 0
+    for ch in sub_text:
+        spaced_width += draw.textbbox((0, 0), ch, font=font_sub)[2] + 14
+    spaced_width -= 14
+    sub_x = (W - spaced_width) // 2 + 4
+    draw_letter_spaced(draw, sub_x, 880, sub_text,
+                       font=font_sub, fill=SAGE, spacing=14)
+
+    # Tagline at bottom
+    font_tag = get_serif(36, bold=False)
+    tag = 'One idea. Every channel. Six AI agents.'
+    tbbox = draw.textbbox((0, 0), tag, font=font_tag)
+    tw = tbbox[2] - tbbox[0]
+    draw.text(((W - tw) // 2, 950), tag, font=font_tag, fill=CREAM_WHITE)
+
+    # $9 LIFETIME pill top-center
+    pill_w, pill_h = 240, 60
+    pill_x = (W - pill_w) // 2
+    pill_y = 60
+    draw.rounded_rectangle(
+        [pill_x, pill_y, pill_x + pill_w, pill_y + pill_h],
+        radius=30, fill=GOLD
+    )
+    font_pill = get_sans(22, bold=True)
+    pill_text = '$9 LIFETIME'
+    pbbox = draw.textbbox((0, 0), pill_text, font=font_pill)
+    pw = pbbox[2] - pbbox[0]
+    ph = pbbox[3] - pbbox[1]
+    draw.text(
+        (pill_x + (pill_w - pw) // 2, pill_y + (pill_h - ph) // 2 - 4),
+        pill_text, font=font_pill, fill=FOREST
+    )
+
+    out = ASSETS_DIR / 'GEM_instagram_1080x1080.png'
+    img.save(out, 'PNG', optimize=True)
+    print(f'Wrote {out.name} ({W}x{H}, {os.path.getsize(out)/1024:.1f} KB)')
+
+
+# ─── Favicons ────────────────────────────────────────────────────────
+WEB_ASSETS_DIR = REPO / 'assets' / 'web-assets'
+WEB_ASSETS_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def _hex_path(cx, cy, R):
+    """Return six pointy-top hex vertices as int tuples (for drawing on small canvases)."""
+    return [
+        (int(cx + R * math.cos(math.radians(60 * i - 90))),
+         int(cy + R * math.sin(math.radians(60 * i - 90))))
+        for i in range(6)
+    ]
+
+
+def _draw_simple_hex_mark(draw, cx, cy, R):
+    """
+    Simplified hex mark for small favicon sizes — no 3D facet shading,
+    just outer forest hex, inner cream hex, and dark center button. Cleaner
+    at 16x16 and 32x32 where facet shading becomes pixel noise.
+    """
+    outer_v  = _hex_path(cx, cy, R)
+    inner_v  = _hex_path(cx, cy, R * 0.58)
+    button_v = _hex_path(cx, cy, R * 0.26)
+    draw.polygon(outer_v, fill=FOREST)
+    draw.polygon(inner_v, fill=CREAM_WHITE)
+    draw.polygon(button_v, fill=FOREST)
+
+
+def build_favicons():
+    """
+    Generate all five favicon sizes referenced by manifest.json and
+    landing.html link tags.
+    """
+    # 16x16 — supersample 4x then downscale for smoother edges
+    for size, name, simple in [
+        (16, 'favicon-16x16.png', True),
+        (32, 'favicon-32x32.png', True),
+    ]:
+        ss = size * 4
+        big = Image.new('RGBA', (ss, ss), (0, 0, 0, 0))
+        d = ImageDraw.Draw(big)
+        _draw_simple_hex_mark(d, ss // 2, ss // 2, ss * 0.46)
+        small = big.resize((size, size), Image.LANCZOS)
+        out = WEB_ASSETS_DIR / name
+        small.save(out, 'PNG', optimize=True)
+        print(f'Wrote {out.name} ({size}x{size}, {os.path.getsize(out)/1024:.1f} KB)')
+
+    # apple-touch-icon.png (180x180) — solid forest bg, full 3D hex
+    img = Image.new('RGB', (180, 180), FOREST)
+    draw = ImageDraw.Draw(img)
+    draw_gem_mark(draw, cx=90, cy=90, R=64)
+    out = WEB_ASSETS_DIR / 'apple-touch-icon.png'
+    img.save(out, 'PNG', optimize=True)
+    print(f'Wrote {out.name} (180x180, {os.path.getsize(out)/1024:.1f} KB)')
+
+    # android-chrome-192x192.png — maskable, hex sits inside the 80% safe zone
+    img = Image.new('RGB', (192, 192), FOREST)
+    draw = ImageDraw.Draw(img)
+    draw_gem_mark(draw, cx=96, cy=96, R=64)  # ~67% of canvas, inside maskable safe zone
+    out = WEB_ASSETS_DIR / 'android-chrome-192x192.png'
+    img.save(out, 'PNG', optimize=True)
+    print(f'Wrote {out.name} (192x192, {os.path.getsize(out)/1024:.1f} KB)')
+
+    # android-chrome-512x512.png — same as 192 but higher resolution
+    img = Image.new('RGB', (512, 512), FOREST)
+    draw = ImageDraw.Draw(img)
+    draw_gem_mark(draw, cx=256, cy=256, R=172)  # ~67% of canvas
+    out = WEB_ASSETS_DIR / 'android-chrome-512x512.png'
+    img.save(out, 'PNG', optimize=True)
+    print(f'Wrote {out.name} (512x512, {os.path.getsize(out)/1024:.1f} KB)')
+
+
 # ─── Main ────────────────────────────────────────────────────────────
 if __name__ == '__main__':
     print('Generating GEM brand assets...')
+    print()
+    print('Social (assets/social/):')
     build_avatar()
     build_banner()
+    build_linkedin_banner()
+    build_og_image()
+    build_instagram_square()
     print()
-    print('Done. Files saved to assets/social/:')
-    print('  - GEM_avatar_400x400.png       (square avatar)')
-    print('  - GEM_banner_1500x500.png      (Twitter / X header)')
+    print('Web (assets/web-assets/):')
+    build_favicons()
     print()
-    print('Upload these as your social profile photo and header on:')
-    print('  Twitter / X, LinkedIn, Discord, GitHub, Indie Hackers, Product Hunt.')
+    print('Done. All assets generated.')
+    print()
+    print('Upload list:')
+    print('  Profile photo:     GEM_avatar_400x400.png')
+    print('  Twitter / X:       GEM_banner_1500x500.png')
+    print('  LinkedIn personal: GEM_linkedin_banner_1584x396.png')
+    print('  Share preview:     GEM_open_graph_1200x630.jpg')
+    print('  Instagram post:    GEM_instagram_1080x1080.png')
+    print('  Favicons:          assets/web-assets/* (auto-served by Vercel)')
