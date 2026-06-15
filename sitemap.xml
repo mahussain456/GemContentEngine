@@ -5,7 +5,7 @@
 
   <url>
     <loc>https://thegeminfo.com/</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://thegeminfo.com/"/>
@@ -13,7 +13,7 @@
     <image:image>
       <image:loc>https://thegeminfo.com/assets/social/GEM_open_graph_1200x630.jpg</image:loc>
       <image:title>GEM Content Engine — One idea. Every channel.</image:title>
-      <image:caption>Six AI agents. One full content drop in 90 seconds.</image:caption>
+      <image:caption>Six AI agents. One full content drop in 5 minutes.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://thegeminfo.com/assets/logos/png/GEM_primary_horizontal_2000w.png</image:loc>
@@ -21,103 +21,21 @@
     </image:image>
   </url>
 
+  <url><loc>https://thegeminfo.com/features.html</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://thegeminfo.com/how-it-works.html</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://thegeminfo.com/compare.html</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://thegeminfo.com/pricing.html</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://thegeminfo.com/faq.html</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
   <url>
-    <loc>https://thegeminfo.com/app/</loc>
-    <lastmod>2026-05-13</lastmod>
+    <loc>https://thegeminfo.com/app</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thegeminfo.com/app/"/>
-  </url>
-
-  <url>
-    <loc>https://thegeminfo.com/about.html</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thegeminfo.com/app"/>
   </url>
 
-  <url>
-    <loc>https://thegeminfo.com/privacy.html</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://thegeminfo.com/terms.html</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://thegeminfo.com/#pricing</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://thegeminfo.com/#what</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://thegeminfo.com/#how</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://thegeminfo.com/#for</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://thegeminfo.com/#features</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://thegeminfo.com/#sample</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://thegeminfo.com/#compare</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://thegeminfo.com/#quality</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://thegeminfo.com/#faq</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://thegeminfo.com/#roadmap</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
+  <url><loc>https://thegeminfo.com/about.html</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thegeminfo.com/privacy.html</loc><lastmod>2026-06-15</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://thegeminfo.com/terms.html</loc><lastmod>2026-06-15</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
 </urlset>

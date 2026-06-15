@@ -7,8 +7,15 @@
     { "source": "/app", "destination": "/app/index.html" }
   ],
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.thegeminfo.com" }],
+      "destination": "https://thegeminfo.com/:path*",
+      "permanent": true
+    },
     { "source": "/landing.html", "destination": "/", "permanent": true },
-    { "source": "/index.html", "destination": "/", "permanent": true }
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/app/", "destination": "/app", "permanent": true }
   ],
   "headers": [
     {
